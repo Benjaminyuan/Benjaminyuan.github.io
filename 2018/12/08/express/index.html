@@ -110,23 +110,25 @@
 
 
 
-  <meta name="description" content="记录生活点滴">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Benji&#39;blog">
-<meta property="og:url" content="http://yoursite.com/index.html">
+  <meta name="description" content="后端填(天)坑系列">
+<meta name="keywords" content="JavaScript,Backend,Express">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Express+MongoDb后端框架">
+<meta property="og:url" content="http://yoursite.com/2018/12/08/express/index.html">
 <meta property="og:site_name" content="Benji&#39;blog">
-<meta property="og:description" content="记录生活点滴">
+<meta property="og:description" content="后端填(天)坑系列">
 <meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-12-08T15:11:46.370Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Benji&#39;blog">
-<meta name="twitter:description" content="记录生活点滴">
+<meta name="twitter:title" content="Express+MongoDb后端框架">
+<meta name="twitter:description" content="后端填(天)坑系列">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/">
+  <link rel="canonical" href="http://yoursite.com/2018/12/08/express/">
 
 
 
@@ -136,7 +138,7 @@
   };
 </script>
 
-  <title>Benji'blog</title>
+  <title>Express+MongoDb后端框架 | Benji'blog</title>
   
 
 
@@ -185,8 +187,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-  page-home">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
@@ -227,7 +228,7 @@
         
         
           
-          <li class="menu-item menu-item-home menu-item-active">
+          <li class="menu-item menu-item-home">
 
     
     
@@ -436,9 +437,9 @@
           
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
 
@@ -470,10 +471,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2018/12/08/express/" class="post-title-link" itemprop="http://yoursite.com/index.html">Express+MongoDb后端框架</a>
+          <h1 class="post-title" itemprop="name headline">Express+MongoDb后端框架
               
             
           </h1>
@@ -554,18 +552,30 @@
       
 
       
-        
-          <h2 id="后端填-天-坑系列"><a href="#后端填-天-坑系列" class="headerlink" title="后端填(天)坑系列"></a>后端填(天)坑系列</h2>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2018/12/08/express/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-         
-          <!--/noindex-->
-        
+        <h2 id="后端填-天-坑系列"><a href="#后端填-天-坑系列" class="headerlink" title="后端填(天)坑系列"></a>后端填(天)坑系列</h2><a id="more"></a>
+<h2 id="文件结构"><a href="#文件结构" class="headerlink" title="文件结构"></a>文件结构</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">terminal: tree -L 2 -I &quot;*node_module*&quot;</span><br><span class="line">.</span><br><span class="line">├── controllers</span><br><span class="line">│   └── users.js</span><br><span class="line">├── models</span><br><span class="line">│   ├── blogs.js</span><br><span class="line">│   ├── comment.js</span><br><span class="line">│   └── users.js</span><br><span class="line">├── package-lock.json</span><br><span class="line">├── package.json</span><br><span class="line">├── routes.js</span><br><span class="line">├── server.js</span><br><span class="line">├── static</span><br><span class="line">│   ├── css</span><br><span class="line">│   ├── html</span><br><span class="line">│   └── images</span><br><span class="line">└── views</span><br><span class="line">    ├── article.htm</span><br><span class="line">    └── index.htm</span><br><span class="line"></span><br><span class="line">7 directories, 10 files</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>先看server.js ,从逻辑上来说这是服务器的入口</p>
+</li>
+<li><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1. require。。。。。</span></span><br><span class="line"><span class="keyword">var</span> express = <span class="built_in">require</span>(<span class="string">'express'</span>);</span><br><span class="line"><span class="keyword">var</span> bodyParser =<span class="built_in">require</span>(<span class="string">'body-parser'</span>);</span><br><span class="line"><span class="keyword">var</span> cookieParser = <span class="built_in">require</span>(<span class="string">'cookie-parser'</span>);</span><br><span class="line"><span class="keyword">var</span> expressSession = <span class="built_in">require</span>(<span class="string">'express-session'</span>);</span><br><span class="line"><span class="keyword">var</span> mongoStore = <span class="built_in">require</span>(<span class="string">'connect-mongo'</span>)(&#123;<span class="attr">session</span>: expressSession&#125;);</span><br><span class="line"><span class="keyword">var</span> mongoose =<span class="built_in">require</span>(<span class="string">'mongoose'</span>);</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">	s以上是这套后端开发常用的nodejs 库</span></span><br><span class="line"><span class="comment">	1. express 显然是核心啦</span></span><br><span class="line"><span class="comment">	2. body-parser, cookie-parser,express-seesion 则是一些中间件</span></span><br><span class="line"><span class="comment">	可以把中间件理解成工具，使用中间件处理请求可以大大减少处理http请求的一些繁杂，琐碎的工作。cookie-parser，express-session,connect-mongo在登陆验证的环节会用的比较多。具体用法参见 一下链接（如果有问题，请参照官方文档）</span></span><br><span class="line"><span class="comment">	3. mongoose 则是MongoDb的ORM(Object Relational Mapping)框架</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="comment">//先编译模型</span></span><br><span class="line"><span class="built_in">require</span>(<span class="string">'./models/user_model.js'</span>);</span><br><span class="line">mongoose.connect(<span class="string">'mongodb://localhost/dbName'</span>);</span><br><span class="line"><span class="keyword">var</span> conn = mongoose.connection;</span><br><span class="line"><span class="comment">//等待数据库连接完成后开始监听</span></span><br><span class="line">conn.on(<span class="string">'open'</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> app = express();</span><br><span class="line">    <span class="comment">//实例化express()对象</span></span><br><span class="line">    app.engine(<span class="string">'.htm'</span>,<span class="built_in">require</span>(<span class="string">'ejs'</span>).__express);</span><br><span class="line">    app.set(<span class="string">'views'</span>,__dirname+<span class="string">'/views'</span>);</span><br><span class="line">    app.set(<span class="string">'view engine'</span>,<span class="string">'htm'</span>);</span><br><span class="line">    <span class="comment">//设置模版渲染的配置</span></span><br><span class="line">    app.use(bodyParser());</span><br><span class="line">    app.use(cookieParser());</span><br><span class="line">    app.use(expressSession(&#123;</span><br><span class="line">        secret:<span class="string">'SECRET'</span>,</span><br><span class="line">        cookie:&#123;<span class="attr">maxAge</span>:<span class="number">60</span>*<span class="number">60</span>*<span class="number">1000</span>&#125;,</span><br><span class="line">        store: <span class="keyword">new</span> mongoStore(&#123;</span><br><span class="line">            db:mongoose.connection.db,</span><br><span class="line">            collection:<span class="string">'sessions'</span></span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;));</span><br><span class="line">  <span class="comment">//配置插件</span></span><br><span class="line">    <span class="built_in">require</span>(<span class="string">'./routes'</span>)(app);</span><br><span class="line">   <span class="comment">//路由处理</span></span><br><span class="line">    app.listen(<span class="number">8008</span>);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p><a href="https://www.cnblogs.com/chyingp/p/express-cookie-parser-deep-in.html" target="_blank" rel="noopener">cookie-parser中间件实现深入剖析</a></p>
+<p><a href="https://www.cnblogs.com/chyingp/p/nodejs-learning-express-session.html" target="_blank" rel="noopener">express+session实现建议的身份认证</a></p>
+</li>
+<li><p>routes.js</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> express =<span class="built_in">require</span>(<span class="string">'express'</span>);</span><br><span class="line"><span class="built_in">module</span>.exports = <span class="function"><span class="keyword">function</span>(<span class="params">app</span>)</span>&#123;</span><br><span class="line">    app.use(<span class="string">'/static'</span>,express.static(<span class="string">'./static'</span>));</span><br><span class="line">    <span class="comment">//设置静态文件的目录</span></span><br><span class="line">    app.get(<span class="string">'/'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">req,res</span>)</span>&#123;</span><br><span class="line">        res.render(<span class="string">'index'</span>);</span><br><span class="line">        <span class="comment">//render默认文件夹为view，这里是使用模版渲染的html</span></span><br><span class="line">        <span class="comment">// res.sendfile 可以返回静态文件</span></span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">    1.app.get('/',function(res,res)&#123;&#125;);这里处理的是GET方法的 '/'路由请求</span></span><br><span class="line"><span class="comment">    2.express的路由处理支持正则匹配的</span></span><br><span class="line"><span class="comment">    3.app.get('path/:id/');通过req.params.id获取参数</span></span><br><span class="line"><span class="comment">    4.queryString可以通过req.query.Name获取</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>controllers 目录是控制层一般里面放请求处理代码        </p>
+</li>
+<li><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//一般来说路由处理通常是这样写</span></span><br><span class="line">app.get(<span class="string">"/"</span>,<span class="function"><span class="keyword">function</span>(<span class="params">req,res</span>)</span>&#123;</span><br><span class="line">    <span class="comment">//code to handle request </span></span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">这样写，请求处理函数短的话没有什么问题，但是当处理函数比较复杂时，这回导致路由处理的逻辑难以分辨，不利于调试和维护。这时候就需要去耦合，减少路由分发和路由处理的耦合度</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="comment">//以下面请求为例：</span></span><br><span class="line"><span class="comment">//routes.js</span></span><br><span class="line"><span class="keyword">var</span> users = <span class="built_in">require</span>(<span class="string">"./controllers/users"</span>)</span><br><span class="line">app.post(<span class="string">'/signup'</span>,users.signup);</span><br><span class="line"><span class="comment">//controllers/users.js</span></span><br><span class="line"><span class="keyword">export</span>.signup = <span class="function"><span class="keyword">function</span>(<span class="params">req,res</span>)</span>&#123;</span><br><span class="line">    <span class="comment">//code to hanlde /signup post request </span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>models—持久层目录</p>
+<p>注意到在server.js中有一行代码：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">require</span>(<span class="string">'./models/user_model.js'</span>);</span><br></pre></td></tr></table></figure>
+<p>这里是编译schema（我所理解的）</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// user_model.js</span></span><br><span class="line"><span class="keyword">var</span> mongo = <span class="built_in">require</span>(<span class="string">'mongoose'</span>);</span><br><span class="line"><span class="keyword">var</span> Schema = mongo.Schema;</span><br><span class="line"><span class="keyword">var</span> UserSchema = <span class="keyword">new</span> Schema(&#123;</span><br><span class="line">    username:&#123;<span class="attr">type</span>:<span class="built_in">String</span>,<span class="attr">unique</span>:<span class="literal">true</span>&#125;,</span><br><span class="line">    email:<span class="built_in">String</span>,</span><br><span class="line">    color:<span class="built_in">String</span>,</span><br><span class="line">    hashed_password:<span class="built_in">String</span></span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">//构建关系模型</span></span><br><span class="line">mongo.model(<span class="string">"User"</span>,UserSchema,<span class="string">"User"</span>);</span><br><span class="line"><span class="comment">//编译模型mongoose.model(schemaName,schema,collectionName);</span></span><br><span class="line"><span class="comment">//如果省略第三个参数，那么会自动将第一个参数的复数形式作为作为第三个参数的值</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+
       
     </div>
 
@@ -581,197 +591,74 @@
        
     
     
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>Donate comment here</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>Donate</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.png" alt="BenjaminYuan WeChat Pay">
+        <p>WeChat Pay</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="BenjaminYuan Alipay">
+        <p>Alipay</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
 
     
 
     <footer class="post-footer">
       
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/02/firstblog/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="BenjaminYuan">
-      <meta itemprop="description" content="记录生活点滴">
-      <meta itemprop="image" content="/images/avatar.jpeg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Benji'blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2018/12/02/firstblog/" class="post-title-link" itemprop="http://yoursite.com/index.html">Java Spring Jdbc学习笔记</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2018-12-02 00:00:00" itemprop="dateCreated datePublished" datetime="2018-12-02T00:00:00+08:00">2018-12-02</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2018-12-08 23:14:42" itemprop="dateModified" datetime="2018-12-08T23:14:42+08:00">2018-12-08</time>
-              
-            
-          </span>
-
+        <div class="post-tags">
           
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/JavaSpring学习笔记/" itemprop="url" rel="index"><span itemprop="name">JavaSpring学习笔记</span></a></span>
-
-                
-                
-              
-            </span>
+            <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
           
-
+            <a href="/tags/Backend/" rel="tag"># Backend</a>
           
-            
+            <a href="/tags/Express/" rel="tag"># Express</a>
           
-
-          
-          
-
-          
-
-          
-
-          
-
         </div>
-      </header>
-    
+      
 
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
+      
       
       
 
       
-        
-          <h2 id="JavaSpring事务管理-1"><a href="#JavaSpring事务管理-1" class="headerlink" title="JavaSpring事务管理(1)"></a>JavaSpring事务管理(1)</h2>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2018/12/02/firstblog/#more" rel="contents">
-                Read more &raquo;
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/12/02/firstblog/" rel="next" title="Java Spring Jdbc学习笔记">
+                <i class="fa fa-chevron-left"></i> Java Spring Jdbc学习笔记
               </a>
-            </div>
-         
-          <!--/noindex-->
-        
-      
-    </div>
+            
+          </div>
 
-    
+          <span class="post-nav-divider"></span>
 
-    
-    
-    
-
-    
-
-    
-       
-    
-    
-
-    
-
-    <footer class="post-footer">
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
       
 
       
-
-      
-
-      
-      
-        <div class="post-eof"></div>
       
     </footer>
   </div>
@@ -781,14 +668,15 @@
   </article>
 
 
-    
-  </section>
-
-  
+  </div>
 
 
           </div>
           
+
+  
+
+
 
         </div>
         
@@ -809,8 +697,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
@@ -911,6 +808,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#后端填-天-坑系列"><span class="nav-number">1.</span> <span class="nav-text">后端填(天)坑系列</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文件结构"><span class="nav-number">2.</span> <span class="nav-text">文件结构</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -1052,6 +965,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.5.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.5.0"></script>
+
+
 
   
 
