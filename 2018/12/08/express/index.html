@@ -111,14 +111,14 @@
 
 
   <meta name="description" content="后端填(天)坑系列">
-<meta name="keywords" content="JavaScript,Backend,Express">
+<meta name="keywords" content="Backend,JavaScript,Express">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Express+MongoDb后端框架">
 <meta property="og:url" content="http://yoursite.com/2018/12/08/express/index.html">
 <meta property="og:site_name" content="Benji&#39;blog">
 <meta property="og:description" content="后端填(天)坑系列">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-12-08T15:11:46.370Z">
+<meta property="og:updated_time" content="2018-12-09T06:14:22.518Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Express+MongoDb后端框架">
 <meta name="twitter:description" content="后端填(天)坑系列">
@@ -297,7 +297,7 @@
       
     
 
-    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories<span class="badge">2</span></a>
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories<span class="badge">3</span></a>
 
   </li>
         
@@ -316,7 +316,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives<span class="badge">2</span></a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives<span class="badge">3</span></a>
 
   </li>
         
@@ -496,12 +496,24 @@
                 
               
 
-              <time title="Created: 2018-12-08 19:28:22 / Modified: 23:11:46" itemprop="dateCreated datePublished" datetime="2018-12-08T19:28:22+08:00">2018-12-08</time>
+              <time title="Created: 2018-12-08 19:28:22" itemprop="dateCreated datePublished" datetime="2018-12-08T19:28:22+08:00">2018-12-08</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2018-12-09 14:14:22" itemprop="dateModified" datetime="2018-12-09T14:14:22+08:00">2018-12-09</time>
               
             
           </span>
@@ -572,8 +584,14 @@
 <p>注意到在server.js中有一行代码：</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">require</span>(<span class="string">'./models/user_model.js'</span>);</span><br></pre></td></tr></table></figure>
 <p>这里是编译schema（我所理解的）</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// user_model.js</span></span><br><span class="line"><span class="keyword">var</span> mongo = <span class="built_in">require</span>(<span class="string">'mongoose'</span>);</span><br><span class="line"><span class="keyword">var</span> Schema = mongo.Schema;</span><br><span class="line"><span class="keyword">var</span> UserSchema = <span class="keyword">new</span> Schema(&#123;</span><br><span class="line">    username:&#123;<span class="attr">type</span>:<span class="built_in">String</span>,<span class="attr">unique</span>:<span class="literal">true</span>&#125;,</span><br><span class="line">    email:<span class="built_in">String</span>,</span><br><span class="line">    color:<span class="built_in">String</span>,</span><br><span class="line">    hashed_password:<span class="built_in">String</span></span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">//构建关系模型</span></span><br><span class="line">mongo.model(<span class="string">"User"</span>,UserSchema,<span class="string">"User"</span>);</span><br><span class="line"><span class="comment">//编译模型mongoose.model(schemaName,schema,collectionName);</span></span><br><span class="line"><span class="comment">//如果省略第三个参数，那么会自动将第一个参数的复数形式作为作为第三个参数的值</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// user_model.js</span></span><br><span class="line"><span class="keyword">var</span> mongo = <span class="built_in">require</span>(<span class="string">'mongoose'</span>);</span><br><span class="line"><span class="keyword">var</span> Schema = mongo.Schema;</span><br><span class="line"><span class="keyword">var</span> UserSchema = <span class="keyword">new</span> Schema(&#123;</span><br><span class="line">    username:&#123;<span class="attr">type</span>:<span class="built_in">String</span>,<span class="attr">unique</span>:<span class="literal">true</span>&#125;,</span><br><span class="line">    email:<span class="built_in">String</span>,</span><br><span class="line">    color:<span class="built_in">String</span>,</span><br><span class="line">    hashed_password:<span class="built_in">String</span></span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">//构建关系模型</span></span><br><span class="line">mongo.model(<span class="string">"User"</span>,UserSchema,<span class="string">"User"</span>);</span><br><span class="line"><span class="comment">//编译模型mongoose.model(schemaName,schema,collectionName);</span></span><br><span class="line"><span class="comment">//如果省略第三个参数，那么会自动将第一个参数的复数形式作为作为第三个参数的值</span></span><br><span class="line"><span class="comment">//如果该模型存在的话，就会放货这个模型</span></span><br></pre></td></tr></table></figure>
+<p><em>以上是我认为一个后端程序的基本结构了。有些东西一直在变化，如有问题请参照官方文档。</em></p>
 </li>
+</ul>
+<h2 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h2><ul>
+<li>基本的：node server.js</li>
+<li>要知道，后端不仅仅是将程序跑起来，运维也是一个很大的问题。这里推荐使用<a href="https://pm2.io/doc/zh/runtime/overview/" target="_blank" rel="noopener">pm2</a></li>
+<li>当然，现在微服务很流行，<a href="https://docs.docker.com/v17.09/get-started/" target="_blank" rel="noopener">docker</a>也是很必要的啦！</li>
 </ul>
 
       
@@ -593,7 +611,7 @@
     
       <div>
         <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
-  <div>Donate comment here</div>
+  <div>谢谢你请我吃糖果</div>
   <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
     <span>Donate</span>
   </button>
@@ -627,9 +645,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
-          
             <a href="/tags/Backend/" rel="tag"># Backend</a>
+          
+            <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
           
             <a href="/tags/Express/" rel="tag"># Express</a>
           
@@ -653,6 +671,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/12/09/docker/" rel="prev" title="Docker入门总结">
+                Docker入门总结 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -724,7 +746,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">2</span>
+                    <span class="site-state-item-count">3</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -741,7 +763,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">2</span>
+                      
+                    
+                    <span class="site-state-item-count">3</span>
                     <span class="site-state-item-name">categories</span>
                   </a>
                 </div>
@@ -770,7 +794,7 @@
                     
                       
                     
-                    <span class="site-state-item-count">6</span>
+                    <span class="site-state-item-count">8</span>
                     <span class="site-state-item-name">tags</span>
                   </a>
                 </div>
@@ -818,7 +842,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#后端填-天-坑系列"><span class="nav-number">1.</span> <span class="nav-text">后端填(天)坑系列</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文件结构"><span class="nav-number">2.</span> <span class="nav-text">文件结构</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#后端填-天-坑系列"><span class="nav-number">1.</span> <span class="nav-text">后端填(天)坑系列</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文件结构"><span class="nav-number">2.</span> <span class="nav-text">文件结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#启动"><span class="nav-number">3.</span> <span class="nav-text">启动</span></a></li></ol></div>
             
 
           </div>

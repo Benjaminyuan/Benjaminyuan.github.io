@@ -110,25 +110,28 @@
 
 
 
-  <meta name="description" content="JavaSpring事务管理(1)">
-<meta name="keywords" content="Backend,Java,Curd,CodeLife">
+  <meta name="description" content="这是我个人学习使用Docker的知识总结，如果想要系统的学习参照官方文档">
+<meta name="keywords" content="Docker,自动化部署,Backend">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Java Spring Jdbc学习笔记">
-<meta property="og:url" content="http://yoursite.com/2018/12/02/firstblog/index.html">
+<meta property="og:title" content="Docker入门总结">
+<meta property="og:url" content="http://yoursite.com/2018/12/09/docker/index.html">
 <meta property="og:site_name" content="Benji&#39;blog">
-<meta property="og:description" content="JavaSpring事务管理(1)">
+<meta property="og:description" content="这是我个人学习使用Docker的知识总结，如果想要系统的学习参照官方文档">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-12-08T15:14:42.912Z">
+<meta property="og:image" content="http://yoursite.com/images/dockerdiff.jpg">
+<meta property="og:image" content="http://yoursite.com/images/architecture.svg">
+<meta property="og:updated_time" content="2018-12-09T10:24:52.534Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Java Spring Jdbc学习笔记">
-<meta name="twitter:description" content="JavaSpring事务管理(1)">
+<meta name="twitter:title" content="Docker入门总结">
+<meta name="twitter:description" content="这是我个人学习使用Docker的知识总结，如果想要系统的学习参照官方文档">
+<meta name="twitter:image" content="http://yoursite.com/images/dockerdiff.jpg">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/12/02/firstblog/">
+  <link rel="canonical" href="http://yoursite.com/2018/12/09/docker/">
 
 
 
@@ -138,7 +141,7 @@
   };
 </script>
 
-  <title>Java Spring Jdbc学习笔记 | Benji'blog</title>
+  <title>Docker入门总结 | Benji'blog</title>
   
 
 
@@ -454,7 +457,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/02/firstblog/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/09/docker/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="BenjaminYuan">
@@ -471,7 +474,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Java Spring Jdbc学习笔记
+          <h1 class="post-title" itemprop="name headline">Docker入门总结
               
             
           </h1>
@@ -496,24 +499,12 @@
                 
               
 
-              <time title="Created: 2018-12-02 00:00:00" itemprop="dateCreated datePublished" datetime="2018-12-02T00:00:00+08:00">2018-12-02</time>
+              <time title="Created: 2018-12-09 14:15:27 / Modified: 18:24:52" itemprop="dateCreated datePublished" datetime="2018-12-09T14:15:27+08:00">2018-12-09</time>
             
 
             
               
 
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2018-12-08 23:14:42" itemprop="dateModified" datetime="2018-12-08T23:14:42+08:00">2018-12-08</time>
               
             
           </span>
@@ -530,7 +521,7 @@
                 <span class="post-meta-item-text">In</span>
               
               
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/JavaSpring学习笔记/" itemprop="url" rel="index"><span itemprop="name">JavaSpring学习笔记</span></a></span>
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/运维/" itemprop="url" rel="index"><span itemprop="name">运维</span></a></span>
 
                 
                 
@@ -564,15 +555,88 @@
       
 
       
-        <h2 id="JavaSpring事务管理-1"><a href="#JavaSpring事务管理-1" class="headerlink" title="JavaSpring事务管理(1)"></a>JavaSpring事务管理(1)</h2><a id="more"></a>
-<h2 id="文件结构"><a href="#文件结构" class="headerlink" title="文件结构"></a>文件结构</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├── applicationContext.xml</span><br><span class="line">└── scheme</span><br><span class="line">    ├── Dao.java</span><br><span class="line">    ├── JdbcTest.java</span><br><span class="line">    ├── TestDaoImpl.java</span><br><span class="line">    ├── User.java</span><br></pre></td></tr></table></figure>
-<h2 id="JDBC配置"><a href="#JDBC配置" class="headerlink" title="JDBC配置"></a>JDBC配置</h2><p><em>省略部分代码</em><br>applicationContext.xml<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">context:component-scan</span> <span class="attr">base-package</span>=<span class="string">"JDBC.scheme"</span>&gt;</span><span class="tag">&lt;/<span class="name">context:component-scan</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 申明该xml配置文件“作用范围” --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"dataSource"</span> <span class="attr">class</span>=<span class="string">"org.springframework.jdbc.datasource.DriverManagerDataSource"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"driverClassName"</span> <span class="attr">value</span>=<span class="string">"com.mysql.jdbc.Driver"</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"url"</span> <span class="attr">value</span>=<span class="string">"jdbc:mysql://localhost:3306/java?useSSL=false"</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"username"</span> <span class="attr">value</span>=<span class="string">"root"</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"password"</span> <span class="attr">value</span>=<span class="string">""</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 配置需要连接数据库信息 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"jdbcTemplate"</span> <span class="attr">class</span>=<span class="string">"org.springframework.jdbc.core.JdbcTemplate"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"dataSource"</span> <span class="attr">ref</span>=<span class="string">"dataSource"</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">bean</span>&gt;</span> </span><br><span class="line">    <span class="comment">&lt;!-- 创建JdbcTemplate模版--&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></span><br><span class="line">```   </span><br><span class="line">## 创建实体类    </span><br><span class="line">User.java</span><br><span class="line">```java</span><br><span class="line">public class User &#123;</span><br><span class="line">    //映射的事情由jdbctemplate来完成，前提是名字与数据库里面的要一一对应；</span><br><span class="line">    private Integer id;</span><br><span class="line">    private String name;</span><br><span class="line">    private String sex;</span><br><span class="line">    //toString方便查看对象属性</span><br><span class="line">    public String toString()&#123;</span><br><span class="line">        return "myuser(id="+String.valueOf(id)+",name:"+name+",sex:"+sex+"date:"+"2018]";</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    public void setId(Integer id)&#123;</span><br><span class="line">        this.id = id;</span><br><span class="line">    &#125;</span><br><span class="line">    public void setName(String name)&#123;</span><br><span class="line">        this.name = name;</span><br><span class="line">    &#125;</span><br><span class="line">    public void setSex(String sex)&#123;</span><br><span class="line">        this.sex = sex;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h2 id="JavaTemplate实例的创建"><a href="#JavaTemplate实例的创建" class="headerlink" title="JavaTemplate实例的创建"></a>JavaTemplate实例的创建</h2><p>TestDaoImpl.java<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Repository</span>(<span class="string">"testDao"</span>)</span><br><span class="line"><span class="comment">//将该实例注入xml文件，交由Spring来管理，可用ApplicationContext对象的getBean("testDao")获取</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestDaoImpl</span> <span class="keyword">implements</span> <span class="title">Dao</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="comment">//使用xml文件中配置好的jdbc实例</span></span><br><span class="line">    <span class="keyword">private</span> JdbcTemplate jdbcTemplate;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="comment">//对Dao的接口重写</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">update</span><span class="params">(String sql,Object[] param)</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> jdbcTemplate.update(sql,param);</span><br><span class="line">        <span class="comment">//返回更新的行数</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> List&lt;User&gt; <span class="title">query</span><span class="params">(String sql, Object[] param)</span></span>&#123;</span><br><span class="line">    <span class="comment">//这里使用BeanPropertyRowMapper会比自己实现RowMapper要简单一些</span></span><br><span class="line">    <span class="comment">// BeanPropertyRowMapper可以自动调用相应的setter对对象进行赋值</span></span><br><span class="line">       RowMapper&lt;User&gt; rowMapper = <span class="keyword">new</span>  BeanPropertyRowMapper&lt;User&gt;(User.class);</span><br><span class="line">       <span class="keyword">return</span> jdbcTemplate.query(sql,rowMapper,param);</span><br><span class="line">    <span class="comment">// RowMapper&lt;User&gt; userMapper = new UserMapper();</span></span><br><span class="line">    <span class="comment">// return jdbcTemplate.query(sql,userMapper,param);</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//如果要用注释所用方法query,则需要自己实现一个RowMapper类</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">UserMapper</span> <span class="keyword">implements</span> <span class="title">RowMapper</span>&lt;<span class="title">User</span>&gt; </span>&#123;</span><br><span class="line">    <span class="comment">//结果是以 行 为单位返回的</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> User <span class="title">mapRow</span><span class="params">(ResultSet rs,<span class="keyword">int</span> rowNum)</span> <span class="keyword">throws</span> SQLException </span>&#123;</span><br><span class="line">            User user = <span class="keyword">new</span> User();</span><br><span class="line">            user.setId(rs.getInt(<span class="string">"id"</span>));</span><br><span class="line">            user.setName(rs.getString(<span class="string">"name"</span>));</span><br><span class="line">            user.setSex(rs.getString(<span class="string">"sex"</span>));</span><br><span class="line">            <span class="keyword">return</span> user;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><p>JdbcTest.java<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JdbcTest</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">        ApplicationContext appcon = <span class="keyword">new</span> ClassPathXmlApplicationContext(<span class="string">"/JDBC/applicationContext.xml"</span>);</span><br><span class="line"><span class="comment">//          ApplicationContext appcom = new FileSystemXmlApplicationContext("src/JDBC/applicationContext.xml");</span></span><br><span class="line">       Dao td = (Dao) appcon.getBean(<span class="string">"testDao"</span>);</span><br><span class="line">       String insertSql = <span class="string">"insert into user values(?,?,?,NOW())"</span>;</span><br><span class="line">       Object param1[]=&#123;<span class="number">1</span>,<span class="string">"Benji"</span>,<span class="string">"boy"</span>&#125;;</span><br><span class="line">       Object param2[]=&#123;<span class="number">2</span>,<span class="string">"Lee"</span>,<span class="string">"boy"</span>&#125;;</span><br><span class="line">       Object param3[]=&#123;<span class="number">3</span>,<span class="string">"Jimmy"</span>,<span class="string">"boy"</span>&#125;;</span><br><span class="line">       Object param4[]=&#123;<span class="number">4</span>,<span class="string">"Lily"</span>,<span class="string">"girl"</span>&#125;;</span><br><span class="line">       Object param5[]=&#123;<span class="number">5</span>,<span class="string">"Morry"</span>,<span class="string">"girl"</span>&#125;;</span><br><span class="line">       td.update(insertSql,param1);</span><br><span class="line">       td.update(insertSql,param2);</span><br><span class="line">       td.update(insertSql,param3);</span><br><span class="line">       td.update(insertSql,param4);</span><br><span class="line">       td.update(insertSql,param5);</span><br><span class="line">        String selectSql = <span class="string">"select * from user"</span>;</span><br><span class="line">        List&lt;User&gt; list = td.query(selectSql,<span class="keyword">null</span>);</span><br><span class="line">        <span class="keyword">for</span>(User user:list)&#123;</span><br><span class="line">            System.out.println(user);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h2 id="JdbcTemplate-常用方法"><a href="#JdbcTemplate-常用方法" class="headerlink" title="JdbcTemplate 常用方法"></a>JdbcTemplate 常用方法</h2><ul>
-<li>update()</li>
-<li>query()</li>
-<li>…<br>和SQL语句差不多,可以查询官方文档</li>
+        <h2 id="这是我个人学习使用Docker的知识总结，如果想要系统的学习参照官方文档"><a href="#这是我个人学习使用Docker的知识总结，如果想要系统的学习参照官方文档" class="headerlink" title="这是我个人学习使用Docker的知识总结，如果想要系统的学习参照官方文档"></a>这是我个人学习使用Docker的知识总结，如果想要系统的学习参照<a href="https://docs.docker.com/v17.09/get-started/" target="_blank" rel="noopener">官方文档</a></h2><a id="more"></a>
+<h2 id="简单理解"><a href="#简单理解" class="headerlink" title="简单理解"></a>简单理解</h2><ul>
+<li><p>docker是一种容器，属于Linux容器的一种封装，提供简单易用的容器使用接口。先来一张图</p>
+<p><img src="/images/dockerdiff.jpg" alt="dockerdiff"></p>
+</li>
+<li><p>docker相对于虚拟机来说要便捷许多。</p>
+<p>docker与虚拟机的比较</p>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">特性</th>
+<th style="text-align:center">docker</th>
+<th style="text-align:center">虚拟机</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">启动</td>
+<td style="text-align:center">秒级</td>
+<td style="text-align:center">分钟级</td>
+</tr>
+<tr>
+<td style="text-align:center">硬盘使用</td>
+<td style="text-align:center">一般为MB级</td>
+<td style="text-align:center">GB级别</td>
+</tr>
+<tr>
+<td style="text-align:center">性能</td>
+<td style="text-align:center">接近原生</td>
+<td style="text-align:center">若弱于原生</td>
+</tr>
+<tr>
+<td style="text-align:center">系统容纳量</td>
+<td style="text-align:center">单机支持上千个容器</td>
+<td style="text-align:center">一般十几个</td>
+</tr>
+</tbody>
+</table>
+<h2 id="docker的结构"><a href="#docker的结构" class="headerlink" title="docker的结构"></a>docker的结构</h2><ul>
+<li><p>用一张图来表示吧</p>
+<p><img src="/images/architecture.svg" alt=""></p>
+</li>
+<li><p>简单地说，docker存在image，container这两种东西，要跑的是container。而container是由image产生的，而image可以通过docker build 出来，也可以从远程repository pull下来。</p>
+</li>
+</ul>
+<h2 id="Docker-build"><a href="#Docker-build" class="headerlink" title="Docker build"></a>Docker build</h2><ul>
+<li><p>首先，先要建立一个Dockerfile。Dockerfile里面写的代码可以理解为创建image的一个流程，当然实际生成一个image后面有很多看不到的过程, (以搭建一个nodejs后端服务器为例):</p>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">FROM</span> node: version</span><br><span class="line"><span class="comment"># 首先指定镜像基础，这里是构建node环境并指定版本</span></span><br><span class="line"><span class="keyword">COPY</span> . /app </span><br><span class="line"># 指定工作目录</span><br><span class="line">WORKDIR /app</span><br><span class="line"># 将当前目录拷贝到images的/app目录</span><br><span class="line">RUN	npm install --repository=https://registry.npm.taobao.org</span><br><span class="line"># 安装nodeJS程序的依赖</span><br><span class="line">EXPOSE 8008</span><br><span class="line"># 开放image的3000端口</span><br><span class="line">CMD  ["node", "server.js"]</span><br><span class="line"># 在container运行时执行 node server.js</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>创建dockerfile之后，再新建.dockerignore 文件，这里主要是排除一些不要被build的文件</p>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">.git </span><br><span class="line">node_modules</span><br><span class="line">npm-debug.log</span><br><span class="line"><span class="comment"># 这里主要是排除git，和nodejs的模块，需要的模块在在build的时候 RUN npm install 会自动安装</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>build</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker build -t imageName  path</span><br></pre></td></tr></table></figure>
+<p>path为build的文件目录”起点“，一般是”./“ 即当前目录</p>
+</li>
+</ul>
+<h2 id="Docker-Run"><a href="#Docker-Run" class="headerlink" title="Docker Run"></a>Docker Run</h2><ul>
+<li><p>首先我们要跑的是container，所以可以先查看有哪些container</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker container ls</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Run </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">docker container run --rm -p 8080:8008 -i -t imageName  /bin/bash </span><br><span class="line">//--rm 表示container停止后自动删除容器文件</span><br><span class="line">//-i 让容器的标注输入保持打开</span><br><span class="line">//-t 让Docker 分配一个伪终端并绑定到容器的标准输入上</span><br><span class="line">//-p 表示端口映射，将docker的8008端口映射到宿主机的8080端口</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="Docker-命令的一些细节"><a href="#Docker-命令的一些细节" class="headerlink" title="Docker 命令的一些细节"></a>Docker 命令的一些细节</h2><ul>
+<li><p>退出docker</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">1. docker kill containerID </span><br><span class="line">//结束进程，containerId的话不需要输全的，只要前四位就行啦</span><br><span class="line">2. dockerstop containerName</span><br><span class="line">//在docker 里面</span><br><span class="line">1. Ctrl+D </span><br><span class="line">2. exit</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>进入Docker</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1. docker attch [option] containerId</span><br><span class="line">//忘记怎么使用的可以docker attch --help </span><br><span class="line">2. docker exec [options]</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="Docker-的一些推荐"><a href="#Docker-的一些推荐" class="headerlink" title="Docker 的一些推荐"></a>Docker 的一些推荐</h2><ul>
+<li><p><a href="http://www.ruanyifeng.com/blog/2018/02/docker-tutorial.html" target="_blank" rel="noopener">阮一峰Docker入门教程</a></p>
+</li>
+<li><p><a href="http://www.ruanyifeng.com/blog/2018/02/docker-tutorial.html" target="_blank" rel="noopener">阮一峰Docker微服务</a></p>
+</li>
+<li><p><a href="http://www.ruanyifeng.com/blog/2018/02/docker-tutorial.html" target="_blank" rel="noopener">Docker–从入门到实践</a></p>
+</li>
 </ul>
 
       
@@ -626,13 +690,11 @@
       
         <div class="post-tags">
           
+            <a href="/tags/Docker/" rel="tag"># Docker</a>
+          
+            <a href="/tags/自动化部署/" rel="tag"># 自动化部署</a>
+          
             <a href="/tags/Backend/" rel="tag"># Backend</a>
-          
-            <a href="/tags/Java/" rel="tag"># Java</a>
-          
-            <a href="/tags/Curd/" rel="tag"># Curd</a>
-          
-            <a href="/tags/CodeLife/" rel="tag"># CodeLife</a>
           
         </div>
       
@@ -645,15 +707,15 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2018/12/08/express/" rel="next" title="Express+MongoDb后端框架">
+                <i class="fa fa-chevron-left"></i> Express+MongoDb后端框架
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/12/08/express/" rel="prev" title="Express+MongoDb后端框架">
-                Express+MongoDb后端框架 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -821,7 +883,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#JavaSpring事务管理-1"><span class="nav-number">1.</span> <span class="nav-text">JavaSpring事务管理(1)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文件结构"><span class="nav-number">2.</span> <span class="nav-text">文件结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JDBC配置"><span class="nav-number">3.</span> <span class="nav-text">JDBC配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JavaTemplate实例的创建"><span class="nav-number">4.</span> <span class="nav-text">JavaTemplate实例的创建</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#测试"><span class="nav-number">5.</span> <span class="nav-text">测试</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JdbcTemplate-常用方法"><span class="nav-number">6.</span> <span class="nav-text">JdbcTemplate 常用方法</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#这是我个人学习使用Docker的知识总结，如果想要系统的学习参照官方文档"><span class="nav-number">1.</span> <span class="nav-text">这是我个人学习使用Docker的知识总结，如果想要系统的学习参照官方文档</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#简单理解"><span class="nav-number">2.</span> <span class="nav-text">简单理解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#docker的结构"><span class="nav-number">3.</span> <span class="nav-text">docker的结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Docker-build"><span class="nav-number">4.</span> <span class="nav-text">Docker build</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Docker-Run"><span class="nav-number">5.</span> <span class="nav-text">Docker Run</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Docker-命令的一些细节"><span class="nav-number">6.</span> <span class="nav-text">Docker 命令的一些细节</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Docker-的一些推荐"><span class="nav-number">7.</span> <span class="nav-text">Docker 的一些推荐</span></a></li></ol></div>
             
 
           </div>
