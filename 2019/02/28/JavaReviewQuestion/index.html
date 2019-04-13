@@ -118,7 +118,7 @@
 <meta property="og:site_name" content="Benji&#39;blog">
 <meta property="og:description" content="一些常见的Java面试问题">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-03-16T06:19:52.643Z">
+<meta property="og:updated_time" content="2019-03-31T12:50:54.256Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaReviewQuestion">
 <meta name="twitter:description" content="一些常见的Java面试问题">
@@ -278,7 +278,7 @@
       
     
 
-    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags<span class="badge">13</span></a>
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags<span class="badge">20</span></a>
 
   </li>
         
@@ -297,7 +297,7 @@
       
     
 
-    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories<span class="badge">8</span></a>
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories<span class="badge">11</span></a>
 
   </li>
         
@@ -316,7 +316,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives<span class="badge">9</span></a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives<span class="badge">13</span></a>
 
   </li>
         
@@ -513,7 +513,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-03-16 14:19:52" itemprop="dateModified" datetime="2019-03-16T14:19:52+08:00">2019-03-16</time>
+                <time title="Modified: 2019-03-31 20:50:54" itemprop="dateModified" datetime="2019-03-31T20:50:54+08:00">2019-03-31</time>
               
             
           </span>
@@ -740,7 +740,25 @@
 <li>调用DisposableBean的destroy()方法</li>
 <li>调用自定义的销毁方法</li>
 </ol>
-<h2 id="Linux"><a href="#Linux" class="headerlink" title="Linux"></a>Linux</h2><h3 id="Linux查看进程命令"><a href="#Linux查看进程命令" class="headerlink" title="Linux查看进程命令"></a>Linux查看进程命令</h3><ul>
+<h2 id="Linux"><a href="#Linux" class="headerlink" title="Linux"></a>Linux</h2><h3 id="查看当前系统启动时间"><a href="#查看当前系统启动时间" class="headerlink" title="查看当前系统启动时间"></a>查看当前系统启动时间</h3><ul>
+<li>top</li>
+<li>w</li>
+<li>uptime </li>
+<li><h3 id="fg-bg-ctrl-z-jobs"><a href="#fg-bg-ctrl-z-jobs" class="headerlink" title="fg,bg,ctrl+z,jobs"></a>fg,bg,ctrl+z,jobs</h3></li>
+<li>fg +作业号，将后台程序调度到前台</li>
+<li>bg 与fg相反</li>
+<li>ctrl+z将程序挂起</li>
+<li>jobs查看正在运行的任务<h3 id="tar"><a href="#tar" class="headerlink" title="tar"></a>tar</h3></li>
+<li>-c:compress，打包</li>
+<li>-x:extract, 提取</li>
+<li>-g:gzip，提取或压缩</li>
+<li>-j:bzip2，提取或压缩</li>
+<li>-v:verbose(详细)，显示指令执行过程</li>
+<li>-f:指定提取或压缩后的文件名以及位置<h3 id="软链接和硬链接"><a href="#软链接和硬链接" class="headerlink" title="软链接和硬链接"></a>软链接和硬链接</h3></li>
+<li>硬链接和文件本身的inode号是一样的</li>
+<li>相当于软链接是保存链一个绝对路径</li>
+</ul>
+<h2 id="多进程"><a href="#多进程" class="headerlink" title="多进程"></a>多进程</h2><h3 id="Linux查看进程命令"><a href="#Linux查看进程命令" class="headerlink" title="Linux查看进程命令"></a>Linux查看进程命令</h3><ul>
 <li>processes Statistic</li>
 <li>ps -aux 查看系统所有的进程</li>
 <li>ps -IA 查看所有系统的数据</li>
@@ -763,27 +781,26 @@
 <li>FIFO：任何进程间都能通讯，但速度慢</li>
 <li>消息队列：容量受到系统限制，且要注意第一次读的时候，要考虑上一次没有读完数据的问题</li>
 <li>信号量：不能传递复杂消息，只能用来同步</li>
-<li>共享内存区：能够很容易控制容量，速度快，但要保持同步，比如一个进程在写的时候，另一个进程要注意读写的问题，相当于线程中的线程安全，当然，共享内存区同样可以用作线程间通讯，不过没这个必要，线程间本来就已经共享了同一进程内的一块内存<h3 id="查看当前系统启动时间"><a href="#查看当前系统启动时间" class="headerlink" title="查看当前系统启动时间"></a>查看当前系统启动时间</h3></li>
-<li>top</li>
-<li>w</li>
-<li>uptime </li>
-<li><h3 id="fg-bg-ctrl-z-jobs"><a href="#fg-bg-ctrl-z-jobs" class="headerlink" title="fg,bg,ctrl+z,jobs"></a>fg,bg,ctrl+z,jobs</h3></li>
-<li>fg +作业号，将后台程序调度到前台</li>
-<li>bg 与fg相反</li>
-<li>ctrl+z将程序挂起</li>
-<li>jobs查看正在运行的任务<h3 id="tar"><a href="#tar" class="headerlink" title="tar"></a>tar</h3></li>
-<li>-c:compress，打包</li>
-<li>-x:extract, 提取</li>
-<li>-g:gzip，提取或压缩</li>
-<li>-j:bzip2，提取或压缩</li>
-<li>-v:verbose(详细)，显示指令执行过程</li>
-<li>-f:指定提取或压缩后的文件名以及位置<h3 id="进程和线程的区别"><a href="#进程和线程的区别" class="headerlink" title="进程和线程的区别"></a>进程和线程的区别</h3></li>
+<li>共享内存区：能够很容易控制容量，速度快，但要保持同步，比如一个进程在写的时候，另一个进程要注意读写的问题，相当于线程中的线程安全，当然，共享内存区同样可以用作线程间通讯，不过没这个必要，线程间本来就已经共享了同一进程内的一块内存</li>
+</ul>
+<h3 id="进程和线程的区别"><a href="#进程和线程的区别" class="headerlink" title="进程和线程的区别"></a>进程和线程的区别</h3><ul>
 <li>进程是操作系统资源分配的基本单位，</li>
 <li>而线程是任务调度和执行的基本单位</li>
-<li>进程有独立的代码和数据空间，线程没有，线程切换开销小<h3 id="软链接和硬链接"><a href="#软链接和硬链接" class="headerlink" title="软链接和硬链接"></a>软链接和硬链接</h3></li>
-<li>硬链接和文件本身的inode号是一样的</li>
-<li>相当于软链接是保存链一个绝对路径<h3 id="ping"><a href="#ping" class="headerlink" title="ping"></a>ping</h3></li>
-<li>ICMP(internet Control Message Protocol)<h3 id="数据库连接池"><a href="#数据库连接池" class="headerlink" title="数据库连接池"></a>数据库连接池</h3>##网络协议<h3 id="http和https的区别"><a href="#http和https的区别" class="headerlink" title="http和https的区别"></a>http和https的区别</h3></li>
+<li>进程有独立的代码和数据空间，线程没有，线程切换开销小<h2 id="锁"><a href="#锁" class="headerlink" title="锁"></a>锁</h2><h3 id="锁的种类"><a href="#锁的种类" class="headerlink" title="锁的种类"></a>锁的种类</h3></li>
+<li><h3 id="synchronized锁"><a href="#synchronized锁" class="headerlink" title="synchronized锁"></a>synchronized锁</h3></li>
+<li>互斥锁: 一次只允许一个线程进入被锁住的代码块</li>
+<li>作用对象：方法块，代码块</li>
+<li>内置锁/监视器锁，Java每一个对象都有一个内置锁，synchronized使用的是对象内置锁来锁定代码块</li>
+<li>可见行，原子性</li>
+<li>monitorenter, monitorexit </li>
+<li>修饰静态变量获得的是类锁，其他是对象锁，对象锁和类锁是不冲突的</li>
+<li>可重入: 锁的持有者是“线程”</li>
+<li>释放: 不会出现死锁，自动释放锁，或者异常时会自动释放</li>
+</ul>
+<h3 id="乐观锁-amp-amp-悲观锁"><a href="#乐观锁-amp-amp-悲观锁" class="headerlink" title="乐观锁&amp;&amp;悲观锁"></a>乐观锁&amp;&amp;悲观锁</h3><ul>
+<li>乐观锁：在使用数据时候不会添加锁 CAS(Java Autmtic 类)</li>
+<li>悲观锁: 在使用数据时不管怎么样先加锁<h3 id="数据库连接池"><a href="#数据库连接池" class="headerlink" title="数据库连接池"></a>数据库连接池</h3>##网络协议<h3 id="ping"><a href="#ping" class="headerlink" title="ping"></a>ping</h3></li>
+<li>ICMP(internet Control Message Protocol)<h3 id="http和https的区别"><a href="#http和https的区别" class="headerlink" title="http和https的区别"></a>http和https的区别</h3></li>
 <li>http = http+ssl</li>
 <li>http端口80，https端口443</li>
 <li>http为明文传输</li>
@@ -876,6 +893,10 @@
 
           <div class="post-nav-prev post-nav-item">
             
+              <a href="/2019/03/18/algorithms/" rel="prev" title="algorithms">
+                algorithms <i class="fa fa-chevron-right"></i>
+              </a>
+            
           </div>
         </div>
       
@@ -946,7 +967,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">9</span>
+                    <span class="site-state-item-count">13</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -975,7 +996,13 @@
                     
                       
                     
-                    <span class="site-state-item-count">8</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">11</span>
                     <span class="site-state-item-name">categories</span>
                   </a>
                 </div>
@@ -1014,7 +1041,21 @@
                     
                       
                     
-                    <span class="site-state-item-count">13</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">19</span>
                     <span class="site-state-item-name">tags</span>
                   </a>
                 </div>
@@ -1062,7 +1103,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一些常见的Java面试问题"><span class="nav-number">1.</span> <span class="nav-text">一些常见的Java面试问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#操作系统中-heap-和-stack-的区别"><span class="nav-number">1.1.</span> <span class="nav-text">操作系统中 heap 和 stack 的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是基于注解的切面实现"><span class="nav-number">1.2.</span> <span class="nav-text">什么是基于注解的切面实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是-对象-关系-映射集成模块"><span class="nav-number">1.3.</span> <span class="nav-text">什么是 对象/关系 映射集成模块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Java反射机制"><span class="nav-number">1.4.</span> <span class="nav-text">Java反射机制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#索引的一篇文章"><span class="nav-number">1.5.</span> <span class="nav-text">索引的一篇文章</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ACID"><span class="nav-number">1.6.</span> <span class="nav-text">ACID</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#索引的类型"><span class="nav-number">1.7.</span> <span class="nav-text">索引的类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#主键和唯一索引的区别"><span class="nav-number">1.8.</span> <span class="nav-text">主键和唯一索引的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#索引的优点"><span class="nav-number">1.9.</span> <span class="nav-text">索引的优点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#索引的缺点"><span class="nav-number">1.10.</span> <span class="nav-text">索引的缺点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mysql事务级别"><span class="nav-number">1.11.</span> <span class="nav-text">mysql事务级别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#join"><span class="nav-number">1.12.</span> <span class="nav-text">join</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mysql引擎"><span class="nav-number">1.13.</span> <span class="nav-text">mysql引擎</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BTree和B-Tree"><span class="nav-number">1.14.</span> <span class="nav-text">BTree和B+Tree</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BS和CS的联系和区别"><span class="nav-number">1.15.</span> <span class="nav-text">BS和CS的联系和区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Cookie-和-Session的区别"><span class="nav-number">1.16.</span> <span class="nav-text">Cookie 和 Session的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#fail-fast-与-fail-safe-机制有什么区别"><span class="nav-number">1.17.</span> <span class="nav-text">fail-fast 与 fail-safe 机制有什么区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GET和POST的区别"><span class="nav-number">1.18.</span> <span class="nav-text">GET和POST的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#interface和abstract类的区别"><span class="nav-number">1.19.</span> <span class="nav-text">interface和abstract类的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IOC的优点是什么"><span class="nav-number">1.20.</span> <span class="nav-text">IOC的优点是什么</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IO-和-NIO的区别，NIO优点"><span class="nav-number">1.21.</span> <span class="nav-text">IO 和 NIO的区别，NIO优点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是竞态条件，死锁？-举个例子说明。"><span class="nav-number">1.22.</span> <span class="nav-text">什么是竞态条件，死锁？ 举个例子说明。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MVC的各个部分都有那些技术来实现-如何实现"><span class="nav-number">1.23.</span> <span class="nav-text">MVC的各个部分都有那些技术来实现?如何实现?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RPC-通信和-RMI-区别"><span class="nav-number">1.24.</span> <span class="nav-text">RPC 通信和 RMI 区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#WEB容器"><span class="nav-number">1.25.</span> <span class="nav-text">WEB容器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#servlet的生命周期"><span class="nav-number">1.26.</span> <span class="nav-text">servlet的生命周期</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Java正则表达式"><span class="nav-number">1.27.</span> <span class="nav-text">Java正则表达式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是懒加载（Lazy-Loading）"><span class="nav-number">1.28.</span> <span class="nav-text">什么是懒加载（Lazy Loading）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#伪递归"><span class="nav-number">1.29.</span> <span class="nav-text">伪递归</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是控制反转（Inversion-of-Control）与依赖注入（Dependency-Injection"><span class="nav-number">1.30.</span> <span class="nav-text">什么是控制反转（Inversion of Control）与依赖注入（Dependency Injection</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Java内存和JVM模型"><span class="nav-number">1.31.</span> <span class="nav-text">Java内存和JVM模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#finalize关键字"><span class="nav-number">1.32.</span> <span class="nav-text">finalize关键字</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#volatile"><span class="nav-number">1.33.</span> <span class="nav-text">volatile</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#transient"><span class="nav-number">1.34.</span> <span class="nav-text">transient</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#equal和‘-’区别"><span class="nav-number">1.35.</span> <span class="nav-text">equal和‘==’区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Java-switch-语句可以用的类型"><span class="nav-number">1.36.</span> <span class="nav-text">Java switch 语句可以用的类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#a-a-b-与-a-b-的区别？"><span class="nav-number">1.37.</span> <span class="nav-text">a = a + b 与 a += b 的区别？</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Spring"><span class="nav-number">2.</span> <span class="nav-text">Spring</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#javaSpring-bean的管理方式"><span class="nav-number">2.1.</span> <span class="nav-text">javaSpring bean的管理方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Spring注解的方式"><span class="nav-number">2.2.</span> <span class="nav-text">Spring注解的方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Spring的生命周期"><span class="nav-number">2.3.</span> <span class="nav-text">Spring的生命周期</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Linux"><span class="nav-number">3.</span> <span class="nav-text">Linux</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Linux查看进程命令"><span class="nav-number">3.1.</span> <span class="nav-text">Linux查看进程命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#进程间通讯"><span class="nav-number">3.2.</span> <span class="nav-text">进程间通讯</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#进程间的比较"><span class="nav-number">3.3.</span> <span class="nav-text">进程间的比较</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查看当前系统启动时间"><span class="nav-number">3.4.</span> <span class="nav-text">查看当前系统启动时间</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#fg-bg-ctrl-z-jobs"><span class="nav-number">3.5.</span> <span class="nav-text">fg,bg,ctrl+z,jobs</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#tar"><span class="nav-number">3.6.</span> <span class="nav-text">tar</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#进程和线程的区别"><span class="nav-number">3.7.</span> <span class="nav-text">进程和线程的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#软链接和硬链接"><span class="nav-number">3.8.</span> <span class="nav-text">软链接和硬链接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ping"><span class="nav-number">3.9.</span> <span class="nav-text">ping</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据库连接池"><span class="nav-number">3.10.</span> <span class="nav-text">数据库连接池</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#http和https的区别"><span class="nav-number">3.11.</span> <span class="nav-text">http和https的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TCP"><span class="nav-number">3.12.</span> <span class="nav-text">TCP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#jdbc"><span class="nav-number">3.13.</span> <span class="nav-text">jdbc</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#连接代码"><span class="nav-number">4.</span> <span class="nav-text">连接代码</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#hashcode"><span class="nav-number">4.1.</span> <span class="nav-text">hashcode</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CDN原理"><span class="nav-number">4.2.</span> <span class="nav-text">CDN原理</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一些常见的Java面试问题"><span class="nav-number">1.</span> <span class="nav-text">一些常见的Java面试问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#操作系统中-heap-和-stack-的区别"><span class="nav-number">1.1.</span> <span class="nav-text">操作系统中 heap 和 stack 的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是基于注解的切面实现"><span class="nav-number">1.2.</span> <span class="nav-text">什么是基于注解的切面实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是-对象-关系-映射集成模块"><span class="nav-number">1.3.</span> <span class="nav-text">什么是 对象/关系 映射集成模块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Java反射机制"><span class="nav-number">1.4.</span> <span class="nav-text">Java反射机制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#索引的一篇文章"><span class="nav-number">1.5.</span> <span class="nav-text">索引的一篇文章</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ACID"><span class="nav-number">1.6.</span> <span class="nav-text">ACID</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#索引的类型"><span class="nav-number">1.7.</span> <span class="nav-text">索引的类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#主键和唯一索引的区别"><span class="nav-number">1.8.</span> <span class="nav-text">主键和唯一索引的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#索引的优点"><span class="nav-number">1.9.</span> <span class="nav-text">索引的优点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#索引的缺点"><span class="nav-number">1.10.</span> <span class="nav-text">索引的缺点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mysql事务级别"><span class="nav-number">1.11.</span> <span class="nav-text">mysql事务级别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#join"><span class="nav-number">1.12.</span> <span class="nav-text">join</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mysql引擎"><span class="nav-number">1.13.</span> <span class="nav-text">mysql引擎</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BTree和B-Tree"><span class="nav-number">1.14.</span> <span class="nav-text">BTree和B+Tree</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BS和CS的联系和区别"><span class="nav-number">1.15.</span> <span class="nav-text">BS和CS的联系和区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Cookie-和-Session的区别"><span class="nav-number">1.16.</span> <span class="nav-text">Cookie 和 Session的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#fail-fast-与-fail-safe-机制有什么区别"><span class="nav-number">1.17.</span> <span class="nav-text">fail-fast 与 fail-safe 机制有什么区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GET和POST的区别"><span class="nav-number">1.18.</span> <span class="nav-text">GET和POST的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#interface和abstract类的区别"><span class="nav-number">1.19.</span> <span class="nav-text">interface和abstract类的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IOC的优点是什么"><span class="nav-number">1.20.</span> <span class="nav-text">IOC的优点是什么</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IO-和-NIO的区别，NIO优点"><span class="nav-number">1.21.</span> <span class="nav-text">IO 和 NIO的区别，NIO优点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是竞态条件，死锁？-举个例子说明。"><span class="nav-number">1.22.</span> <span class="nav-text">什么是竞态条件，死锁？ 举个例子说明。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MVC的各个部分都有那些技术来实现-如何实现"><span class="nav-number">1.23.</span> <span class="nav-text">MVC的各个部分都有那些技术来实现?如何实现?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RPC-通信和-RMI-区别"><span class="nav-number">1.24.</span> <span class="nav-text">RPC 通信和 RMI 区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#WEB容器"><span class="nav-number">1.25.</span> <span class="nav-text">WEB容器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#servlet的生命周期"><span class="nav-number">1.26.</span> <span class="nav-text">servlet的生命周期</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Java正则表达式"><span class="nav-number">1.27.</span> <span class="nav-text">Java正则表达式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是懒加载（Lazy-Loading）"><span class="nav-number">1.28.</span> <span class="nav-text">什么是懒加载（Lazy Loading）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#伪递归"><span class="nav-number">1.29.</span> <span class="nav-text">伪递归</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是控制反转（Inversion-of-Control）与依赖注入（Dependency-Injection"><span class="nav-number">1.30.</span> <span class="nav-text">什么是控制反转（Inversion of Control）与依赖注入（Dependency Injection</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Java内存和JVM模型"><span class="nav-number">1.31.</span> <span class="nav-text">Java内存和JVM模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#finalize关键字"><span class="nav-number">1.32.</span> <span class="nav-text">finalize关键字</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#volatile"><span class="nav-number">1.33.</span> <span class="nav-text">volatile</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#transient"><span class="nav-number">1.34.</span> <span class="nav-text">transient</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#equal和‘-’区别"><span class="nav-number">1.35.</span> <span class="nav-text">equal和‘==’区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Java-switch-语句可以用的类型"><span class="nav-number">1.36.</span> <span class="nav-text">Java switch 语句可以用的类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#a-a-b-与-a-b-的区别？"><span class="nav-number">1.37.</span> <span class="nav-text">a = a + b 与 a += b 的区别？</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Spring"><span class="nav-number">2.</span> <span class="nav-text">Spring</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#javaSpring-bean的管理方式"><span class="nav-number">2.1.</span> <span class="nav-text">javaSpring bean的管理方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Spring注解的方式"><span class="nav-number">2.2.</span> <span class="nav-text">Spring注解的方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Spring的生命周期"><span class="nav-number">2.3.</span> <span class="nav-text">Spring的生命周期</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Linux"><span class="nav-number">3.</span> <span class="nav-text">Linux</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#查看当前系统启动时间"><span class="nav-number">3.1.</span> <span class="nav-text">查看当前系统启动时间</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#fg-bg-ctrl-z-jobs"><span class="nav-number">3.2.</span> <span class="nav-text">fg,bg,ctrl+z,jobs</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#tar"><span class="nav-number">3.3.</span> <span class="nav-text">tar</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#软链接和硬链接"><span class="nav-number">3.4.</span> <span class="nav-text">软链接和硬链接</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多进程"><span class="nav-number">4.</span> <span class="nav-text">多进程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Linux查看进程命令"><span class="nav-number">4.1.</span> <span class="nav-text">Linux查看进程命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#进程间通讯"><span class="nav-number">4.2.</span> <span class="nav-text">进程间通讯</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#进程间的比较"><span class="nav-number">4.3.</span> <span class="nav-text">进程间的比较</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#进程和线程的区别"><span class="nav-number">4.4.</span> <span class="nav-text">进程和线程的区别</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#锁"><span class="nav-number">5.</span> <span class="nav-text">锁</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#锁的种类"><span class="nav-number">5.1.</span> <span class="nav-text">锁的种类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#synchronized锁"><span class="nav-number">5.2.</span> <span class="nav-text">synchronized锁</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#乐观锁-amp-amp-悲观锁"><span class="nav-number">5.3.</span> <span class="nav-text">乐观锁&amp;&amp;悲观锁</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据库连接池"><span class="nav-number">5.4.</span> <span class="nav-text">数据库连接池</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ping"><span class="nav-number">5.5.</span> <span class="nav-text">ping</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#http和https的区别"><span class="nav-number">5.6.</span> <span class="nav-text">http和https的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TCP"><span class="nav-number">5.7.</span> <span class="nav-text">TCP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#jdbc"><span class="nav-number">5.8.</span> <span class="nav-text">jdbc</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#连接代码"><span class="nav-number">6.</span> <span class="nav-text">连接代码</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#hashcode"><span class="nav-number">6.1.</span> <span class="nav-text">hashcode</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CDN原理"><span class="nav-number">6.2.</span> <span class="nav-text">CDN原理</span></a></li></ol></li></ol></div>
             
 
           </div>
