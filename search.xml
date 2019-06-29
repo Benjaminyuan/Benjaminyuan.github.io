@@ -27,7 +27,7 @@
   <entry>
     <title><![CDATA[algorithms]]></title>
     <url>%2F2019%2F03%2F18%2Falgorithms%2F</url>
-    <content type="text"><![CDATA[​ 复习算法，还没有看完，先总结一波（算法怎么看得完QAQ &lt;!— more — &gt; 排序冒泡排序 这个应该是最简单的了，直接贴代码好了 插入排序 类似于抽牌排序的过程 归并排序 借用二分的思想，当分成只有一个元素的片段时就已经是排好序了 合并就类似于链表的合并，但是需要额外开辟空间 堆排序 buildTree，从右边数第一个叶子结点的父节点开始建树， 123456789101112131415161718for(int i=nums.length/2-1;i&gt;=0;i--)&#123; heapify(i); &#125;public void maxHeapify(int index)&#123; int left = 2*index +1; int right = 2*index+2; int max = index; if(left&lt;this.heapSize&amp;&amp; num[left]&gt;num[max])&#123; max = left; &#125; if(right&lt;this.heapSize&amp;&amp; num[right]&gt; num[max])&#123; max = right; &#125; if(max!=i)&#123; swap(max,i) maxHeapify(max) &#125;&#125; ​ 建堆完毕后，取出最大值后重新建堆即可 123456789public void sort()&#123; maxTreeBuild(); for(int i = num.length-1;i&gt;=0;i++)&#123; this.heapSize-- swap(i,0); maxHeapify(0); &#125;&#125;]]></content>
+    <content type="text"><![CDATA[​ 复习算法，还没有看完，先总结一波（算法怎么看得完QAQ 排序冒泡排序 这个应该是最简单的了，直接贴代码好了 插入排序 类似于抽牌排序的过程 归并排序 借用二分的思想，当分成只有一个元素的片段时就已经是排好序了 合并就类似于链表的合并，但是需要额外开辟空间 堆排序 buildTree，从右边数第一个叶子结点的父节点开始建树， 123456789101112131415161718for(int i=nums.length/2-1;i&gt;=0;i--)&#123; heapify(i); &#125;public void maxHeapify(int index)&#123; int left = 2*index +1; int right = 2*index+2; int max = index; if(left&lt;this.heapSize&amp;&amp; num[left]&gt;num[max])&#123; max = left; &#125; if(right&lt;this.heapSize&amp;&amp; num[right]&gt; num[max])&#123; max = right; &#125; if(max!=i)&#123; swap(max,i) maxHeapify(max) &#125;&#125; ​ 建堆完毕后，取出最大值后重新建堆即可 123456789public void sort()&#123; maxTreeBuild(); for(int i = num.length-1;i&gt;=0;i++)&#123; this.heapSize-- swap(i,0); maxHeapify(0); &#125;&#125;]]></content>
       <tags>
         <tag>Algorithms</tag>
       </tags>
@@ -87,8 +87,8 @@
         <category>学期总结</category>
       </categories>
       <tags>
-        <tag>Life</tag>
         <tag>Code</tag>
+        <tag>Life</tag>
       </tags>
   </entry>
   <entry>
@@ -99,9 +99,9 @@
         <category>JavaSpring</category>
       </categories>
       <tags>
+        <tag>SpringMvc</tag>
         <tag>Backend</tag>
         <tag>Code</tag>
-        <tag>SpringMvc</tag>
       </tags>
   </entry>
   <entry>
@@ -112,9 +112,9 @@
         <category>运维</category>
       </categories>
       <tags>
+        <tag>Backend</tag>
         <tag>Docker</tag>
         <tag>自动化部署</tag>
-        <tag>Backend</tag>
       </tags>
   </entry>
   <entry>
