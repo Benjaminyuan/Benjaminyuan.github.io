@@ -118,7 +118,7 @@
 <meta property="og:description" content="操作系统##计算机启动 BIOS 将BootLoader从磁盘的引导扇区(512kb)加载到 0x7c00 跳转到CS: IP = 0000: 7c00  BootLoader 将操作系统的代码和数据从硬盘加载到内存当中 跳转到操作系统的起始地址  系统调用 应用程序主动向操作系统发出的服务请求 同步或者异步 响应: 等待和持续 高级程序运用系统提供的API来完成系统调用 操作系统执行权限：用户态">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/Users/mac/Documents/Blog/hexoBlog/source/draft/屏幕快照%202019-04-07%2016.45.32.png">
-<meta property="og:updated_time" content="2019-04-11T13:30:48.735Z">
+<meta property="og:updated_time" content="2019-04-29T08:58:09.282Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Benji&#39;blog">
 <meta name="twitter:description" content="操作系统##计算机启动 BIOS 将BootLoader从磁盘的引导扇区(512kb)加载到 0x7c00 跳转到CS: IP = 0000: 7c00  BootLoader 将操作系统的代码和数据从硬盘加载到内存当中 跳转到操作系统的起始地址  系统调用 应用程序主动向操作系统发出的服务请求 同步或者异步 响应: 等待和持续 高级程序运用系统提供的API来完成系统调用 操作系统执行权限：用户态">
@@ -279,7 +279,7 @@
       
     
 
-    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags<span class="badge">20</span></a>
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags<span class="badge">21</span></a>
 
   </li>
         
@@ -317,7 +317,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives<span class="badge">13</span></a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives<span class="badge">12</span></a>
 
   </li>
         
@@ -625,7 +625,7 @@
 <li><p>分段寻址方案</p>
 <ul>
 <li>段访问机制<ul>
-<li>段：内存块 （逻辑地址空间）</li>
+<li>段：内存块 （逻辑地址空间）(大小可变)</li>
 <li>程序访问地址:（s, addr) 短号，偏移量</li>
 </ul>
 </li>
@@ -644,10 +644,10 @@
 </li>
 <li>建立方案 <ul>
 <li>页表</li>
-<li>MMU/TLB</li>
+<li>MMU(内存管理单元)/TLB</li>
 </ul>
 </li>
-<li>帧<ul>
+<li>帧(大小不可变)<ul>
 <li>物理内存被分割为大小相等的帧</li>
 <li>物理地址（f,o) = 2^s*f+o(一个帧大小为2^s) </li>
 </ul>
@@ -665,6 +665,66 @@
 <li>不是所有的页都有对应的帧数</li>
 </ul>
 </li>
+</ul>
+</li>
+<li><p>页表</p>
+<ul>
+<li><p>Flags(resident bit 物理页帧存在为1) | Frame num</p>
+<ul>
+<li><p>问题</p>
+<ul>
+<li>访问一个内存单元需要2次内存访问<ul>
+<li>访问页表项</li>
+<li>一次访问数据</li>
+</ul>
+</li>
+<li>页表可能非常大<ul>
+<li>64位机器如果每页1024byte,页表大小为2^54</li>
+<li>每个程序都有一个页表</li>
+<li>页表过大，访问页表时间开销大</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>解决</p>
+<ul>
+<li><p>缓存</p>
+<ul>
+<li><p>TLB（Translation Lookaside Buffer）快表</p>
+<ul>
+<li><p>使用关联内存实现</p>
+</li>
+<li><p>TLB命中，物理页号可以很快被获取</p>
+</li>
+<li><p>TLB未命中，对应的表项被更新到TLB中</p>
+<p>ps(实现和LRU类似)</p>
+</li>
+<li><p>代码访问局部性</p>
+</li>
+<li><p>x86cpu完全由硬件实现，mips由系统实现</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>多级页表</p>
+<ul>
+<li>拆分page Number </li>
+<li>因为除一级页表外无需存储不存在的映射关系节省空间</li>
+</ul>
+</li>
+<li><p>反向页表</p>
+<ul>
+<li>占据空间小</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="虚拟内存"><a href="#虚拟内存" class="headerlink" title="虚拟内存"></a>虚拟内存</h4><ul>
+<li>覆盖技术</li>
 </ul>
 </li>
 </ul>
@@ -738,7 +798,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">13</span>
+                    <span class="site-state-item-count">12</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -773,7 +833,7 @@
                     
                       
                     
-                    <span class="site-state-item-count">11</span>
+                    <span class="site-state-item-count">10</span>
                     <span class="site-state-item-name">categories</span>
                   </a>
                 </div>
@@ -826,7 +886,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">19</span>
+                      
+                    
+                    <span class="site-state-item-count">17</span>
                     <span class="site-state-item-name">tags</span>
                   </a>
                 </div>
@@ -874,7 +936,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#操作系统"><span class="nav-number">1.</span> <span class="nav-text">操作系统</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#BIOS"><span class="nav-number">1.0.1.</span> <span class="nav-text">BIOS</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#BootLoader"><span class="nav-number">1.1.</span> <span class="nav-text">BootLoader</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#系统调用"><span class="nav-number">1.1.1.</span> <span class="nav-text">系统调用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#异常"><span class="nav-number">1.1.2.</span> <span class="nav-text">异常</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#中断"><span class="nav-number">1.1.3.</span> <span class="nav-text">中断</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#操作系统-1"><span class="nav-number">1.1.4.</span> <span class="nav-text">操作系统</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#内存分层结构"><span class="nav-number">1.1.5.</span> <span class="nav-text">内存分层结构</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#层次"><span class="nav-number">1.1.5.1.</span> <span class="nav-text">层次</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#优点"><span class="nav-number">1.1.5.2.</span> <span class="nav-text">优点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#操作系统中管理内存的不同方法"><span class="nav-number">1.1.5.3.</span> <span class="nav-text">操作系统中管理内存的不同方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#地址空间-amp-地址生成"><span class="nav-number">1.1.5.4.</span> <span class="nav-text">地址空间&amp; 地址生成</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#内存碎片和分区的动态分配"><span class="nav-number">1.1.5.5.</span> <span class="nav-text">内存碎片和分区的动态分配</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#连续内存分配"><span class="nav-number">1.1.5.6.</span> <span class="nav-text">连续内存分配</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#非连续的内存分配"><span class="nav-number">1.1.5.7.</span> <span class="nav-text">非连续的内存分配</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#操作系统"><span class="nav-number">1.</span> <span class="nav-text">操作系统</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#BIOS"><span class="nav-number">1.0.1.</span> <span class="nav-text">BIOS</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#BootLoader"><span class="nav-number">1.1.</span> <span class="nav-text">BootLoader</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#系统调用"><span class="nav-number">1.1.1.</span> <span class="nav-text">系统调用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#异常"><span class="nav-number">1.1.2.</span> <span class="nav-text">异常</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#中断"><span class="nav-number">1.1.3.</span> <span class="nav-text">中断</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#操作系统-1"><span class="nav-number">1.1.4.</span> <span class="nav-text">操作系统</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#内存分层结构"><span class="nav-number">1.1.5.</span> <span class="nav-text">内存分层结构</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#层次"><span class="nav-number">1.1.5.1.</span> <span class="nav-text">层次</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#优点"><span class="nav-number">1.1.5.2.</span> <span class="nav-text">优点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#操作系统中管理内存的不同方法"><span class="nav-number">1.1.5.3.</span> <span class="nav-text">操作系统中管理内存的不同方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#地址空间-amp-地址生成"><span class="nav-number">1.1.5.4.</span> <span class="nav-text">地址空间&amp; 地址生成</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#内存碎片和分区的动态分配"><span class="nav-number">1.1.5.5.</span> <span class="nav-text">内存碎片和分区的动态分配</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#连续内存分配"><span class="nav-number">1.1.5.6.</span> <span class="nav-text">连续内存分配</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#非连续的内存分配"><span class="nav-number">1.1.5.7.</span> <span class="nav-text">非连续的内存分配</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#虚拟内存"><span class="nav-number">1.1.5.8.</span> <span class="nav-text">虚拟内存</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
