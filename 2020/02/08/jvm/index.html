@@ -1,0 +1,2226 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=6.5.0" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.5.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.5.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.5.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.5.0" color="#222">
+
+
+  <link rel="manifest" href="/images/manifest.json">
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '6.5.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="Jvm">
+<meta name="keywords" content="Jvm">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Jvm笔记">
+<meta property="og:url" content="http://yoursite.com/2020/02/08/jvm/index.html">
+<meta property="og:site_name" content="Benji&#39;blog">
+<meta property="og:description" content="Jvm">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2020-02-08T11:59:11.517Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Jvm笔记">
+<meta name="twitter:description" content="Jvm">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2020/02/08/jvm/">
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Jvm笔记 | Benji'blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Benji'blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">不坠青云之志</p>
+      
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+      
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>About</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+      
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags<span class="badge">23</span></a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+      
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories<span class="badge">11</span></a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives<span class="badge">13</span></a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-schedule">
+
+    
+    
+    
+      
+    
+
+    
+      
+    
+
+    <a href="/schedule/" rel="section"><i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>Schedule</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-sitemap">
+
+    
+    
+    
+      
+    
+
+    
+      
+    
+
+    <a href="/sitemap.xml" rel="section"><i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br>Sitemap</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-commonweal">
+
+    
+    
+    
+      
+    
+
+    
+      
+    
+
+    <a href="/404/" rel="section"><i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br>Commonweal 404</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>Search</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="Searching..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/08/jvm/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="BenjaminYuan">
+      <meta itemprop="description" content="记录生活点滴">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Benji'blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Jvm笔记
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2020-02-08 20:02:49 / Modified: 19:59:11" itemprop="dateCreated datePublished" datetime="2020-02-08T20:02:49+08:00">2020-02-08</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/Jvm/" itemprop="url" rel="index"><span itemprop="name">Jvm</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>Jvm<br><a id="more"></a></p>
+<h1 id="整体思路"><a href="#整体思路" class="headerlink" title="整体思路"></a>整体思路</h1><blockquote>
+<p>共有设计，私有实现，始终贯穿，不同虚拟机对于jvm的设计实现上有一定的差别</p>
+</blockquote>
+<h1 id="Java内存区域和内存移除异常"><a href="#Java内存区域和内存移除异常" class="headerlink" title="Java内存区域和内存移除异常"></a>Java内存区域和内存移除异常</h1><h2 id="运行时数据区域"><a href="#运行时数据区域" class="headerlink" title="运行时数据区域"></a>运行时数据区域</h2><h3 id="程序计数器"><a href="#程序计数器" class="headerlink" title="程序计数器"></a>程序计数器</h3><ul>
+<li>程序位置指示器</li>
+<li>线程私有<h3 id="Java虚拟机栈"><a href="#Java虚拟机栈" class="headerlink" title="Java虚拟机栈"></a><a href="#stack">Java虚拟机栈</a></h3></li>
+<li>线程私有</li>
+<li><a href=""></a></li>
+<li>方法执行时会创建栈帧<ul>
+<li>局部变量表:用变量槽（32位）保存8种基本数据类型&amp;&amp; 引用，</li>
+<li>操作数栈（Java指令架构时基于栈的）</li>
+<li>动态连接</li>
+<li>方法出口<h3 id="本地方法栈"><a href="#本地方法栈" class="headerlink" title="本地方法栈"></a>本地方法栈</h3></li>
+<li>和虚拟机栈类似</li>
+<li>区别在于是虚拟机栈<strong>为虚拟机执行Java方法服务</strong>，而本地方法栈则为<strong>虚拟机使用到的本地方法服务</strong><h3 id="堆"><a href="#堆" class="headerlink" title="堆"></a>堆</h3></li>
+</ul>
+</li>
+<li>对象实例存放的地方</li>
+<li>可以通过-Xms,-Xmx改变大小<h3 id="方法区"><a href="#方法区" class="headerlink" title="方法区"></a>方法区</h3></li>
+<li>存放虚拟机加载的<strong>类型信息</strong>，<strong>常量</strong>，<strong>静态变量</strong>，即时编译后(JIT)的代码缓存</li>
+<li>包括运行时常量池<ul>
+<li>编译期生成的各种字面量和符号引用，类加载后会存放进方法区</li>
+</ul>
+</li>
+<li>Hotpot 采用本地内存来实现元空间，元空间是方法区的实现<h3 id="直接内存"><a href="#直接内存" class="headerlink" title="直接内存"></a>直接内存</h3></li>
+<li><strong>不属于虚拟机运行时数据区</strong></li>
+<li>IO时分配堆外内存，可以减少一次Java堆到Native堆的拷贝<h2 id="HotPot虚拟机对象"><a href="#HotPot虚拟机对象" class="headerlink" title="HotPot虚拟机对象"></a>HotPot虚拟机对象</h2><h3 id="对象创建"><a href="#对象创建" class="headerlink" title="对象创建"></a>对象创建</h3></li>
+<li>new字节码指令执行过程<ul>
+<li>常量池中定位符号引用</li>
+<li>检查符号引用对于的类是否加载，如果没有加载，这先执行类加载</li>
+<li>分配内存（取决于<strong>垃圾收集器</strong>是否带有空间压缩整理的能力）<ul>
+<li>内存绝对规整：指针碰撞（Bump The Pointer）</li>
+<li>不规整（已使用内存和未使用内存交错）：维护一个空闲列表</li>
+</ul>
+</li>
+<li>更新的原子性<ul>
+<li>CAS + 失败重试</li>
+<li>每个线程预分配(Thread Local Allocation Buffer TLAB)</li>
+</ul>
+</li>
+<li>设置对象初始信息<ul>
+<li>对象头（Object Header）</li>
+</ul>
+</li>
+<li>执行构造函数<init>()<h3 id="对象内存布局"><a href="#对象内存布局" class="headerlink" title="对象内存布局"></a>对象内存布局</h3></init></li>
+</ul>
+</li>
+<li><p>mark word </p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 32bit </span></span><br><span class="line"><span class="comment">//-----</span></span><br><span class="line"><span class="comment">//hash:25:-----------------&gt;| age:4 biased_lock:1 lock:2 (normal object)</span></span><br><span class="line"><span class="comment">//JavaThread*: epoch:2 age:4 Biased_lock:1 lock:2 (biased object)</span></span><br><span class="line"><span class="comment">//size:32--------------------------------------&gt;| (CMS free block)</span></span><br><span class="line"><span class="comment">//PromotedObject*:29--------&gt;| promo_bits:3----&gt;| (CMS promoted object)</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>对象有效信息: 从自身定义字段+父类继承下来的字段</p>
+<ul>
+<li>HotSpot分配策略<ul>
+<li>存储顺序：longs/doubles,ints,shorts,chars,bytes/booleans,oops</li>
+<li>相同宽度的字段总是被分配在一起</li>
+<li>在满足以上前提，父类定义的字段会出现在子类之前</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>对其填充<ul>
+<li>HotSpot虚拟机自动内存管理要求对象起始地址必须是8字节的整数倍<h3 id="对象的访问定位"><a href="#对象的访问定位" class="headerlink" title="对象的访问定位"></a>对象的访问定位</h3></li>
+</ul>
+</li>
+<li>主流访问方式<ul>
+<li>使用句柄：对象移动时，只改变句柄池的实例数据指针</li>
+<li>直接指针：直接指向对象的内存位置</li>
+</ul>
+</li>
+<li>区别：使用句柄多一次指针定位的时间开销</li>
+<li>HotSpot使用直接指针<h2 id="OutOfMemoryError异常"><a href="#OutOfMemoryError异常" class="headerlink" title="OutOfMemoryError异常"></a>OutOfMemoryError异常</h2><h3 id="Java堆溢出"><a href="#Java堆溢出" class="headerlink" title="Java堆溢出"></a>Java堆溢出</h3><h3 id="虚拟机栈和本地方法栈溢出"><a href="#虚拟机栈和本地方法栈溢出" class="headerlink" title="虚拟机栈和本地方法栈溢出"></a>虚拟机栈和本地方法栈溢出</h3></li>
+<li>请求栈深度大于虚拟机允许的深度 –&gt; StackOverflow，常见：递归</li>
+<li>当虚拟机栈内存允许动态拓展，拓展栈无法申请到足够的内存时，将抛出OutOfMemoryError异常（HotSpot不支持）<h3 id="方法区和运行时常量池溢出"><a href="#方法区和运行时常量池溢出" class="headerlink" title="方法区和运行时常量池溢出"></a>方法区和运行时常量池溢出</h3></li>
+<li>字符串问题<ul>
+<li>String.intern()方法，JDK6中，首次遇到的字符串实例复制到永久代的字符串常量池中，返回的也是永久代里面这个字符串的引用，而JDK7 只需要将常量池里面记录一下首次出现的实例引用即可</li>
+<li>JDK6 HotSpot中，字符串常量池在方法区（永久代），而JDK7 后，被移到类Java堆中</li>
+</ul>
+</li>
+<li>方法区溢出<ul>
+<li>CGLib技术直接操作字节码运行时生成大量的动态类<h3 id="本机直接内存溢出"><a href="#本机直接内存溢出" class="headerlink" title="本机直接内存溢出"></a>本机直接内存溢出</h3></li>
+</ul>
+</li>
+<li>Unsafe类向操作系统申请内存</li>
+<li>问题排查：是否使用了DirectMemory</li>
+</ul>
+<h1 id="垃圾收集器和内存分配策略"><a href="#垃圾收集器和内存分配策略" class="headerlink" title="垃圾收集器和内存分配策略"></a>垃圾收集器和内存分配策略</h1><h2 id="聚焦问题"><a href="#聚焦问题" class="headerlink" title="聚焦问题"></a>聚焦问题</h2><ul>
+<li>那些内存需要回收</li>
+<li>什么时候回收</li>
+<li>如何回收<h2 id="对象存活问题"><a href="#对象存活问题" class="headerlink" title="对象存活问题"></a>对象存活问题</h2><h3 id="引用计数算法"><a href="#引用计数算法" class="headerlink" title="引用计数算法"></a>引用计数算法</h3></li>
+<li>描述：在对象中添加一个引用计数器，每有一个地方引用它，计数器值就加1，引用失效时就减1，应用为0则无用了</li>
+<li>简单，效率高，但是存在循环引用问题<h3 id="可达性分析算法"><a href="#可达性分析算法" class="headerlink" title="可达性分析算法"></a>可达性分析算法</h3></li>
+<li>描述：通过一系列的“GC Root” 的根对象作为其实节点集，从这些节点开始，根据引用关系向下搜索，如果对象不跟任何引用链相连，则被认为不再被使用。</li>
+<li>Java技术体系里面，固定可以作为GC Roots的对象包括<ul>
+<li>虚拟机栈中引用的对象，</li>
+<li>方法区中的静态属性引用，如类的引用类型静态变量</li>
+<li>方法区中常量引用的对象，譬如字符串常量池里引用的对象</li>
+<li>本地方法栈中的JNI引用的对象</li>
+<li>Java虚拟机内部引用，如基本数据类型对应的Class对象，一些常驻的异常等，还有系统的类加载器</li>
+<li>所有被同步锁持有的对象</li>
+<li>Java虚拟机内部情况的JMXBean，JVMTI中注册的回调，本地代码缓存等</li>
+<li>除以上固定的，还有其他对象“临时性”地加入，共同构成完整的GCRoots集合<h3 id="引用引用"><a href="#引用引用" class="headerlink" title="引用引用"></a>引用引用</h3></li>
+</ul>
+</li>
+<li>应用的概念扩冲<ul>
+<li>强引用：Object obj = new Object();</li>
+<li>软引用：有用非必须，在将要发生内存溢出异常前，会把这些对象列进回收范围进行第二次回收，如果这次回收没有足够的内存，才会发生内存异常，JDK 1.2版本之后提供列SoftReference类来实现软引用</li>
+<li>弱引用：非必须对象，关联的对象只能生存到下一次垃圾收集发生为止。JDK 1.2后使用WeakReference类来实现弱引用</li>
+<li>虚引用：不会对对象的生存时间构成影响 JDK 1.2后，提供PhantomReference类来实现虚引用<h3 id="To-die-to"><a href="#To-die-to" class="headerlink" title="To die to"></a>To die to</h3></li>
+</ul>
+</li>
+<li>死亡 –&gt; finalize()</li>
+<li>F-Queue队列由虚拟机自动建立的，低调度优先级的Finalizer线程去执行finalize()方法（不保证能够执行完成）</li>
+<li>一个对象的finalize()只能执行一次<h3 id="回收方法区"><a href="#回收方法区" class="headerlink" title="回收方法区"></a>回收方法区</h3></li>
+<li>允许回收条件<ul>
+<li>该类的所有实例都已经被回收，Java堆中不存在该类及其任何派生子类的实例</li>
+<li>该类的类加载器被回收，一般很难达成</li>
+<li>该类对应的java.lang.Class 对象没有在任何地方被引用，无法在任何地方通过反射获得该类的方法</li>
+</ul>
+</li>
+<li>允许回收不一定要回收<h2 id="垃圾回收算法"><a href="#垃圾回收算法" class="headerlink" title="垃圾回收算法"></a>垃圾回收算法</h2><h3 id="分代收集理论"><a href="#分代收集理论" class="headerlink" title="分代收集理论"></a>分代收集理论</h3></li>
+<li>假说<ul>
+<li>弱分代假说：绝大多数对象都是朝生夕灭</li>
+<li>强分代假说：熬过越多次垃圾收集过程的对象就越难以消亡</li>
+<li>跨代引用假说：跨代引用相对与同代引用来说仅占及其少数 –&gt; 引出<strong>记忆集</strong>概念<h3 id="标记-清除算法"><a href="#标记-清除算法" class="headerlink" title="标记-清除算法"></a>标记-清除算法</h3></li>
+</ul>
+</li>
+<li>描述：标记所有要清除的算法，标记完成后统一回收所有被标记的对象</li>
+<li>缺点：<ul>
+<li>执行效率不高，需要扫描大量对象，执行大量标记和清除动作。</li>
+<li>内存空间的碎片化问题，标记、清除之后产生的大量不连续的内存碎片。<h3 id="标记-复制算法"><a href="#标记-复制算法" class="headerlink" title="标记-复制算法"></a>标记-复制算法</h3></li>
+</ul>
+</li>
+<li>描述：将可用内存分为大小相等的两块，每次只使用其中的一块。每一块用完了就将还存活的对象赋值到另外一块（HotSpot是8:1:1）</li>
+<li>商用Java虚拟机大多采用这种算法收集新生代。</li>
+<li>分配担保机制<h3 id="标记-整理"><a href="#标记-整理" class="headerlink" title="标记-整理"></a>标记-整理</h3></li>
+<li>描述：存活对象都向内存空间一端移动，然后直接清理掉边界以外的内存。</li>
+<li><p>缺点：</p>
+<ul>
+<li>移动存活对象需要STW</li>
+</ul>
+</li>
+<li><p>移动和不移动，that’s a question: 不移动影响内存分配，移动影响吞吐量</p>
+<h2 id="HotSpot算法细节实现"><a href="#HotSpot算法细节实现" class="headerlink" title="HotSpot算法细节实现"></a>HotSpot算法细节实现</h2><h3 id="根节点枚举"><a href="#根节点枚举" class="headerlink" title="根节点枚举"></a>根节点枚举</h3></li>
+<li>根节点枚举必须在一个保障一致性的快照中进行（所有的收集器在根节点枚举时都得STW）</li>
+<li>改进：<ul>
+<li>准确式垃圾收集：用户线程停下来后，不需要逐个检查引用位置，虚拟机存储存放对象引用的地方</li>
+<li>HotSpot解决方案：使用一组OopMap的数据结构，类加载动作完成时，记录对象内制定偏移位置的数据类型。无需一个不漏地从方法区等GC Roots开始查找<h3 id="安全点"><a href="#安全点" class="headerlink" title="安全点"></a>安全点</h3></li>
+</ul>
+</li>
+<li>OopMap的问题：让OopMap内容变化的指令很多，如果为每一条指令都生成对应的OopMap，那将会需要大量的额外存储空间。HotSpot只在特定的地方记录OopMap，这些位置被称为 <strong>安全点</strong></li>
+<li>所有线程跑到最近的安全点才能暂停，开始垃圾收集</li>
+<li>安全点位置选取：以“是否具有让程序长时间执行的特征” 为标准进行选定的，如方法调用，循环跳转，异常跳转等功能指令才会产生安全点</li>
+<li>中断有两种方式<ul>
+<li>抢先式中断：垃圾回收时，系统首先把所有的用户线程全部中断，如果有线程没有中断在安全点上，则恢复执行，直到跑到安全点上。</li>
+<li>主动式中断：当垃圾回收需要中断线程时，不直接对线程操作，仅仅简单地设置一个标志位，各个线程执行过程中会不停地主动轮询这个标志，一旦发现中断标志为真就自己在最近的安全点上主动中断挂起。<h3 id="安全区域"><a href="#安全区域" class="headerlink" title="安全区域"></a>安全区域</h3></li>
+</ul>
+</li>
+<li>定义：一段代码片段之中，引用关系不会发生变化，因此在这个区域任何地方开始垃圾回收都是安全的。</li>
+<li>行为：当线程会标识进入安全区域，当这段时间发生垃圾回收时，虚拟机不会管已声明在安全区域的线程，当线程离开安全区时，需要检查虚拟机是否已经完成了跟节点枚举，只有完成跟节点枚举才能继续运行<h3 id="记忆集与卡集"><a href="#记忆集与卡集" class="headerlink" title="记忆集与卡集"></a>记忆集与卡集</h3></li>
+<li>定义：记忆集是一种用于记录从<strong>非收集区域</strong>指向<strong>收集区域</strong>的指针集合的抽象数据结构</li>
+<li>记忆集精度<ul>
+<li>字长精度</li>
+<li>对象精度</li>
+<li>卡精度：“卡表”<ul>
+<li>卡表的简单形式可以是一个字节数组，HotSpot实现也是这样 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//HotSpot使用的卡页大小为2的9次幂，512字节</span></span><br><span class="line"><span class="comment">//只要卡页里面有跨代指针就标识为1，称为变脏，将其加入GC Roots中一并扫描</span></span><br><span class="line">CARD_TABLE[this_address &gt;&gt; <span class="number">9</span>] =<span class="number">0</span>;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="写屏障（区分“内存屏障”）"><a href="#写屏障（区分“内存屏障”）" class="headerlink" title="写屏障（区分“内存屏障”）"></a>写屏障（区分“内存屏障”）</h3><ul>
+<li>虚拟机层面对“引用类型字段赋值”这个动作的AOP切面，类似与AOP技术，在赋值前的操作叫做写前屏障，在赋值后的操作叫做写后屏障。</li>
+<li>HotSpot 通过写屏障技术维护卡表状态，在写屏障中添加更新卡表操作。</li>
+<li>卡表更新的缓存问题：改成只有没有变脏的才能变脏，HotSpot：-XX:+UseCondCardMark,开启</li>
+</ul>
+<h3 id="并发的可达性分析"><a href="#并发的可达性分析" class="headerlink" title="并发的可达性分析"></a>并发的可达性分析</h3><ul>
+<li>引出问题：GCRoots相比Java堆的对象是极少数的，停顿时间较短，但是遍历对象图时间和Java堆容量成正比，需要削减遍历时间</li>
+<li>三色标记法<ul>
+<li>白色：对象未被垃圾收集器访问过。开始时-&gt;都为白色，结束时白色-&gt;不可达</li>
+<li>黑色：标示被垃圾收集器访问过，且其所有的引用都已经扫描过了</li>
+<li>灰色：被访问过，但是对象上至少还有一个引用没有被扫描过</li>
+</ul>
+</li>
+<li>并发工作是可能存在的问题：<ul>
+<li>赋值器插入了一条或多条黑色对象到白色对象的新引用</li>
+<li>赋值器删除了全部从灰色对象到该白色对象的直接或间接引用</li>
+</ul>
+</li>
+<li>解决方案<ul>
+<li>增量更新：记录被新插入指向白色对象引用的黑色对象，并发扫描结束后以这些记录过的黑色对象为根，重新扫描一次。(CMS)</li>
+<li>原始快照：当灰色对象要删除指向白色对象的引用时，记录要被删除的引用记录，在扫描结束之后，与这些记录过的引用关系中的灰色对象为根重新扫描一次。(G1,Shenandoah)</li>
+<li>相比增量更新算法，原始快照搜索能够减少并发标记和重新标记阶段的消耗。<h2 id="经典垃圾回收器"><a href="#经典垃圾回收器" class="headerlink" title="经典垃圾回收器"></a>经典垃圾回收器</h2><h3 id="Serial收集器"><a href="#Serial收集器" class="headerlink" title="Serial收集器"></a>Serial收集器</h3></li>
+</ul>
+</li>
+<li>描述：单线程工作的收集器，一个线程处理垃圾收集工作，同时必须暂停其他工作线程。</li>
+<li>新生代：<strong>标记-复制</strong>，老年代：<strong>标志-整理</strong> 。</li>
+<li>HotSpot虚拟机客户端模式下默认新生代收集器</li>
+<li>优点：内存消耗最小，单核处理器或处理器核心数较少的环境来说，serial收集器没有线程交互的开销。在系统分配资源较少时，还不错。<h3 id="ParNew收集器"><a href="#ParNew收集器" class="headerlink" title="ParNew收集器"></a>ParNew收集器</h3></li>
+<li>描述：ParNew收集器实质上是Serial收集器的多线程并行版本</li>
+<li>大多数运行在服务端模式下的HotSpot虚拟机中首选的新生代收集器</li>
+<li>默认开启收集线程数和处理器逻辑核心数量相同<h3 id="Parallel-Scavenge收集器"><a href="#Parallel-Scavenge收集器" class="headerlink" title="Parallel Scavenge收集器"></a>Parallel Scavenge收集器</h3></li>
+<li>描述：基于<strong>标记-复制</strong>算法实现的新生代收集器，关注点是达到一个可控制的吞吐量。</li>
+<li>$$<br>吞吐量 = {运行用户代码时间}/{(运行用户代码时间+运行垃圾收集时间)}<br>$$</li>
+<li>策略：控制最大垃圾收集停顿时间-XX:MaxGCPauseMillis，设置吞吐量大小-XX:GCTimeRatio,垃圾停顿时间缩短是以牺牲吞吐量和新生代空间为代价换取的。<h3 id="Serial-Old收集器"><a href="#Serial-Old收集器" class="headerlink" title="Serial Old收集器"></a>Serial Old收集器</h3></li>
+<li>描述：单线程Serial收集器的老年代版本，使用<strong>标记-清除</strong> </li>
+<li>用途：<ul>
+<li>Parallel Scavenge收集器搭配使用</li>
+<li>作为CMS收集器发生Concurrent Mode Failure 时的后备预案<h3 id="Parallel-Old收集器"><a href="#Parallel-Old收集器" class="headerlink" title="Parallel Old收集器"></a>Parallel Old收集器</h3></li>
+</ul>
+</li>
+<li>描述：Parallel Old 是Parallel Scavenge 收集器的老年代版本，支持多线程并发收集，基于<strong>标记-整理</strong>算法实现<h3 id="CMS（Concurrent-Mark-Sweep）收集器"><a href="#CMS（Concurrent-Mark-Sweep）收集器" class="headerlink" title="CMS（Concurrent Mark Sweep）收集器"></a>CMS（Concurrent Mark Sweep）收集器</h3></li>
+<li>描述：一种以获取最短回收停顿时间为目标，基于<strong>标记-清除</strong>算法的收集器。</li>
+<li>过程<ul>
+<li>初始标记（CMS initial mark）：标记GCRoots能直接关联到的对象，（STW）</li>
+<li>并发标记（CMS concurrent mark）：从GCRoots能直接关联的对象开始遍历整个对象图的过程。</li>
+<li>重新标记（CMS remark ）：修正并发标记的期间，标记变动的对象标记（STW）</li>
+<li>并发清除（CMS concurrent sweep）：清理标记阶段死亡的对象</li>
+</ul>
+</li>
+<li>关联：增量更新</li>
+<li>特点<ul>
+<li>并发标记和并发清理阶段，用户线程还在运行，标记过程结束后的产生的垃圾无法在本次GC清理，存在“浮动垃圾”</li>
+<li>基于上一特点，CMS收集器存在启动阀值</li>
+<li>如果在CMS垃圾回收过程中，预留内存无法满足程序分配内存的需要（Concurrent Mode Failure），会启动后备预案：冻结用户线程的执行，临时使用Serial Old 收集器来重新进行老年代的垃圾收集。<h3 id="Garbage-First收集器"><a href="#Garbage-First收集器" class="headerlink" title="Garbage First收集器"></a>Garbage First收集器</h3></li>
+</ul>
+</li>
+<li>描述：面向服务端应用的垃圾收集器,JDK9服务端模式默认回收器</li>
+<li>过程<ul>
+<li>初始标记：标记GCRoots能直接关联到的对象，STW</li>
+<li>并发标记：从GCRoots开始对堆中的对象进行可达性分析。</li>
+<li>最终标记：用于处理并发阶段结束后遗留的少量SATB记录，STW</li>
+<li>筛选回收：根据各个Region的回收价值和成本进行排序，将需要回收Region的存活对象<strong>复制</strong>到空的Region,STW</li>
+</ul>
+</li>
+<li>特点：<ul>
+<li>G1收集器面向整个Java堆，用来垃圾数量做衡量标准，使回收收益最大，Mixed GC模式</li>
+<li>把连续的Java堆划分为多个大小相等的独立区域（region），每一region都可以成为Eden,Survivor,或者老年代空间，Region是最小回收单元，-XX:G1HeapRegionSize设定大小[1MB,32MB] 2^N次</li>
+<li>G1还有一类Humongous区域用于存放大对象，一般当作老年代的一部分看待，判定标准：大于Region容量一半的对象</li>
+<li>G1收集器会跟踪各个Region里的垃圾堆积的“价值”，在后台维护一个优先级列表，优先收集价值最大的Region。</li>
+<li>从G1开始，最先进的垃圾收集器设计导向都不约而同地变为追求能够应付应用内存的分配速率。</li>
+</ul>
+</li>
+<li>存在问题和解决方案<ul>
+<li>跨Region引用问题：记忆集<ul>
+<li>哈希表：Key是别的Region的起始地址，Value是一个集合，里面存储的元素是卡表的索引号。这样的结构内存消耗比较大，每一个Region都要有一份卡表，至少要消耗相当于Java堆容量10%至20%的额外内存来位置收集器工作，</li>
+</ul>
+</li>
+<li>并发标记时收集线程和用户线程冲突问题<ul>
+<li>G1为每一个Region设计两个名为TAMS（Top at Mark Start）的指针，把Region划分出来用于分配新对象，G1默认这个地址上的对象是隐式标记的。</li>
+</ul>
+</li>
+<li>如何建立停顿等待预测模型<ul>
+<li>-XX:MaxGCPauseMillis 制定垃圾收集之前的期望值。</li>
+<li>衰减均值为理论基础：普通平均值更容易收新数据的影响，但是衰减平均值更加准确地代表“最近的”平均状态</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="低延迟垃圾收集器"><a href="#低延迟垃圾收集器" class="headerlink" title="低延迟垃圾收集器"></a>低延迟垃圾收集器</h2><ul>
+<li>衡量垃圾回收器的三项重要指标，“不可能三角”<ul>
+<li>内存占用</li>
+<li>吞吐量</li>
+<li>延迟<h3 id="Shenandoah"><a href="#Shenandoah" class="headerlink" title="Shenandoah"></a>Shenandoah</h3></li>
+</ul>
+</li>
+<li>描述：和G1类似，基于Region的堆内存布局，同样有Humongous Region，支持和用户线程并发的整理算法，<strong>摈弃了G1中消耗大量内存的记忆集</strong>，改名为“连接矩阵”的全局数据来维护跨Region的引用关系（类似于图里面的邻接矩阵）。</li>
+<li>过程 <ul>
+<li>初始标记：标记和GCRoots直接关联的对象</li>
+<li>并发标记：遍历对象图</li>
+<li>最终标记：处理甚于的SATB</li>
+<li>并发清理：清理没有一个存活对象的region</li>
+<li>并发回收：复制存活对象到未使用的Region</li>
+<li>初始引用更新：复制对象结束后，还需要把堆中的所有指向旧对象的引用修正到复制后的新地址，引用更新。初始引用更新只是一个线程集合点，确保回收阶段的收集器线程都完成了任务</li>
+<li>并发引用更新：真正开始的引用更新。</li>
+<li>最终引用更新：修正存在于GCRoots的引用</li>
+<li>并发清理：最后并发清理回收集的Region</li>
+</ul>
+</li>
+<li>转发指针<ul>
+<li>实现对象移动和用户程序并发的解决方案</li>
+<li>方案-1<ul>
+<li>通常是在被移动对象原有的内存上设置保护陷阱，一旦用户程序访问到归属于旧对象的内存空间就会产生自陷中断，由异常处理器中的代码逻辑把访问转发到复制后的新对象上。</li>
+<li>会导致用户态频繁切换到核心态，代价大</li>
+</ul>
+</li>
+<li>Brooks（大佬）提出的新方案<ul>
+<li>在原有的对象布局结构的最前面同一增加一个新的引用字段，在正常不处于并发移动的情况下，该引用指向对象自己</li>
+<li>两次访问内存，存在开销，同时要保证对对象的写入只能发生在新的对象中（CAS实现）。<h3 id="ZGC"><a href="#ZGC" class="headerlink" title="ZGC"></a>ZGC</h3><h4 id="ZGC的内存布局"><a href="#ZGC的内存布局" class="headerlink" title="ZGC的内存布局"></a>ZGC的内存布局</h4></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>基于Region的堆内存布局</li>
+<li>ZGC的Region具有动态性–动态创建和销毁</li>
+<li>ZGC的Region可以分为大、中、小三类容量<ul>
+<li>小型Region：size固定：2MB,用于放置小于256KB的小对象</li>
+<li>中型Region：size固定：32MB,用于放置大于等于256KB但小于4MB的对象</li>
+<li>大型Region：容量不固定&gt;=4MB，可以动态变化，但是必须是<strong>2N</strong>MB,用于大于等于4MB的对象，不会被<strong>重分配</strong><h4 id="染色指针技术"><a href="#染色指针技术" class="headerlink" title="染色指针技术"></a>染色指针技术</h4></li>
+</ul>
+</li>
+<li>将标记信息记在引用对象的指针上</li>
+<li><p>原理</p>
+<ul>
+<li>在64位系统中理论可以访问的内存高达16EB但是处于成本和性能的考虑，<ul>
+<li>在AMD64架构中只支持到<strong>52位的地址总线</strong>和<strong>48位的虚拟地址空间</strong></li>
+<li>64位的Linux则分别支持47位的进程虚拟地址空间和46的物理地址空间，64位Window甚至只支持44位的物理地址空间</li>
+</ul>
+</li>
+<li>ZGC提取46位中的高4位来存储4个标志信息，意味着ZGC管理内存不能超过2^42B<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">|-------Unused(18bit)------| Finalizable| Remapped | Marked1 |-Marked0-|-----------Object Address(42bit)-----------|</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>染色指针优势</p>
+<ul>
+<li>染色指针可以使得一旦某个Region的存活对象被移走之后，这个Region立即就能够被释放和重用调（“自愈”特性）</li>
+<li>减少内存屏障的使用</li>
+<li>染色指针可以作为可拓展的存储结构来记录更多的对象标记</li>
+</ul>
+</li>
+<li>定义内存的可能性<ul>
+<li>X86实现：Linux平台上，ZGC使用多重映射，不同地址段映射到同一个物理内存空间。</li>
+</ul>
+</li>
+<li>ZGC过程<ul>
+<li>并发标记：可达性分析，更新染色指针中的Marked0、Marked 1标志位</li>
+<li>并发预备重分配：根据特定的查询条件统计本次需要清理哪些Region，将这些Region组成重分配集，每次回收会扫描所有的Region，ZGC的分配集只是决定了里面的存活对象会被重新复制到其他的Region中</li>
+<li>并发重分配：把重分配集中的存活对象复制到新的Region上，并为重分配集中的每个Region维护一个转发表，记录旧对象到新对象的转向关系，访问时预置的的内存屏障会被截获，同时修正其值</li>
+<li>并发重映射：修正整个堆中指向重分配集中旧对象的所有引用，可自愈，不急迫</li>
+</ul>
+</li>
+</ul>
+<h2 id="类文件结构"><a href="#类文件结构" class="headerlink" title="类文件结构"></a>类文件结构</h2><h3 id="无关性的基石"><a href="#无关性的基石" class="headerlink" title="无关性的基石"></a>无关性的基石</h3><ul>
+<li>Class文件<h3 id="Class文件结构"><a href="#Class文件结构" class="headerlink" title="Class文件结构"></a>Class文件结构</h3></li>
+<li>Class文件以8个字节为基础单位的二进制流。</li>
+<li>数据类型：<ul>
+<li>“无符号数”：属于基本的数据类型，以u1、u2、u4、u8</li>
+<li>“表”：所有表都以“_info”结尾，整个Class文件本质上也可以视作一张表<h3 id="魔数和Class文件的版本"><a href="#魔数和Class文件的版本" class="headerlink" title="魔数和Class文件的版本"></a>魔数和Class文件的版本</h3><h3 id="访问标志"><a href="#访问标志" class="headerlink" title="访问标志"></a>访问标志</h3></li>
+</ul>
+</li>
+<li>u2:代表访问标志，和这个标志用于标志一些类或者接口层次的访问信息，包括Class是类还是接口，是否定义为public,abstract,final。使用位运算表示。<h3 id="类索引、父类索引和接口索引集合"><a href="#类索引、父类索引和接口索引集合" class="headerlink" title="类索引、父类索引和接口索引集合"></a>类索引、父类索引和接口索引集合</h3></li>
+<li>u2:类索引</li>
+<li>u2:夫类索引</li>
+<li>u2:接口长度，u2:接口索引<h3 id="字段表集合"><a href="#字段表集合" class="headerlink" title="字段表集合"></a>字段表集合</h3></li>
+<li>u2:access_flag，访问标志</li>
+<li>u2:name_index，字段的简单名称：没有类型和参数修饰，全限定名：包名+类名，/ 分割</li>
+<li>u2:descriptor_index，类型描述，如：java.lang.String[][] –&gt; ‘[[Ljava/lang/String;’</li>
+<li>u2:attributes_count</li>
+<li>attribute_info:<h3 id="方法表集合"><a href="#方法表集合" class="headerlink" title="方法表集合"></a>方法表集合</h3></li>
+<li>基本和字段表一致，访问标志符多了几个</li>
+</ul>
+<h3 id="属性表集合"><a href="#属性表集合" class="headerlink" title="属性表集合"></a>属性表集合</h3><ul>
+<li>u2: attribute_name_index,如code，exceptions等的</li>
+<li>u4:attribute_length,1</li>
+<li>u1:info,attribute_length</li>
+</ul>
+<h2 id="字节码指令简介"><a href="#字节码指令简介" class="headerlink" title="字节码指令简介"></a>字节码指令简介</h2><h3 id="字节码与数据类型"><a href="#字节码与数据类型" class="headerlink" title="字节码与数据类型"></a>字节码与数据类型</h3><ul>
+<li>i(int),l(long),s(short),b(byte),c(char),f(float),d(double),a(reference)<h3 id="加载和存储指令"><a href="#加载和存储指令" class="headerlink" title="加载和存储指令"></a>加载和存储指令</h3></li>
+<li>jvm虚拟机基于操作数栈的</li>
+<li>\&lt;type>load_\<n>:iload,iload_1,n为操作数栈顶的第n个操作数</n></li>
+<li>\&lt;type>store_\<n>:istore,istore_1<h3 id="运算指令"><a href="#运算指令" class="headerlink" title="运算指令"></a>运算指令</h3></n></li>
+<li>operator:add,sub,mul,div,rem(求余),neg(取反)，ish[l|r]移位指令,</li>
+<li>\&lt;type>operator<h3 id="类型转化指令"><a href="#类型转化指令" class="headerlink" title="类型转化指令"></a>类型转化指令</h3></li>
+<li>\&lt;type>2\<type></type></li>
+<li>小范围到大范围是安全的</li>
+<li>浮点值转化为整数类型T:<ul>
+<li>如果浮点值是NaN，那转换结果就是int或者long类型<h3 id="对象创建与访问指令"><a href="#对象创建与访问指令" class="headerlink" title="对象创建与访问指令"></a>对象创建与访问指令</h3></li>
+</ul>
+</li>
+<li>创建类实例的指令：new</li>
+<li>创建数组的指令：newarray,anewarray,multianewarray</li>
+<li>访问类字段：getfield、putfiled、getstatic、putstatic</li>
+<li>加载数组元素加载到操作数栈的指令,操作数栈的值存储到数组元素中\&lt;type>a(operator)，ballad、caload、saload、bastore</li>
+<li>取数组长度：arraylength</li>
+<li>检查类实例类型的指令：instanceof、checkcast<h3 id="操作数栈管理指令"><a href="#操作数栈管理指令" class="headerlink" title="操作数栈管理指令"></a>操作数栈管理指令</h3></li>
+<li>操作数栈的栈顶一个或两个元素出栈：pop、pop2</li>
+<li>复制操作数栈的栈顶一个或两个元素并且重新入栈：dup_x1、dup2_x2</li>
+<li>互换栈顶两个元素：swap<h3 id="控制转移指令"><a href="#控制转移指令" class="headerlink" title="控制转移指令"></a>控制转移指令</h3></li>
+<li>条件分支：ifeq,iflt</li>
+<li>符合条件分支</li>
+<li>无条件分支：goto、goto_w、jsr、jsr_w、ret<h3 id="方法调用"><a href="#方法调用" class="headerlink" title="方法调用"></a>方法调用</h3></li>
+<li>invokevirtual指令：调用对象的实例方法</li>
+<li>invokeinterface指令：调用接口方法，搜索一个实现了这个接口方法的对象</li>
+<li>invokespecial指令：用于调用一些需要特殊处理的实例方法，包括实例初始化方法，私有化方法和夫类方法</li>
+<li>invokestatic指令：调用类的静态方法</li>
+<li>invokedynamic：运行时动态解析出调用点限定符所引用的方法<h3 id="异常处理指令"><a href="#异常处理指令" class="headerlink" title="异常处理指令"></a>异常处理指令</h3></li>
+<li>athrow<h3 id="同步指令"><a href="#同步指令" class="headerlink" title="同步指令"></a>同步指令</h3></li>
+<li>方法内部指令同步和方法级同步：使用管程(monitor，monitor 的重要特点是，同一个时刻，只有一个 进程/线程 能进入 monitor 中定义的临界区)来实现。</li>
+<li>方法级同步：虚拟机可以通过方法常量池中的ACC_SYNCHRONIZED访问标志，当方法调用时将会检查方法的ACC_SYNCHRONIZED访问标志是否被设置，如果设置了，执行线程就要求先成功持有管程。</li>
+<li>synchronized：monitorenter，monitorexit。<h1 id="虚拟机类加载机制"><a href="#虚拟机类加载机制" class="headerlink" title="虚拟机类加载机制"></a>虚拟机类加载机制</h1><h2 id="类加载时机"><a href="#类加载时机" class="headerlink" title="类加载时机"></a>类加载时机</h2></li>
+<li>过程：加载-&gt;验证-&gt;准备-&gt;解析-&gt;初始化-&gt;使用-&gt;卸载</li>
+<li>初始化时机：对一个类型进行<strong>主动引用</strong>触发初始化。<ul>
+<li>遇到new、getstatic、putstatic、invokestatic，如果类型没有被初始化，先触发初始化，对于静态字段，只有直接定义的类才会初始化。</li>
+<li>遇到new实例化对象</li>
+<li>读取或设置一个静态字段（<strong>被final修饰，已在编译期把结果放入常量池的静态字段除外</strong>）的时候</li>
+<li>调用静态方法</li>
+</ul>
+</li>
+<li>初始化类时，同时初始化未初始化的夫类。</li>
+<li>虚拟机启动时，用户需要指定一个执行的主类，先要初始化这个类。</li>
+<li>接口实现类初始化时，要先初始化接口<h2 id="类加载过程"><a href="#类加载过程" class="headerlink" title="类加载过程"></a>类加载过程</h2><h3 id="加载"><a href="#加载" class="headerlink" title="加载"></a>加载</h3></li>
+<li><p>虚拟机工作</p>
+<ul>
+<li>通过一个类的全限定名来获取定义此类的二进制字节流</li>
+<li>将这个字节流所代表的静态存储结构转化方法区运行时的数据结构</li>
+<li>在内存中生成一个<strong>代表这个类的java.lang.Class对象</strong>，作为方法区这个类的各种数据访问入口</li>
+</ul>
+</li>
+<li><p>加载阶段可以通过自定义的类加载器控制获取字节流方式</p>
+<ul>
+<li>重写一个类的类加载器的findClass()或loadClass()方法</li>
+</ul>
+</li>
+<li><p>对于<strong>数组类本身不通过类加载器创建，它是由Java虚拟机在内存中直接动态构造出来的</strong>。<strong>数组类的元素类型</strong>还是要靠类加载器，数组类创建规则：</p>
+<ul>
+<li>如果数组的组件类型是引用类型，递归加载组件类型</li>
+<li><strong>数组的组件类型不是引用类型（如：int），Java虚拟机会把数组C标记为与引导类加载器关联</strong></li>
+<li>数组类的可访问性与它的组件类型一致。</li>
+</ul>
+</li>
+<li><p>加载结束后，加载的字节流按照虚拟机所设定的格式存储在方法区，同时生成java.lang.Class类的对象，这个对象将作为程序访问方法区中的数据类型的外部接口</p>
+<h3 id="验证"><a href="#验证" class="headerlink" title="验证"></a>验证</h3></li>
+<li>文件格式验证：<ul>
+<li>验证点<ul>
+<li>是否魔数开头</li>
+<li>主次版本是否是Java虚拟机所接受的</li>
+<li>常量池的常量中是否有不被支持的常量类型（tag标志）</li>
+<li>Class文件中的各个部分及文件本身是否有被删除或者附加的信息</li>
+</ul>
+</li>
+<li>目的<ul>
+<li>保证输入的字节流能正确解析并存储于方法区内</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>元数据验证<ul>
+<li>验证点<ul>
+<li>是否有父类</li>
+<li>是否继承了不被允许继承的类</li>
+<li>是否是抽象类，是否实现了其父类或者接口之中要求实现的所有方法</li>
+<li>类中的字段、方法是否与父类产生矛盾（覆盖类父类的final字段，不符合规则的方法重载</li>
+</ul>
+</li>
+<li>目的<ul>
+<li>对类的元数据进行语义校验，（个人理解：是否违背了Java面向对象的规则）</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>字节码验证<ul>
+<li>验证点<ul>
+<li>保证任意时刻操作数栈的数据类型与指令代码序列能配合工作</li>
+<li>跳转指令的合法性</li>
+<li>类型转化的有效性（不合法如：父亲对象赋值给子类数据类型）</li>
+</ul>
+</li>
+<li>优化<ul>
+<li>减少数据流分析和控制流分析的消耗，将更多的校验挪到编译器里进行，新增StackMapTable</li>
+<li>StackMapTable:描述类方法体所有的基本块（按照控制流拆分代码块）开始时本地变量表和操作数栈的状态，使得<strong>字节码验证的类型推导变成了类型检查</strong></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>符号引用验证<ul>
+<li>验证点<ul>
+<li>符号引用通过字符串描述的全限定名是否能够找到对应的类</li>
+<li>指定类中是否存在符合方法的字段描述以及简单名称所描述的方法和字段</li>
+<li>符号引用中的类、字段、方法的可访问性是否可被当前类访问 </li>
+</ul>
+</li>
+<li>目的<ul>
+<li>主要保证解析行为能够正常执行<h3 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h3></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>为类中定义的变量（即静态变量，被static修饰的变量）分配内存并设置<strong>类变量初始值</strong>（“0”值，被final修饰的话，会在这一阶段赋值为指定的值）</li>
+<li>概念上分配在方法区，但是JDK8后<strong>类变量会随着Class对象</strong>一起存放在<strong>Java堆</strong>中。<h3 id="解析"><a href="#解析" class="headerlink" title="解析"></a>解析</h3></li>
+<li>将Java虚拟机将常量内的符号引用替换为直接引用(定义：直接引用是可以直接指向目标指针、相对偏移量或者一个间接定位到目标的句柄)</li>
+<li>invokedynamic指令，符号引用多次解析不能保证是同一个实体</li>
+<li>例子<ul>
+<li>类和接口的解析：对一个类D，将一个符号引用 N 解析为一个类或接口C的直接引用。<ul>
+<li>如果C不是一个数组类型，将符号引用N的全限定名递给D的类加载器去加载这个类C。</li>
+<li>如果C是数组类型，并且数组类型为对象，则按照第一点的规则加载数组元素类型，然后由<strong>虚拟机生成</strong>一个代表数组维度和元素的数组对象</li>
+<li>以上两点没有异常后检查D对C的访问权限</li>
+</ul>
+</li>
+<li>字段解析<ul>
+<li>解析字段表中的CONSTANT_Class_info符号引用，设所属的类或者接口为C</li>
+<li>对C进行后续字段搜索<ul>
+<li>C包含了简单名称和字段描述符与目的字段相匹配的字段，则返回这个字段的直接引用，查找结束</li>
+<li>如果没有，则向上查找（实现的接口和继承的类中查找，如果接口和类都有同一字段的话会冲突）</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>方法解析<ul>
+<li>和字段解析类似</li>
+</ul>
+</li>
+<li>接口方法解析<ul>
+<li>方法解析类似<h3 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h3></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>执行类构造器\&lt;clinit>()方法<ul>
+<li>\&lt;clinit>()编译器自动收集类中的所有<strong>类变量的赋值动作</strong>和<strong>静态语句</strong>中的语句合并生成。</li>
+<li>收集顺序由定义顺序决定，静态语句块只能访问到<strong>静态语句块之前的变量</strong></li>
+<li>\&lt;clinit>()方法与类的构造函数不同，他不需要显示调用父类构造器，Java虚拟机会保证子类的\&lt;clinit>()方法执行前，父类的方法已经执行完毕。</li>
+<li>如果类没有静态语句块，也没有对变量的赋值操作，\<clinit>()方法不会生成</clinit></li>
+<li>接口与类不同的是，执行接口的\&lt;clinit>()方法不需要先执行父接口的\&lt;clinit>()方法，只有使用了父定义的变量，父接口才会被初始化</li>
+<li>\&lt;clinit>()方法是线程安全的<h2 id="类加载器"><a href="#类加载器" class="headerlink" title="类加载器"></a>类加载器</h2><h3 id="类与类加载器"><a href="#类与类加载器" class="headerlink" title="类与类加载器"></a>类与类加载器</h3></li>
+</ul>
+</li>
+<li>比较两个类是否“相等”，只有在两个类是由同一个类加载器加载的前提下才有意义，否则两个类来源于同一Class文件，被同一个Java虚拟机加载，只要他们的类加载器不同，那这两个类就必定不相等。<h3 id="双亲委派模型"><a href="#双亲委派模型" class="headerlink" title="双亲委派模型"></a>双亲委派模型</h3></li>
+<li>Java虚拟机两种类加载器：启动类加载器(C++实现)，其他类加载器(Java语言实现)</li>
+<li>系统提供的类加载器<ul>
+<li>启动类加载器：加载\&lt;JAVA_HOME>\lib或者被-Xbootclasspath参数指定的路径中存放的类库</li>
+<li>拓展类加载器：加载\&lt;JAVA_HOME>\lib\ext目录中的或者被java.ext.dirs系统变量所指定的类库.</li>
+<li>应用程序加载器：加载用户类路径上所有的类库，开发者可以直接在代码中使用这个类加载器</li>
+</ul>
+</li>
+<li>双亲委派模式<ul>
+<li>类加载器收到一个类加载的请求时，他首先不会自己去尝试加载这个类，而是把这个请求委托给父类加载器去完成，每一个层次的类加载器都是如此，因此只有父类的加载器无法完成加载请求（他的搜索范围中没有找到所需要的类），子类才会去加载。</li>
+<li>优点：保证Java的类和他的类加载器一起具备了带有优先级的层次，防止Java标准库中的类被用户定义的类覆盖<h3 id="模块下的类加载器："><a href="#模块下的类加载器：" class="headerlink" title="模块下的类加载器："></a>模块下的类加载器：</h3></li>
+</ul>
+</li>
+<li>维持三层加载器和双亲委派模式的架构</li>
+<li>当平台及父加载器加载前，要先判断该类是否能够归属到某一个系统模块中，如果可以找到归属，则优先委派给负责那个模块的加载器加载<h1 id="虚拟机字节码执行引擎"><a href="#虚拟机字节码执行引擎" class="headerlink" title="虚拟机字节码执行引擎"></a>虚拟机字节码执行引擎</h1><h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2></li>
+<li>执行 <ul>
+<li>解释执行：通过解释器执行</li>
+<li>编译执行：编译生成本地代码执行<h2 id="运行时栈帧结构"><a href="#运行时栈帧结构" class="headerlink" title="运行时栈帧结构"></a><span id="stack">运行时栈帧结构</span></h2><h3 id="局部变量表"><a href="#局部变量表" class="headerlink" title="局部变量表"></a>局部变量表</h3></li>
+</ul>
+</li>
+<li>存放方法参数和方法内部定义的局部变量，Code属性的max_locals数据项中确定了该方法所需分配的局部变量表的最大容量</li>
+<li>变量槽：可以存放32位的数据</li>
+<li>0号索引变量槽默认是用于传递方法对象实例的引用的</li>
+<li>变量槽可以复用</li>
+<li>局部变量没有赋初值不能使用<h3 id="操作数栈"><a href="#操作数栈" class="headerlink" title="操作数栈"></a>操作数栈</h3></li>
+<li>概念上，两个不同的栈帧为不同的两个虚拟机栈的元素，完全独立，实现上会将下面栈帧的部分操作数栈和上面栈帧的部分局部变量表重叠在一起<h3 id="动态链接"><a href="#动态链接" class="headerlink" title="动态链接"></a>动态链接</h3></li>
+<li>指向运行时常量池中栈帧所属方法的引用。</li>
+<li>符号引用一部分会在类加载阶段或者第一个使用的时候就被转化为直接引用，这被称为静态解析，另一部分将在每一次运行期间都转化为直接引用，这部分为动态连接。<h3 id="方法返回地址"><a href="#方法返回地址" class="headerlink" title="方法返回地址"></a>方法返回地址</h3></li>
+<li>方法执行后两种推出方法<ul>
+<li>执行引擎遇到任意方法返回的字节码指令</li>
+<li>方法执行的过程中产生异常，本地方法的异常表中没有搜索到匹配的异常处理器，会导致方法推出。</li>
+</ul>
+</li>
+<li>方法退出等同于把当前栈帧出栈，因此退出可能执行的操作：恢复上层方法的局部变量表和操作数栈，把返回值压入调用者栈帧中的操作数栈中，调整PC计数器。<h2 id="方法调用-1"><a href="#方法调用-1" class="headerlink" title="方法调用"></a>方法调用</h2><h3 id="解析-1"><a href="#解析-1" class="headerlink" title="解析"></a>解析</h3></li>
+<li>“非虚方法”：类加载的解析阶段，将一部分符号引用转化为直接引用，前提：方法在程序真正运行之前就有一个可以确定的调用版本，并且这个方法的调用在运行期是不可变的。invokestatic,invokespecial。</li>
+<li>“虚方法”：<h3 id="分派"><a href="#分派" class="headerlink" title="分派"></a>分派</h3></li>
+<li>静态分派 <ul>
+<li>静态类型：定义的字面类型，重载是通过静态类型作为判定依据，重载时如果没有找到准确的函数时，会自动类型转化，安全转型最优先。</li>
+<li>动态类型：变量的实际类型</li>
+</ul>
+</li>
+<li>动态分派<ul>
+<li>方法调用通过动态分配：<ul>
+<li>找到操作数栈顶的第一个元素所指向的对象的实际类型，记作C。</li>
+<li>校验调用C类型的方法相关参数，访问权限是否相符合</li>
+<li>否则从下向上依次对C的各个父类搜索和验证</li>
+</ul>
+</li>
+<li>Java只有虚方法存在，<strong>字段永远不可能是虚的</strong>，如果子类有父类一致的字段，子类会覆盖父类字段，但是内存同时存在</li>
+</ul>
+</li>
+<li>单分派与多分派<ul>
+<li>宗量<ul>
+<li>方法的接收者</li>
+<li>方法的参数</li>
+</ul>
+</li>
+<li>Java语言属于动态分配属于单分派类型（方法接受者在）<h1 id="前端编译"><a href="#前端编译" class="headerlink" title="前端编译"></a>前端编译</h1><h2 id="概述-1"><a href="#概述-1" class="headerlink" title="概述"></a>概述</h2></li>
+</ul>
+</li>
+<li>编译器类型<ul>
+<li>前端编译器：<em>.java文件转变成 </em>.class 文件，Javac</li>
+<li>即时编译器：运行期间把字节码转变成本地机器码，HotSpot虚拟机的C1，C2编译器，Graal编译器</li>
+<li>提前编译器：直接把程序编译成于目标机器指令相关的二进制代码<h2 id="Javac编译器"><a href="#Javac编译器" class="headerlink" title="Javac编译器"></a>Javac编译器</h2><h3 id="编译过程"><a href="#编译过程" class="headerlink" title="编译过程"></a>编译过程</h3></li>
+</ul>
+</li>
+<li>一个准备过程，3个处理过程<ul>
+<li>准备过程：初始化插入式注解处理器</li>
+<li>解析于填充符号表过程，包括：<ul>
+<li>语法、语法分析。将源代码的字节流转变为标记集合，构造出抽象语法树</li>
+<li>填充符号表。产生符号地址和符号信息</li>
+</ul>
+</li>
+<li>插入式注解处理器的注解处理</li>
+<li>分析与字节码生成过程<ul>
+<li>标注检查：对语法的静态信息进行检查</li>
+<li>数据流控制分析：对程序动态运行过程进行检查</li>
+<li>解语法糖： 将简化代码编写的语法糖还原为原有的形式</li>
+<li>字节码生成：将前面各个步骤所生成的信息转化成字节码<h2 id="Java语法糖"><a href="#Java语法糖" class="headerlink" title="Java语法糖"></a>Java语法糖</h2><h2 id="泛型"><a href="#泛型" class="headerlink" title="泛型"></a>泛型</h2></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Java的泛型：类型擦除式泛型–只在程序源码中（历史包袱问题）</li>
+<li>C#的泛型：具现代化泛型</li>
+<li>类型擦除<ul>
+<li>裸类型：类型泛化实例的共同父类型</li>
+<li>无法支持原始类型数据<h3 id="自动装箱、拆箱与遍历循环"><a href="#自动装箱、拆箱与遍历循环" class="headerlink" title="自动装箱、拆箱与遍历循环"></a>自动装箱、拆箱与遍历循环</h3></li>
+</ul>
+</li>
+<li>包装类在不遇到算术运算的情况下不会自动装箱<h1 id="后端编译与优化"><a href="#后端编译与优化" class="headerlink" title="后端编译与优化"></a>后端编译与优化</h1><h2 id="即时编译器"><a href="#即时编译器" class="headerlink" title="即时编译器"></a>即时编译器</h2><h3 id="解释器和编译器"><a href="#解释器和编译器" class="headerlink" title="解释器和编译器"></a>解释器和编译器</h3><h3 id="编译对象与触发条件"><a href="#编译对象与触发条件" class="headerlink" title="编译对象与触发条件"></a>编译对象与触发条件</h3></li>
+<li>热点代码：<ul>
+<li>被多次调用的方法</li>
+<li>被多次执行的循环体</li>
+</ul>
+</li>
+<li>编译对象：整个方法体。</li>
+<li>热点探测<ul>
+<li>基于采样的热点探测：虚拟机会周期性的地检查各个线程的调用栈顶。</li>
+<li>基于计数器的热点探测：虚拟机为每一个方法（甚至是代码块）建立计数器，统计方法的执行次数（HotSpot采用）</li>
+</ul>
+</li>
+<li>HosSpot的热点计数<ul>
+<li>两种计数器：方法调用计数器、回边计数器</li>
+<li>方法调用计数器：客户端模式是1500次，服务端是10000次</li>
+<li>执行机制<ul>
+<li>存在即时编译的版本时，优先使用编译后的本地代码来执行。</li>
+<li>如果不存在被即时编译过的版本，则将该方法的调用计数器值加一，然后判断方法调用计数器和回边计数器之和是否超过方法调用计数器的阀值，一旦超过阀值的话，将会向即时编译器提交一个该方法的代码编译请求</li>
+</ul>
+</li>
+<li>热度衰减：方法调用计数器统计的是一个频率，如果一段时间内其值仍然没有超过阀值，那么调用计数器就会被减少一半（这段时间被称为此方法统计的半衰期），热度衰减</li>
+<li>回边计数器：统计方法循环体代码执行的次数，在字节码中遇到控制流向后跳转的指令就称为“回边”。目的：触发栈上的替换编译</li>
+<li>回边计数器：执行机制与方法调用计数器差不多，但是没有计数衰减的过程<h3 id="编译过程-1"><a href="#编译过程-1" class="headerlink" title="编译过程"></a>编译过程</h3></li>
+</ul>
+</li>
+<li>标志的编译请求：编译动作在后台的编译线程中进行</li>
+<li>过程：<ul>
+<li>平台独立的前端将字节码构造成一种高级中间的代码表示（HIR,与目标机器指令无关），优化：方法内联，常量传播会在字节码构造成HIR之前完成</li>
+<li>平台相关的后端从HIR中产生低级中间代码表示，优化：空值检查，范围检查消除等。</li>
+<li>平台相关的后端使用线性扫描算法，产生机器码<h1 id="Java的内存模型与线程"><a href="#Java的内存模型与线程" class="headerlink" title="Java的内存模型与线程"></a>Java的内存模型与线程</h1><h2 id="Java的内存模型"><a href="#Java的内存模型" class="headerlink" title="Java的内存模型"></a>Java的内存模型</h2></li>
+</ul>
+</li>
+<li>主内存和工作内存<ul>
+<li>每个线程都有自己的工作内存，线程私有 -&gt; 线程间通信问题</li>
+</ul>
+</li>
+<li>happens before原则<ul>
+<li>程序次序规则</li>
+<li>管程锁定规则</li>
+<li>volatile变量规则</li>
+<li>线程启动规则</li>
+<li>….<h3 id="volatile使用"><a href="#volatile使用" class="headerlink" title="volatile使用"></a>volatile使用</h3></li>
+</ul>
+</li>
+<li>volatile字段的作用<ul>
+<li>保证变量对所有线程的可见性，不能保证运算的正确性，保证及时写回</li>
+<li>禁止指令重排序，内存屏障作用，重排序不能越过内存屏障。</li>
+</ul>
+</li>
+<li>volatile读的内存语义<ul>
+<li>当读一个volatile变量时，JMM会把该线程对应的本地内存置为无效。线程接下来将从主内存中读取共享变量。</li>
+</ul>
+</li>
+<li>volatile重排序的限制<ul>
+<li>当第二个操作是volatile写时，不管第一个操作是什么，都不能重排序。这个规则确保volatile写之前的操作不会被编译器重排序到volatile写之后。</li>
+<li>当第一个操作是volatile读时，不管第二个操作是什么，都不能重排序。这个规则确保volatile读之后的操作不会被编译器重排序到volatile读之前。</li>
+<li>当第一个操作是volatile写，第二个操作是volatile读时，不能重排序。</li>
+</ul>
+</li>
+<li>JMM内存屏障插入策略。<ul>
+<li>在每个volatile写操作的前面插入一个StoreStore屏障。</li>
+<li>在每个volatile写操作的后面插入一个StoreLoad屏障。</li>
+<li>在每个volatile读操作的后面插入一个LoadLoad屏障。</li>
+<li>在每个volatile读操作的后面插入一个LoadStore屏障。</li>
+</ul>
+</li>
+<li>变量值不一致的原因<blockquote>
+<p>处理器不直接和内存通讯，而是先将系统内存的数据读到内部缓存（L1, L2 或者其他）后进行操作。</p>
+</blockquote>
+</li>
+<li>可见性的实现<blockquote>
+<ul>
+<li>被修饰的变量在编译成汇编代码会多一条Lock指令，将缓存的数据写回内存。</li>
+<li>对于其他线程来说，每个处理器通过总线嗅探技术来判断缓存数据的有效性</li>
+</ul>
+</blockquote>
+<h4 id="Java对象头"><a href="#Java对象头" class="headerlink" title="Java对象头"></a>Java对象头</h4></li>
+<li>对象头        </li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">长度</th>
+<th style="text-align:center">内容</th>
+<th style="text-align:center">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">32/64 bit</td>
+<td style="text-align:center">MarkWord</td>
+<td style="text-align:center">存储对象的hashCode或者锁信息等</td>
+</tr>
+<tr>
+<td style="text-align:center">32/64 bit</td>
+<td style="text-align:center">Class Metadata Address</td>
+<td style="text-align:center">存储对象类型数据的指针</td>
+</tr>
+<tr>
+<td style="text-align:center">32/32 bit</td>
+<td style="text-align:center">Array length</td>
+<td style="text-align:center">数组的长度(普通对象没有这一项)</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Mark Word    <h2 id="Java与线程"><a href="#Java与线程" class="headerlink" title="Java与线程"></a>Java与线程</h2><h3 id="线程实现"><a href="#线程实现" class="headerlink" title="线程实现"></a>线程实现</h3></li>
+<li>共享进程资源，轻量级进程</li>
+<li>内核线程1:1</li>
+<li>用户线程：1:N<h3 id="Java线程"><a href="#Java线程" class="headerlink" title="Java线程"></a>Java线程</h3></li>
+<li>1:1线程模型，直接映射到操作<strong>系统原生线程</strong>来实现<h3 id="Java线程调度"><a href="#Java线程调度" class="headerlink" title="Java线程调度"></a>Java线程调度</h3></li>
+<li>协同 or 抢占<h3 id="状态转化"><a href="#状态转化" class="headerlink" title="状态转化"></a>状态转化</h3></li>
+<li>New</li>
+<li>Runnable</li>
+<li>Waiting</li>
+<li>Blocked</li>
+<li>Terminated<h2 id="Java与协程"><a href="#Java与协程" class="headerlink" title="Java与协程"></a>Java与协程</h2><h3 id="内核线程的局限"><a href="#内核线程的局限" class="headerlink" title="内核线程的局限"></a>内核线程的局限</h3></li>
+<li>微服务的兴起，缩短了留给每个服务的响应时间</li>
+<li>对于Java的线程模型而言：当请求本身执行时间短，但是数量变得多的时候，线程切换的开销会很大<h3 id="协程"><a href="#协程" class="headerlink" title="协程"></a>协程</h3></li>
+<li>内核线程的调度成本主要来自于用户态与核心态之间的状态切换，状态切换开销主要来自响应中断，保护和恢复执行现场的成本。</li>
+<li>有栈协程<ul>
+<li>实现完整地做调用栈的保护、恢复工作。</li>
+</ul>
+</li>
+<li>无栈协程<ul>
+<li>await、async、yield关键字</li>
+<li>有限状态机</li>
+</ul>
+</li>
+<li>协程<ul>
+<li>轻量</li>
+<li>需要在应用层面实现的内容特别多</li>
+</ul>
+</li>
+</ul>
+<h1 id="线程安全和锁优化"><a href="#线程安全和锁优化" class="headerlink" title="线程安全和锁优化"></a>线程安全和锁优化</h1><h2 id="线程安全"><a href="#线程安全" class="headerlink" title="线程安全"></a>线程安全</h2><ul>
+<li>多个线程同时访问一个对象时，如果不用考虑这些线程在运行时环境下的调度和交替执行，也不需要进行额外的同步，或者在调用方进行任何其他的协调操作，调用这个对象的行为都可以获得正确的结果。<h2 id="线程安全实现方法"><a href="#线程安全实现方法" class="headerlink" title="线程安全实现方法"></a>线程安全实现方法</h2></li>
+<li>互斥同步<ul>
+<li>临界区，互斥量，信号量</li>
+</ul>
+</li>
+<li>Java实现管程： synchronized <ul>
+<li>monitorenter</li>
+<li>monitorexit</li>
+<li>机制：monitorenter指令时，首先去尝试获取对象的锁。获取后把锁计数的值增加一，执行monitorexit会将锁计数器减一，为零则释放。<h3 id="synchronized的实现"><a href="#synchronized的实现" class="headerlink" title="synchronized的实现"></a>synchronized的实现</h3></li>
+</ul>
+</li>
+<li>具体表现<ul>
+<li>对于普通的同步方法，锁为实例对象</li>
+<li>对于静态同步方法，锁为当前对象的<strong>Class对象</strong></li>
+<li>对于同步方法块，锁是synchronized配置的对象<h3 id="重入锁ReentrantLock"><a href="#重入锁ReentrantLock" class="headerlink" title="重入锁ReentrantLock"></a>重入锁ReentrantLock</h3></li>
+</ul>
+</li>
+<li>等待可中断，等待线程可以选择放弃，改为处理其他事情</li>
+<li>公平锁：按申请时间顺序来获得</li>
+<li>锁定多个条件<h3 id="非阻塞同步"><a href="#非阻塞同步" class="headerlink" title="非阻塞同步"></a>非阻塞同步</h3><ul>
+<li>互斥同步：线程阻塞和唤醒性能消耗，属于阻塞同步</li>
+<li>cmpxchg指令，CAS<h3 id="无同步方案"><a href="#无同步方案" class="headerlink" title="无同步方案"></a>无同步方案</h3></li>
+<li>ThreadLocal: 每个Thread对象中都有一个ThreadLocalMap对象，ThreadLocal变量就是访问入口<h2 id="锁优化"><a href="#锁优化" class="headerlink" title="锁优化"></a>锁优化</h2><h3 id="自旋锁与自适应自旋"><a href="#自旋锁与自适应自旋" class="headerlink" title="自旋锁与自适应自旋"></a>自旋锁与自适应自旋</h3></li>
+</ul>
+</li>
+<li>自旋等待本身虽然避免了线程切换的开销，但是它要是占用处理器时间的，自旋时间过长会浪费系统资源</li>
+<li>自适应自旋<h3 id="锁消除"><a href="#锁消除" class="headerlink" title="锁消除"></a>锁消除</h3></li>
+<li>通过逃逸分析，如果判断到一段代码中在堆上的所有数据都不会逃逸出去被其他线程访问到，那就可以把它们当作栈上数据对待，认为它们是线程私有的。<h3 id="锁粗化"><a href="#锁粗化" class="headerlink" title="锁粗化"></a>锁粗化</h3></li>
+<li><p>如果虚拟机探测到有这样一串零碎的操作都对同一个对象加锁，将会把加锁同步的范围拓展到整个操作序列的外部</p>
+<h3 id="轻量级锁"><a href="#轻量级锁" class="headerlink" title="轻量级锁"></a>轻量级锁</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">|----------|---------------<span class="number">-32b</span>it-----------------------------------|</span><br><span class="line">|--锁状态--|----<span class="number">-25</span> bit------|--<span class="number">-4b</span>it---|----<span class="number">-1b</span>it----|---<span class="number">-2b</span>it-----|</span><br><span class="line">|----------|-<span class="number">-23b</span>it--|<span class="number">-2b</span>it--|----------|---偏向模式--|----标志位---|</span><br><span class="line">|--未锁定--|----对象哈希码---|-分代年龄-|-----<span class="number">-0</span>------|----<span class="number">-01</span>------|</span><br><span class="line">|轻量级锁定|---------指向调用栈中锁记录的指针---------|----<span class="number">-00</span>------|</span><br><span class="line">|重量级锁定|------------指向重量级锁的指针------------|----<span class="number">-10</span>------|</span><br><span class="line">|--GC标记--|------------------------------------------|----<span class="number">-11</span>------|</span><br><span class="line">|--可偏向--|-线程ID-_|-Epoch-|-分代年龄-|-----<span class="number">-1</span>------|----<span class="number">-01</span>------|</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>工作机制</p>
+<ul>
+<li>代码即将进入同步块的时候，如果此同步对象没有被锁定（锁标志为 00），虚拟机在当前栈帧中建立一个名为锁记录（Lock Record）的空间，用于存储锁对象目前的MarkWord的拷贝</li>
+<li>然后虚拟机使用CAS操作尝试把对象的Mark Word更新为指向Lock Record的指针。如果更新成功了，即代表线程拥有了这个对象的锁，并且对象Mark Word的锁标志变为“00”</li>
+<li>如果CAS失败，说明至少有一个线程和当前线程竞争获取该对象的锁，检查对象的MarkWord是否指向当前的栈帧，如果当前线程已经拥有锁了，直接进入同步代码块</li>
+<li>如果出现两条以上线程争用同一个锁的情况，那轻量级锁就不再有效，必须膨胀为重量级锁，锁标志的状态值变为 “10” 此时MarkWord存储的就是指向重量级锁（互斥量）的指针，后面等待锁的线程也必须进入阻塞状态。<h3 id="偏向锁"><a href="#偏向锁" class="headerlink" title="偏向锁"></a>偏向锁</h3></li>
+</ul>
+</li>
+<li>锁会偏向第一个获得它的线程，如果接下来的执行过程中，该锁一直没有被其他的线程获取，则持有偏向锁的线程将永远不需要在进行同步。</li>
+<li>工作机制<ul>
+<li>当锁对象第一次被线程获取的时候，虚拟机将会把对象头中的标志设置为“01”,把偏向模式设置成 “1”，同时使用CAS把获取到的这个锁的线程的ID记录在Mark Word中</li>
+<li>一旦出现另外一个线程去尝试获取这个锁的情况，偏向模式就马上结束，如果对象处于被锁定，则变为轻量级锁，没有则变为未锁定</li>
+<li>hashCode问题：对象头中存储的对象头保证第一次计算之后，再次调用该方法取到的哈希码值永远不会再发生变化，当一个对象当前正处于偏向锁状态，又收到需要计算其一致性哈希码请求时，他的偏向状态被立即撤销，并且会膨胀为重量级锁，在重量级锁ObjectMonitor类里有字段可以记录非加锁状态下的MarkWord。</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>谢谢你请我吃糖果</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>Donate</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.png" alt="BenjaminYuan WeChat Pay">
+        <p>WeChat Pay</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="BenjaminYuan Alipay">
+        <p>Alipay</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Jvm/" rel="tag"># Jvm</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/02/07/db/" rel="next" title="数据库相关知识笔记">
+                <i class="fa fa-chevron-left"></i> 数据库相关知识笔记
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpeg" alt="BenjaminYuan">
+            
+              <p class="site-author-name" itemprop="name">BenjaminYuan</p>
+              <p class="site-description motion-element" itemprop="description">记录生活点滴</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">13</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">9</span>
+                    <span class="site-state-item-name">categories</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">19</span>
+                    <span class="site-state-item-name">tags</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/Benjaminyuan" title="GitHub &rarr; https://github.com/Benjaminyuan" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i></a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#整体思路"><span class="nav-number">1.</span> <span class="nav-text">整体思路</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Java内存区域和内存移除异常"><span class="nav-number">2.</span> <span class="nav-text">Java内存区域和内存移除异常</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#运行时数据区域"><span class="nav-number">2.1.</span> <span class="nav-text">运行时数据区域</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#程序计数器"><span class="nav-number">2.1.1.</span> <span class="nav-text">程序计数器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Java虚拟机栈"><span class="nav-number">2.1.2.</span> <span class="nav-text">Java虚拟机栈</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#本地方法栈"><span class="nav-number">2.1.3.</span> <span class="nav-text">本地方法栈</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#堆"><span class="nav-number">2.1.4.</span> <span class="nav-text">堆</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方法区"><span class="nav-number">2.1.5.</span> <span class="nav-text">方法区</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#直接内存"><span class="nav-number">2.1.6.</span> <span class="nav-text">直接内存</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HotPot虚拟机对象"><span class="nav-number">2.2.</span> <span class="nav-text">HotPot虚拟机对象</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#对象创建"><span class="nav-number">2.2.1.</span> <span class="nav-text">对象创建</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#对象内存布局"><span class="nav-number">2.2.2.</span> <span class="nav-text">对象内存布局</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#对象的访问定位"><span class="nav-number">2.2.3.</span> <span class="nav-text">对象的访问定位</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#OutOfMemoryError异常"><span class="nav-number">2.3.</span> <span class="nav-text">OutOfMemoryError异常</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Java堆溢出"><span class="nav-number">2.3.1.</span> <span class="nav-text">Java堆溢出</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#虚拟机栈和本地方法栈溢出"><span class="nav-number">2.3.2.</span> <span class="nav-text">虚拟机栈和本地方法栈溢出</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方法区和运行时常量池溢出"><span class="nav-number">2.3.3.</span> <span class="nav-text">方法区和运行时常量池溢出</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#本机直接内存溢出"><span class="nav-number">2.3.4.</span> <span class="nav-text">本机直接内存溢出</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#垃圾收集器和内存分配策略"><span class="nav-number">3.</span> <span class="nav-text">垃圾收集器和内存分配策略</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#聚焦问题"><span class="nav-number">3.1.</span> <span class="nav-text">聚焦问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#对象存活问题"><span class="nav-number">3.2.</span> <span class="nav-text">对象存活问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#引用计数算法"><span class="nav-number">3.2.1.</span> <span class="nav-text">引用计数算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#可达性分析算法"><span class="nav-number">3.2.2.</span> <span class="nav-text">可达性分析算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#引用引用"><span class="nav-number">3.2.3.</span> <span class="nav-text">引用引用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#To-die-to"><span class="nav-number">3.2.4.</span> <span class="nav-text">To die to</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#回收方法区"><span class="nav-number">3.2.5.</span> <span class="nav-text">回收方法区</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#垃圾回收算法"><span class="nav-number">3.3.</span> <span class="nav-text">垃圾回收算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#分代收集理论"><span class="nav-number">3.3.1.</span> <span class="nav-text">分代收集理论</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#标记-清除算法"><span class="nav-number">3.3.2.</span> <span class="nav-text">标记-清除算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#标记-复制算法"><span class="nav-number">3.3.3.</span> <span class="nav-text">标记-复制算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#标记-整理"><span class="nav-number">3.3.4.</span> <span class="nav-text">标记-整理</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HotSpot算法细节实现"><span class="nav-number">3.4.</span> <span class="nav-text">HotSpot算法细节实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#根节点枚举"><span class="nav-number">3.4.1.</span> <span class="nav-text">根节点枚举</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安全点"><span class="nav-number">3.4.2.</span> <span class="nav-text">安全点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安全区域"><span class="nav-number">3.4.3.</span> <span class="nav-text">安全区域</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#记忆集与卡集"><span class="nav-number">3.4.4.</span> <span class="nav-text">记忆集与卡集</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#写屏障（区分“内存屏障”）"><span class="nav-number">3.4.5.</span> <span class="nav-text">写屏障（区分“内存屏障”）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#并发的可达性分析"><span class="nav-number">3.4.6.</span> <span class="nav-text">并发的可达性分析</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#经典垃圾回收器"><span class="nav-number">3.5.</span> <span class="nav-text">经典垃圾回收器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Serial收集器"><span class="nav-number">3.5.1.</span> <span class="nav-text">Serial收集器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ParNew收集器"><span class="nav-number">3.5.2.</span> <span class="nav-text">ParNew收集器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Parallel-Scavenge收集器"><span class="nav-number">3.5.3.</span> <span class="nav-text">Parallel Scavenge收集器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Serial-Old收集器"><span class="nav-number">3.5.4.</span> <span class="nav-text">Serial Old收集器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Parallel-Old收集器"><span class="nav-number">3.5.5.</span> <span class="nav-text">Parallel Old收集器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CMS（Concurrent-Mark-Sweep）收集器"><span class="nav-number">3.5.6.</span> <span class="nav-text">CMS（Concurrent Mark Sweep）收集器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Garbage-First收集器"><span class="nav-number">3.5.7.</span> <span class="nav-text">Garbage First收集器</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#低延迟垃圾收集器"><span class="nav-number">3.6.</span> <span class="nav-text">低延迟垃圾收集器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Shenandoah"><span class="nav-number">3.6.1.</span> <span class="nav-text">Shenandoah</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ZGC"><span class="nav-number">3.6.2.</span> <span class="nav-text">ZGC</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#ZGC的内存布局"><span class="nav-number">3.6.2.1.</span> <span class="nav-text">ZGC的内存布局</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#染色指针技术"><span class="nav-number">3.6.2.2.</span> <span class="nav-text">染色指针技术</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#类文件结构"><span class="nav-number">3.7.</span> <span class="nav-text">类文件结构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#无关性的基石"><span class="nav-number">3.7.1.</span> <span class="nav-text">无关性的基石</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Class文件结构"><span class="nav-number">3.7.2.</span> <span class="nav-text">Class文件结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#魔数和Class文件的版本"><span class="nav-number">3.7.3.</span> <span class="nav-text">魔数和Class文件的版本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#访问标志"><span class="nav-number">3.7.4.</span> <span class="nav-text">访问标志</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#类索引、父类索引和接口索引集合"><span class="nav-number">3.7.5.</span> <span class="nav-text">类索引、父类索引和接口索引集合</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字段表集合"><span class="nav-number">3.7.6.</span> <span class="nav-text">字段表集合</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方法表集合"><span class="nav-number">3.7.7.</span> <span class="nav-text">方法表集合</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#属性表集合"><span class="nav-number">3.7.8.</span> <span class="nav-text">属性表集合</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#字节码指令简介"><span class="nav-number">3.8.</span> <span class="nav-text">字节码指令简介</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#字节码与数据类型"><span class="nav-number">3.8.1.</span> <span class="nav-text">字节码与数据类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#加载和存储指令"><span class="nav-number">3.8.2.</span> <span class="nav-text">加载和存储指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#运算指令"><span class="nav-number">3.8.3.</span> <span class="nav-text">运算指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#类型转化指令"><span class="nav-number">3.8.4.</span> <span class="nav-text">类型转化指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#对象创建与访问指令"><span class="nav-number">3.8.5.</span> <span class="nav-text">对象创建与访问指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#操作数栈管理指令"><span class="nav-number">3.8.6.</span> <span class="nav-text">操作数栈管理指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#控制转移指令"><span class="nav-number">3.8.7.</span> <span class="nav-text">控制转移指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方法调用"><span class="nav-number">3.8.8.</span> <span class="nav-text">方法调用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#异常处理指令"><span class="nav-number">3.8.9.</span> <span class="nav-text">异常处理指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#同步指令"><span class="nav-number">3.8.10.</span> <span class="nav-text">同步指令</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#虚拟机类加载机制"><span class="nav-number">4.</span> <span class="nav-text">虚拟机类加载机制</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#类加载时机"><span class="nav-number">4.1.</span> <span class="nav-text">类加载时机</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#类加载过程"><span class="nav-number">4.2.</span> <span class="nav-text">类加载过程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#加载"><span class="nav-number">4.2.1.</span> <span class="nav-text">加载</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#验证"><span class="nav-number">4.2.2.</span> <span class="nav-text">验证</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#准备"><span class="nav-number">4.2.3.</span> <span class="nav-text">准备</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解析"><span class="nav-number">4.2.4.</span> <span class="nav-text">解析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#初始化"><span class="nav-number">4.2.5.</span> <span class="nav-text">初始化</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#类加载器"><span class="nav-number">4.3.</span> <span class="nav-text">类加载器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#类与类加载器"><span class="nav-number">4.3.1.</span> <span class="nav-text">类与类加载器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#双亲委派模型"><span class="nav-number">4.3.2.</span> <span class="nav-text">双亲委派模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#模块下的类加载器："><span class="nav-number">4.3.3.</span> <span class="nav-text">模块下的类加载器：</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#虚拟机字节码执行引擎"><span class="nav-number">5.</span> <span class="nav-text">虚拟机字节码执行引擎</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#概述"><span class="nav-number">5.1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#运行时栈帧结构"><span class="nav-number">5.2.</span> <span class="nav-text">运行时栈帧结构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#局部变量表"><span class="nav-number">5.2.1.</span> <span class="nav-text">局部变量表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#操作数栈"><span class="nav-number">5.2.2.</span> <span class="nav-text">操作数栈</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#动态链接"><span class="nav-number">5.2.3.</span> <span class="nav-text">动态链接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方法返回地址"><span class="nav-number">5.2.4.</span> <span class="nav-text">方法返回地址</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#方法调用-1"><span class="nav-number">5.3.</span> <span class="nav-text">方法调用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#解析-1"><span class="nav-number">5.3.1.</span> <span class="nav-text">解析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分派"><span class="nav-number">5.3.2.</span> <span class="nav-text">分派</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#前端编译"><span class="nav-number">6.</span> <span class="nav-text">前端编译</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#概述-1"><span class="nav-number">6.1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Javac编译器"><span class="nav-number">6.2.</span> <span class="nav-text">Javac编译器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#编译过程"><span class="nav-number">6.2.1.</span> <span class="nav-text">编译过程</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Java语法糖"><span class="nav-number">6.3.</span> <span class="nav-text">Java语法糖</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#泛型"><span class="nav-number">6.4.</span> <span class="nav-text">泛型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#自动装箱、拆箱与遍历循环"><span class="nav-number">6.4.1.</span> <span class="nav-text">自动装箱、拆箱与遍历循环</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#后端编译与优化"><span class="nav-number">7.</span> <span class="nav-text">后端编译与优化</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#即时编译器"><span class="nav-number">7.1.</span> <span class="nav-text">即时编译器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#解释器和编译器"><span class="nav-number">7.1.1.</span> <span class="nav-text">解释器和编译器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#编译对象与触发条件"><span class="nav-number">7.1.2.</span> <span class="nav-text">编译对象与触发条件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#编译过程-1"><span class="nav-number">7.1.3.</span> <span class="nav-text">编译过程</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Java的内存模型与线程"><span class="nav-number">8.</span> <span class="nav-text">Java的内存模型与线程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Java的内存模型"><span class="nav-number">8.1.</span> <span class="nav-text">Java的内存模型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#volatile使用"><span class="nav-number">8.1.1.</span> <span class="nav-text">volatile使用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Java对象头"><span class="nav-number">8.1.1.1.</span> <span class="nav-text">Java对象头</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Java与线程"><span class="nav-number">8.2.</span> <span class="nav-text">Java与线程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#线程实现"><span class="nav-number">8.2.1.</span> <span class="nav-text">线程实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Java线程"><span class="nav-number">8.2.2.</span> <span class="nav-text">Java线程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Java线程调度"><span class="nav-number">8.2.3.</span> <span class="nav-text">Java线程调度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#状态转化"><span class="nav-number">8.2.4.</span> <span class="nav-text">状态转化</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Java与协程"><span class="nav-number">8.3.</span> <span class="nav-text">Java与协程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#内核线程的局限"><span class="nav-number">8.3.1.</span> <span class="nav-text">内核线程的局限</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#协程"><span class="nav-number">8.3.2.</span> <span class="nav-text">协程</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#线程安全和锁优化"><span class="nav-number">9.</span> <span class="nav-text">线程安全和锁优化</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#线程安全"><span class="nav-number">9.1.</span> <span class="nav-text">线程安全</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线程安全实现方法"><span class="nav-number">9.2.</span> <span class="nav-text">线程安全实现方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#synchronized的实现"><span class="nav-number">9.2.1.</span> <span class="nav-text">synchronized的实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#重入锁ReentrantLock"><span class="nav-number">9.2.2.</span> <span class="nav-text">重入锁ReentrantLock</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#非阻塞同步"><span class="nav-number">9.2.3.</span> <span class="nav-text">非阻塞同步</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#无同步方案"><span class="nav-number">9.2.4.</span> <span class="nav-text">无同步方案</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#锁优化"><span class="nav-number">9.3.</span> <span class="nav-text">锁优化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#自旋锁与自适应自旋"><span class="nav-number">9.3.1.</span> <span class="nav-text">自旋锁与自适应自旋</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#锁消除"><span class="nav-number">9.3.2.</span> <span class="nav-text">锁消除</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#锁粗化"><span class="nav-number">9.3.3.</span> <span class="nav-text">锁粗化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#轻量级锁"><span class="nav-number">9.3.4.</span> <span class="nav-text">轻量级锁</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#偏向锁"><span class="nav-number">9.3.5.</span> <span class="nav-text">偏向锁</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 – <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">BenjaminYuan</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v6.5.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    
+      
+  
+  <script type="text/javascript" color="0,0,255" opacity="0.5" zindex="-1" count="99" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.5.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.5.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.5.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.5.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.5.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <style>
+    .copy-btn {
+      display: inline-block;
+      padding: 6px 12px;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 20px;
+      color: #333;
+      white-space: nowrap;
+      vertical-align: middle;
+      cursor: pointer;
+      background-color: #eee;
+      background-image: linear-gradient(#fcfcfc, #eee);
+      border: 1px solid #d5d5d5;
+      border-radius: 3px;
+      user-select: none;
+      outline: 0;
+    }
+
+    .highlight-wrap .copy-btn {
+      transition: opacity .3s ease-in-out;
+      opacity: 0;
+      padding: 2px 6px;
+      position: absolute;
+      right: 4px;
+      top: 8px;
+    }
+
+    .highlight-wrap:hover .copy-btn,
+    .highlight-wrap .copy-btn:focus {
+      opacity: 1
+    }
+
+    .highlight-wrap {
+      position: relative;
+    }
+  </style>
+  <script>
+    $('.highlight').each(function (i, e) {
+      var $wrap = $('<div>').addClass('highlight-wrap')
+      $(e).after($wrap)
+      $wrap.append($('<button>').addClass('copy-btn').append('Copy').on('click', function (e) {
+        var code = $(this).parent().find('.code').find('.line').map(function (i, e) {
+          return $(e).text()
+        }).toArray().join('\n')
+        var ta = document.createElement('textarea')
+        document.body.appendChild(ta)
+        ta.style.position = 'absolute'
+        ta.style.top = '0px'
+        ta.style.left = '0px'
+        ta.value = code
+        ta.select()
+        ta.focus()
+        var result = document.execCommand('copy')
+        document.body.removeChild(ta)
+        
+        $(this).blur()
+      })).on('mouseleave', function (e) {
+        var $b = $(this).find('.copy-btn')
+        setTimeout(function () {
+          $b.text('Copy')
+        }, 300)
+      }).append(e)
+    })
+  </script>
+
+
+  
+
+</body>
+<script type="text/javascript" src="/js/src/clicklove.js"></script>
+</html>

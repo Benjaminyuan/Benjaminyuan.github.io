@@ -110,27 +110,27 @@
 
 
 
-  <meta name="description" content="Java基础回顾">
-<meta name="keywords" content="Java,CodeLife">
+  <meta name="description" content="4 进程及进程管理4.1 进程 简单地说：进程是计算机系统有限资源地基本单位，在不支持线程的处理机上是调度的基本单位(否则是线程)  进程的状态变化 运行 就绪 等待   状态变迁图:    进程的控制 功能 进程控制 进程调度 进程间的同步协调    进程创建(操作原语) 过程  形成进程控制块PCB，填充进程标识符，进程优先级(PCB块并不是创建时才生成，系统会维持一个PCB池，空闲时PCB">
+<meta name="keywords" content="os">
 <meta property="og:type" content="article">
-<meta property="og:title" content="JavaReview.md">
-<meta property="og:url" content="http://yoursite.com/2019/02/27/JavaReview-md/index.html">
+<meta property="og:title" content="OS">
+<meta property="og:url" content="http://yoursite.com/2020/01/01/OS/index.html">
 <meta property="og:site_name" content="Benji&#39;blog">
-<meta property="og:description" content="Java基础回顾">
+<meta property="og:description" content="4 进程及进程管理4.1 进程 简单地说：进程是计算机系统有限资源地基本单位，在不支持线程的处理机上是调度的基本单位(否则是线程)  进程的状态变化 运行 就绪 等待   状态变迁图:    进程的控制 功能 进程控制 进程调度 进程间的同步协调    进程创建(操作原语) 过程  形成进程控制块PCB，填充进程标识符，进程优先级(PCB块并不是创建时才生成，系统会维持一个PCB池，空闲时PCB">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="http://yoursite.com/Users/mac/Documents/images/JavaException.jpeg">
-<meta property="og:updated_time" content="2019-02-28T11:13:42.503Z">
+<meta property="og:image" content="http://yoursite.com/2020/01/01/images/os_process_change.png">
+<meta property="og:updated_time" content="2020-02-07T04:12:58.274Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="JavaReview.md">
-<meta name="twitter:description" content="Java基础回顾">
-<meta name="twitter:image" content="http://yoursite.com/Users/mac/Documents/images/JavaException.jpeg">
+<meta name="twitter:title" content="OS">
+<meta name="twitter:description" content="4 进程及进程管理4.1 进程 简单地说：进程是计算机系统有限资源地基本单位，在不支持线程的处理机上是调度的基本单位(否则是线程)  进程的状态变化 运行 就绪 等待   状态变迁图:    进程的控制 功能 进程控制 进程调度 进程间的同步协调    进程创建(操作原语) 过程  形成进程控制块PCB，填充进程标识符，进程优先级(PCB块并不是创建时才生成，系统会维持一个PCB池，空闲时PCB">
+<meta name="twitter:image" content="http://yoursite.com/2020/01/01/images/os_process_change.png">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/02/27/JavaReview-md/">
+  <link rel="canonical" href="http://yoursite.com/2020/01/01/OS/">
 
 
 
@@ -140,7 +140,7 @@
   };
 </script>
 
-  <title>JavaReview.md | Benji'blog</title>
+  <title>OS | Benji'blog</title>
   
 
 
@@ -280,7 +280,7 @@
       
     
 
-    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags<span class="badge">21</span></a>
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags<span class="badge">23</span></a>
 
   </li>
         
@@ -318,7 +318,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives<span class="badge">12</span></a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives<span class="badge">13</span></a>
 
   </li>
         
@@ -456,7 +456,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/27/JavaReview-md/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/01/OS/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="BenjaminYuan">
@@ -473,7 +473,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">JavaReview.md
+          <h1 class="post-title" itemprop="name headline">OS
               
             
           </h1>
@@ -498,7 +498,7 @@
                 
               
 
-              <time title="Created: 2019-02-27 19:57:11" itemprop="dateCreated datePublished" datetime="2019-02-27T19:57:11+08:00">2019-02-27</time>
+              <time title="Created: 2020-01-01 13:39:52" itemprop="dateCreated datePublished" datetime="2020-01-01T13:39:52+08:00">2020-01-01</time>
             
 
             
@@ -515,29 +515,11 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-02-28 19:13:42" itemprop="dateModified" datetime="2019-02-28T19:13:42+08:00">2019-02-28</time>
+                <time title="Modified: 2020-02-07 12:12:58" itemprop="dateModified" datetime="2020-02-07T12:12:58+08:00">2020-02-07</time>
               
             
           </span>
 
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a></span>
-
-                
-                
-              
-            </span>
           
 
           
@@ -566,40 +548,158 @@
       
 
       
-        <p>Java基础回顾</p>
-<a id="more"></a>
-<h3 id="受检查异常-unchecked-Exception-和运行异常-RunTimeException"><a href="#受检查异常-unchecked-Exception-和运行异常-RunTimeException" class="headerlink" title="受检查异常(unchecked Exception),和运行异常(RunTimeException)"></a>受检查异常(unchecked Exception),和运行异常(RunTimeException)</h3><p><img src="/Users/mac/Documents/images/JavaException.jpeg" alt=""></p>
-<p>(蓝色的为runtimeException)</p>
-<h3 id="反射"><a href="#反射" class="headerlink" title="反射"></a>反射</h3><ul>
-<li><p>*public Method[] getDeclaredMethods()**返回类或接口声明的所有方法，包括public, protected, default (package) 访问和private方法的Method对象，但不包括继承的方法。当然也包括它所实现接口的方法。</p>
+        <a id="more"></a>
+<h2 id="4-进程及进程管理"><a href="#4-进程及进程管理" class="headerlink" title="4 进程及进程管理"></a>4 进程及进程管理</h2><h3 id="4-1-进程"><a href="#4-1-进程" class="headerlink" title="4.1 进程"></a>4.1 进程</h3><blockquote>
+<p>简单地说：进程是计算机系统有限资源地基本单位，在<strong>不支持线程</strong>的处理机上是调度的基本单位(否则是线程)</p>
+</blockquote>
+<h3 id="进程的状态变化"><a href="#进程的状态变化" class="headerlink" title="进程的状态变化"></a>进程的状态变化</h3><ul>
+<li>运行</li>
+<li>就绪</li>
+<li><p>等待</p>
+<p>  状态变迁图:</p>
+<p>  <img src="../images/os_process_change.png" alt=""></p>
+<h3 id="进程的控制"><a href="#进程的控制" class="headerlink" title="进程的控制"></a>进程的控制</h3><blockquote>
+<h4 id="功能"><a href="#功能" class="headerlink" title="功能"></a>功能</h4><ul>
+<li>进程控制</li>
+<li>进程调度</li>
+<li>进程间的同步协调 </li>
+</ul>
+</blockquote>
+<h4 id="进程创建-操作原语"><a href="#进程创建-操作原语" class="headerlink" title="进程创建(操作原语)"></a>进程创建(操作原语)</h4><blockquote>
+<p>过程</p>
+<ul>
+<li><strong>形成</strong>进程控制块PCB，填充进程标识符，进程优先级(PCB块并不是创建时才生成，系统会维持一个PCB池，空闲时PCB进程标识符存放 ‘-1’)</li>
+<li>UNIX 或Linux系统中，父进程创建子进程时，该子进程继承父进程占用的系统资源，以及<strong>除进程内部系统标示符以外</strong>的其他特性</li>
+</ul>
+</blockquote>
+<h4 id="UNIX和Linux系统创建进程及应用实例-调用fork系统调用"><a href="#UNIX和Linux系统创建进程及应用实例-调用fork系统调用" class="headerlink" title="UNIX和Linux系统创建进程及应用实例(调用fork系统调用)"></a>UNIX和Linux系统创建进程及应用实例(调用fork系统调用)</h4></li>
+<li>分配PCB</li>
+<li>为子进程分配一个唯一的PID(进程标识号)</li>
+<li><strong>拷贝</strong>父进程<strong>数据段</strong>(不会有多线程线程修改父进程的变量的危险操作)和堆栈段数据到新的主存区，正文段(代码段)引用计数+1(即共享代码段)</li>
+<li>增加与进程相关联的文件表和索引节点表的引用数，即子进程可以使用父进程打开的文件</li>
+<li>子进程返回0,父进程返回子进程进程号(PID)<h4 id="进程和线程具体使用"><a href="#进程和线程具体使用" class="headerlink" title="进程和线程具体使用"></a>进程和线程具体使用</h4></li>
+<li><a href="https://github.com/Benjaminyuan/OS" target="_blank" rel="noopener">github仓库</a><h4 id="进程撤销"><a href="#进程撤销" class="headerlink" title="进程撤销"></a>进程撤销</h4></li>
+<li>归还PCB -&gt; PCB资源池，占用资源 -&gt; 父进程</li>
+<li>转进调度程序<h4 id="进程等待"><a href="#进程等待" class="headerlink" title="进程等待"></a>进程等待</h4></li>
+<li>CPU现场保留至PCB现场保护区</li>
+<li>PCB插入到等待队列<h4 id="进程唤醒"><a href="#进程唤醒" class="headerlink" title="进程唤醒"></a>进程唤醒</h4></li>
+<li>被唤醒，转为就绪态</li>
+<li>PCB插入就绪队列</li>
+</ul>
+<h3 id="4-4-进程之间的约束关系"><a href="#4-4-进程之间的约束关系" class="headerlink" title="4.4 进程之间的约束关系"></a>4.4 进程之间的约束关系</h3><ul>
+<li>互斥 -&gt; 存在临界区</li>
+<li>同步 -&gt; 进程执行有顺序限制</li>
+</ul>
+<h3 id="4-5-同步机构"><a href="#4-5-同步机构" class="headerlink" title="4.5 同步机构"></a>4.5 同步机构</h3><blockquote>
+<h3 id="操作系统提供的同步机构"><a href="#操作系统提供的同步机构" class="headerlink" title="操作系统提供的同步机构"></a>操作系统提供的同步机构</h3><ul>
+<li>锁</li>
+<li>信号灯(信号量) 和P,V操作</li>
+</ul>
+</blockquote>
+<h4 id="锁"><a href="#锁" class="headerlink" title="锁"></a>锁</h4><ul>
+<li>可以把它想像成现实生活中的锁，机制是差不多的。</li>
+</ul>
+<h4 id="信号灯"><a href="#信号灯" class="headerlink" title="信号灯"></a>信号灯</h4><ul>
+<li>一组确定的二元组(s,q)</li>
+<li>P操作，以P(s)为例<blockquote>
+<ul>
+<li>s减1</li>
+<li>如果结果 &gt;= 0 ,则进程继续执行</li>
+<li>小于0，线程被封锁，并将它(前面提到过，这里插入的是进程的PCB)插入到该信号灯的等待队列中，然后进入调度程序</li>
+</ul>
+</blockquote>
 </li>
-<li><p><strong>public Method[] getMethods()</strong>返回类的所有public方法，包括其继承类的公用方法，当然也包括它所实现接口的方法</p>
+<li>V操作，以V(s)为例<blockquote>
+<ul>
+<li>s值加1</li>
+<li>如果结果大于0，进程<strong>继续执行</strong></li>
+<li>如果结果小于或者等于零，则从该信号灯的等待队列中移除一个进程，解除它的等待状态，然后返回本进程<strong>继续执行</strong></li>
+<li>V操作不会使当前线程状态变化</li>
+</ul>
+</blockquote>
+<h3 id="4-6线程互斥和同步的实现"><a href="#4-6线程互斥和同步的实现" class="headerlink" title="4.6线程互斥和同步的实现"></a>4.6线程互斥和同步的实现</h3><blockquote>
+<p>总的来说，常见的就那么几种，直接举几个用信号灯实现的例子</p>
+</blockquote>
+<h4 id="简单互斥"><a href="#简单互斥" class="headerlink" title="简单互斥"></a>简单互斥</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 伪代码</span></span><br><span class="line"><span class="comment">// 这里定义cobegin 和coend之间的程序是同时执行的</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line">main()&#123;</span><br><span class="line">    <span class="keyword">int</span> mutex = <span class="number">1</span> ;</span><br><span class="line">    cobegin </span><br><span class="line">        p_a();</span><br><span class="line">        p_b();</span><br><span class="line">    coend </span><br><span class="line">&#125;</span><br><span class="line">p_a()&#123;</span><br><span class="line">    p(mutex)</span><br><span class="line">    <span class="comment">// do something </span></span><br><span class="line">    v(mutex)</span><br><span class="line">&#125;</span><br><span class="line">p_b()&#123;</span><br><span class="line">    p(mutex)</span><br><span class="line">    <span class="comment">// do something </span></span><br><span class="line">    v(mutex)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-<h3 id="数值计算"><a href="#数值计算" class="headerlink" title="数值计算"></a>数值计算</h3><ul>
-<li>没有final修饰的变量相加后会被自动提升为int型，与目标类型byte不相容，需要强制转换（向下转型）。<ul>
-<li>如: byte运算会转化成int;</li>
+<h4 id="简单的先后"><a href="#简单的先后" class="headerlink" title="简单的先后"></a>简单的先后</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">    <span class="comment">// 伪代码，一个看病的例子，先看病，再化验，最后诊断</span></span><br><span class="line">    main()&#123;</span><br><span class="line">        <span class="keyword">int</span> s1 = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> s2 = <span class="number">0</span>;</span><br><span class="line">        cobegin</span><br><span class="line">        labora();</span><br><span class="line">        diagnosis();</span><br><span class="line">        coend</span><br><span class="line">    &#125;</span><br><span class="line">labora()&#123;</span><br><span class="line">    <span class="keyword">while</span>(化验工作未完成)&#123;</span><br><span class="line">        p(s1);</span><br><span class="line">        化验工作;</span><br><span class="line">        v(s2);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">diagnosis()&#123;</span><br><span class="line">    <span class="keyword">while</span>(看病工作未完成)&#123;</span><br><span class="line">        看病;</span><br><span class="line">        v(s1);</span><br><span class="line">        p(s2);</span><br><span class="line">        诊断</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="多级先后关系"><a href="#多级先后关系" class="headerlink" title="多级先后关系"></a>多级先后关系</h4><blockquote>
+<h4 id="实现思路"><a href="#实现思路" class="headerlink" title="实现思路"></a>实现思路</h4><p>和简单先后的思想差不多，如果要让线程-1在另外一个线程-2后面执行，只需要控制信号灯的值在线程-1 执行完之前都小于等于0即可</p>
+</blockquote>
+<h4 id="生成者消费者问题"><a href="#生成者消费者问题" class="headerlink" title="生成者消费者问题"></a>生成者消费者问题</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 一个有界缓冲区 多个消费者度，多个生产者写问题</span></span><br><span class="line"><span class="comment">//        _ _ _ _ _ _ _ _ </span></span><br><span class="line"><span class="comment">// 读 &lt;-- | | | | | | | | &lt;-- 写</span></span><br><span class="line"><span class="comment">//    &lt;-- |_|_|_|_|_|_|_| &lt;-- </span></span><br><span class="line">main()&#123;</span><br><span class="line">    <span class="keyword">int</span> full = <span class="number">0</span>;   <span class="comment">//缓冲区可读的缓冲块数目</span></span><br><span class="line">    <span class="keyword">int</span> empty = n;  <span class="comment">// 缓冲区可写的缓冲区数目</span></span><br><span class="line">    <span class="keyword">int</span> mutex = <span class="number">1</span>;  <span class="comment">// 同时只能有一个线程能够写/读缓冲区</span></span><br><span class="line">    cobegin</span><br><span class="line">    p1();p2();p3();pk();</span><br><span class="line">    c1();c2();c3();ck();</span><br><span class="line">    coend</span><br><span class="line">&#125;</span><br><span class="line">producer()&#123;</span><br><span class="line">    <span class="keyword">while</span>(<span class="comment">/*生产未完成*/</span>)&#123;</span><br><span class="line">        <span class="comment">//生产一个产品;</span></span><br><span class="line">        p(empty);</span><br><span class="line">        p(mutex);</span><br><span class="line">       <span class="comment">// 写一个缓冲块</span></span><br><span class="line">        v(mutex);</span><br><span class="line">        v(full);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">consumer()&#123;</span><br><span class="line">    <span class="keyword">while</span>(<span class="comment">/*还要继续消费*/</span>)&#123;</span><br><span class="line">        p(full);</span><br><span class="line">        p(mutex);</span><br><span class="line">        <span class="comment">// 读一个缓冲块;</span></span><br><span class="line">        v(mutex);</span><br><span class="line">        v(empty);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="4-7进程通信"><a href="#4-7进程通信" class="headerlink" title="4.7进程通信"></a>4.7进程通信</h3><h4 id="进程通信的几种方式"><a href="#进程通信的几种方式" class="headerlink" title="进程通信的几种方式"></a>进程通信的几种方式</h4><ul>
+<li>消息缓冲通信<ul>
+<li>在进程的主存空间设置一个接收区，然后用接收原语(原语可以理解为原子性操作，即操作不可分割)接收消息。</li>
 </ul>
 </li>
+<li>信箱通信<ul>
+<li>用户空间信箱</li>
+<li>系统空间信箱<h3 id="4-8线程"><a href="#4-8线程" class="headerlink" title="4.8线程"></a>4.8线程</h3><blockquote>
+<p>概念提出 -&gt; 为了进一步提高系统的并行处理能力</p>
+</blockquote>
+<h4 id="线程描述"><a href="#线程描述" class="headerlink" title="线程描述"></a>线程描述</h4></li>
 </ul>
-<h3 id="static关键字"><a href="#static关键字" class="headerlink" title="static关键字"></a>static关键字</h3><ul>
-<li>被static修饰的变量或者方法不需要使用对象去访问，是属于类的，只要类被加载，就可以通过类名访问，是实例所共享的。</li>
-<li>static方法不能访问类的非static变量（非static变量,没有实例对象的话实际上是没有被初始化的）</li>
-<li>static不会影响访问权限 抽象类</li>
-<li>static方法不能被重写，如果子类</li>
+</li>
+<li>线程是进程的一条<strong>执行路径</strong></li>
+<li>私有堆栈和处理机环境(PC,CPU运行时间,寄存器)</li>
+<li>共享父进程的主存(想一下和子进程的区别？)</li>
+<li>任务调度的基本单位(一般地，进程是系统<strong>资源分配</strong>的基本单位，线程是<strong>系统调度</strong>的基本单位)<h4 id="内核线程和用户线程"><a href="#内核线程和用户线程" class="headerlink" title="内核线程和用户线程"></a>内核线程和用户线程</h4></li>
+<li>内核线程由操作系统支持，运行在内核空间</li>
+<li>用户线程是在内核的支持下，在用户层通过线程库实现(即用户态线程和内核线程不一定是1:1，也有可能是多对一)。<h3 id="Linux下进程和进程管理"><a href="#Linux下进程和进程管理" class="headerlink" title="Linux下进程和进程管理"></a>Linux下进程和进程管理</h3><blockquote>
+<ul>
+<li>Linux下面，线程被视为一个与其他进程共享某些资源的<strong>特殊进程</strong>  </li>
+<li>PCB -&gt; task_struct</li>
+<li>进程状态基本和上述一致，但是等待状态有TASK_INTERUPTIBLE和TASK_UNINTERUPTIBLE，即是和否可以被中断改变其等待状态</li>
 </ul>
-<h3 id="抽象类和接口"><a href="#抽象类和接口" class="headerlink" title="抽象类和接口"></a>抽象类和接口</h3><h4 id="抽象类"><a href="#抽象类" class="headerlink" title="抽象类"></a>抽象类</h4><ul>
-<li>抽象类提供了继承的概念，它的出发点就是为了继承</li>
-<li>接口是特殊的抽象类</li>
-<li>抽象方法必须由子类来重写(即:声明了abstract的方法在抽象类中没有{ })，子类中不能有和父亲类相同的抽象方法</li>
-<li>Abstract 和final，private不共戴天</li>
-<li>子类必须重写父类所有的抽象方法</li>
+</blockquote>
+</li>
 </ul>
-<h4 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h4><ul>
-<li>比抽象类更加抽象。</li>
-<li>默认为public</li>
-<li>必须重写所有方法;</li>
-<li></li>
+<h2 id="Linux"><a href="#Linux" class="headerlink" title="Linux"></a>Linux</h2><h3 id="查看当前系统启动时间"><a href="#查看当前系统启动时间" class="headerlink" title="查看当前系统启动时间"></a>查看当前系统启动时间</h3><ul>
+<li>top</li>
+<li>w</li>
+<li>uptime </li>
+<li><h3 id="fg-bg-ctrl-z-jobs"><a href="#fg-bg-ctrl-z-jobs" class="headerlink" title="fg,bg,ctrl+z,jobs"></a>fg,bg,ctrl+z,jobs</h3></li>
+<li>fg +作业号，将后台程序调度到前台</li>
+<li>bg 与fg相反</li>
+<li>ctrl+z将程序挂起</li>
+<li>jobs查看正在运行的任务<h3 id="tar"><a href="#tar" class="headerlink" title="tar"></a>tar</h3></li>
+<li>-c:compress，打包</li>
+<li>-x:extract, 提取</li>
+<li>-g:gzip，提取或压缩</li>
+<li>-j:bzip2，提取或压缩</li>
+<li>-v:verbose(详细)，显示指令执行过程</li>
+<li>-f:指定提取或压缩后的文件名以及位置<h3 id="软链接和硬链接"><a href="#软链接和硬链接" class="headerlink" title="软链接和硬链接"></a>软链接和硬链接</h3></li>
+<li>硬链接和文件本身的inode号是一样的</li>
+<li>相当于软链接是保存链一个绝对路径</li>
+</ul>
+<h3 id="Linux查看进程命令"><a href="#Linux查看进程命令" class="headerlink" title="Linux查看进程命令"></a>Linux查看进程命令</h3><ul>
+<li>processes Statistic</li>
+<li>ps -aux 查看系统所有的进程</li>
+<li>ps -IA 查看所有系统的数据</li>
+<li>pa axif 连通部分进程树状态</li>
+<li>pstree </li>
+<li>top</li>
+</ul>
+<p><a href="/images/status.png"></a></p>
+<h3 id="进程间通讯"><a href="#进程间通讯" class="headerlink" title="进程间通讯"></a>进程间通讯</h3><ul>
+<li>信号量</li>
+<li>信号</li>
+<li>管道</li>
+<li>socket</li>
+<li>消息队列</li>
+<li>共享内存(最快)</li>
+<li>文件锁<h3 id="进程间的比较"><a href="#进程间的比较" class="headerlink" title="进程间的比较"></a>进程间的比较</h3></li>
+<li>管道：速度慢，容量有限，只有父子进程能通讯</li>
+<li>FIFO：任何进程间都能通讯，但速度慢</li>
+<li>消息队列：容量受到系统限制，且要注意第一次读的时候，要考虑上一次没有读完数据的问题</li>
+<li>信号量：不能传递复杂消息，只能用来同步</li>
+<li>共享内存区：能够很容易控制容量，速度快，但要保持同步，比如一个进程在写的时候，另一个进程要注意读写的问题，相当于线程中的线程安全，当然，共享内存区同样可以用作线程间通讯，不过没这个必要，线程间本来就已经共享了同一进程内的一块内存</li>
+</ul>
+<h2 id="一些细节"><a href="#一些细节" class="headerlink" title="一些细节"></a>一些细节</h2><h3 id="操作系统中-heap-和-stack-的区别"><a href="#操作系统中-heap-和-stack-的区别" class="headerlink" title="操作系统中 heap 和 stack 的区别"></a>操作系统中 heap 和 stack 的区别</h3><ul>
+<li>栈:由操作系统自动分配释放，存放函数的参数值，局部变量的值等。</li>
+<li>堆:一般由程序员分配释放，若程序员不释放，程序结束后OS自动回收</li>
+<li>栈使用的是一级缓存，堆使用的是二级缓存。</li>
 </ul>
 
       
@@ -653,9 +753,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Java/" rel="tag"># Java</a>
-          
-            <a href="/tags/CodeLife/" rel="tag"># CodeLife</a>
+            <a href="/tags/os/" rel="tag"># os</a>
           
         </div>
       
@@ -668,8 +766,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/01/21/JavaSpringUsingAnnotation/" rel="next" title="JavaSpringUsingAnnotation.md">
-                <i class="fa fa-chevron-left"></i> JavaSpringUsingAnnotation.md
+              <a href="/2019/04/13/Jpa-model/" rel="next" title="Jpa-model">
+                <i class="fa fa-chevron-left"></i> Jpa-model
               </a>
             
           </div>
@@ -678,8 +776,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/02/27/network/" rel="prev" title="network">
-                network <i class="fa fa-chevron-right"></i>
+              <a href="/2020/02/07/db/" rel="prev" title="数据库相关知识笔记">
+                数据库相关知识笔记 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -752,7 +850,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">12</span>
+                    <span class="site-state-item-count">13</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -787,7 +885,7 @@
                     
                       
                     
-                    <span class="site-state-item-count">10</span>
+                    <span class="site-state-item-count">9</span>
                     <span class="site-state-item-name">categories</span>
                   </a>
                 </div>
@@ -842,7 +940,11 @@
                     
                       
                     
-                    <span class="site-state-item-count">17</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">19</span>
                     <span class="site-state-item-name">tags</span>
                   </a>
                 </div>
@@ -890,7 +992,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#受检查异常-unchecked-Exception-和运行异常-RunTimeException"><span class="nav-number">1.</span> <span class="nav-text">受检查异常(unchecked Exception),和运行异常(RunTimeException)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#反射"><span class="nav-number">2.</span> <span class="nav-text">反射</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数值计算"><span class="nav-number">3.</span> <span class="nav-text">数值计算</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#static关键字"><span class="nav-number">4.</span> <span class="nav-text">static关键字</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#抽象类和接口"><span class="nav-number">5.</span> <span class="nav-text">抽象类和接口</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#抽象类"><span class="nav-number">5.1.</span> <span class="nav-text">抽象类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#接口"><span class="nav-number">5.2.</span> <span class="nav-text">接口</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#4-进程及进程管理"><span class="nav-number">1.</span> <span class="nav-text">4 进程及进程管理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-进程"><span class="nav-number">1.1.</span> <span class="nav-text">4.1 进程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#进程的状态变化"><span class="nav-number">1.2.</span> <span class="nav-text">进程的状态变化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#进程的控制"><span class="nav-number">1.3.</span> <span class="nav-text">进程的控制</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#功能"><span class="nav-number">1.3.1.</span> <span class="nav-text">功能</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#进程创建-操作原语"><span class="nav-number">1.3.2.</span> <span class="nav-text">进程创建(操作原语)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#UNIX和Linux系统创建进程及应用实例-调用fork系统调用"><span class="nav-number">1.3.3.</span> <span class="nav-text">UNIX和Linux系统创建进程及应用实例(调用fork系统调用)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#进程和线程具体使用"><span class="nav-number">1.3.4.</span> <span class="nav-text">进程和线程具体使用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#进程撤销"><span class="nav-number">1.3.5.</span> <span class="nav-text">进程撤销</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#进程等待"><span class="nav-number">1.3.6.</span> <span class="nav-text">进程等待</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#进程唤醒"><span class="nav-number">1.3.7.</span> <span class="nav-text">进程唤醒</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-4-进程之间的约束关系"><span class="nav-number">1.4.</span> <span class="nav-text">4.4 进程之间的约束关系</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-5-同步机构"><span class="nav-number">1.5.</span> <span class="nav-text">4.5 同步机构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#操作系统提供的同步机构"><span class="nav-number">1.6.</span> <span class="nav-text">操作系统提供的同步机构</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#锁"><span class="nav-number">1.6.1.</span> <span class="nav-text">锁</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#信号灯"><span class="nav-number">1.6.2.</span> <span class="nav-text">信号灯</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-6线程互斥和同步的实现"><span class="nav-number">1.7.</span> <span class="nav-text">4.6线程互斥和同步的实现</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#简单互斥"><span class="nav-number">1.7.1.</span> <span class="nav-text">简单互斥</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#简单的先后"><span class="nav-number">1.7.2.</span> <span class="nav-text">简单的先后</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#多级先后关系"><span class="nav-number">1.7.3.</span> <span class="nav-text">多级先后关系</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#实现思路"><span class="nav-number">1.7.4.</span> <span class="nav-text">实现思路</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#生成者消费者问题"><span class="nav-number">1.7.5.</span> <span class="nav-text">生成者消费者问题</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-7进程通信"><span class="nav-number">1.8.</span> <span class="nav-text">4.7进程通信</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#进程通信的几种方式"><span class="nav-number">1.8.1.</span> <span class="nav-text">进程通信的几种方式</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-8线程"><span class="nav-number">1.9.</span> <span class="nav-text">4.8线程</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#线程描述"><span class="nav-number">1.9.1.</span> <span class="nav-text">线程描述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#内核线程和用户线程"><span class="nav-number">1.9.2.</span> <span class="nav-text">内核线程和用户线程</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Linux下进程和进程管理"><span class="nav-number">1.10.</span> <span class="nav-text">Linux下进程和进程管理</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Linux"><span class="nav-number">2.</span> <span class="nav-text">Linux</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#查看当前系统启动时间"><span class="nav-number">2.1.</span> <span class="nav-text">查看当前系统启动时间</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#fg-bg-ctrl-z-jobs"><span class="nav-number">2.2.</span> <span class="nav-text">fg,bg,ctrl+z,jobs</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#tar"><span class="nav-number">2.3.</span> <span class="nav-text">tar</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#软链接和硬链接"><span class="nav-number">2.4.</span> <span class="nav-text">软链接和硬链接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Linux查看进程命令"><span class="nav-number">2.5.</span> <span class="nav-text">Linux查看进程命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#进程间通讯"><span class="nav-number">2.6.</span> <span class="nav-text">进程间通讯</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#进程间的比较"><span class="nav-number">2.7.</span> <span class="nav-text">进程间的比较</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一些细节"><span class="nav-number">3.</span> <span class="nav-text">一些细节</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#操作系统中-heap-和-stack-的区别"><span class="nav-number">3.1.</span> <span class="nav-text">操作系统中 heap 和 stack 的区别</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -910,7 +1012,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; 2018 – <span itemprop="copyrightYear">2019</span>
+        <div class="copyright">&copy; 2018 – <span itemprop="copyrightYear">2020</span>
   <span class="with-love" id="animate">
     <i class="fa fa-user"></i>
   </span>
