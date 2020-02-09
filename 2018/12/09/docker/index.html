@@ -281,7 +281,7 @@
       
     
 
-    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags<span class="badge">23</span></a>
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags<span class="badge">22</span></a>
 
   </li>
         
@@ -300,7 +300,7 @@
       
     
 
-    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories<span class="badge">11</span></a>
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories<span class="badge">10</span></a>
 
   </li>
         
@@ -319,7 +319,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives<span class="badge">13</span></a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives<span class="badge">14</span></a>
 
   </li>
         
@@ -616,7 +616,7 @@
 </ul>
 <h2 id="Docker-build"><a href="#Docker-build" class="headerlink" title="Docker build"></a>Docker build</h2><ul>
 <li><p>首先，先要建立一个Dockerfile。Dockerfile里面写的代码可以理解为创建image的一个流程，当然实际生成一个image后面有很多看不到的过程, (以搭建一个nodejs后端服务器为例):</p>
-<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">FROM</span> node: version</span><br><span class="line"><span class="comment"># 首先指定镜像基础，这里是构建node环境并指定版本</span></span><br><span class="line"><span class="keyword">COPY</span> . /app </span><br><span class="line"># 指定工作目录</span><br><span class="line">WORKDIR /app</span><br><span class="line"># 将当前目录拷贝到images的/app目录</span><br><span class="line">RUN	npm install --repository=https://registry.npm.taobao.org</span><br><span class="line"># 安装nodeJS程序的依赖</span><br><span class="line">EXPOSE 8008</span><br><span class="line"># 开放image的3000端口</span><br><span class="line">CMD  ["node", "server.js"]</span><br><span class="line"># 在container运行时执行 node server.js</span><br></pre></td></tr></table></figure>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">FROM</span> node: version</span><br><span class="line"><span class="comment"># 首先指定镜像基础，这里是构建node环境并指定版本</span></span><br><span class="line"><span class="keyword">COPY</span><span class="bash"> . /app </span></span><br><span class="line"><span class="bash"><span class="comment"># 指定工作目录</span></span></span><br><span class="line"><span class="bash">WORKDIR /app</span></span><br><span class="line"><span class="bash"><span class="comment"># 将当前目录拷贝到images的/app目录</span></span></span><br><span class="line"><span class="bash">RUN	npm install --repository=https://registry.npm.taobao.org</span></span><br><span class="line"><span class="bash"><span class="comment"># 安装nodeJS程序的依赖</span></span></span><br><span class="line"><span class="bash">EXPOSE 8008</span></span><br><span class="line"><span class="bash"><span class="comment"># 开放image的3000端口</span></span></span><br><span class="line"><span class="bash">CMD  [<span class="string">"node"</span>, <span class="string">"server.js"</span>]</span></span><br><span class="line"><span class="bash"><span class="comment"># 在container运行时执行 node server.js</span></span></span><br></pre></td></tr></table></figure>
 </li>
 <li><p>创建dockerfile之后，再新建.dockerignore 文件，这里主要是排除一些不要被build的文件</p>
 <figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">.git </span><br><span class="line">node_modules</span><br><span class="line">npm-debug.log</span><br><span class="line"><span class="comment"># 这里主要是排除git，和nodejs的模块，需要的模块在在build的时候 RUN npm install 会自动安装</span></span><br></pre></td></tr></table></figure>
@@ -803,7 +803,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">13</span>
+                    <span class="site-state-item-count">14</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -815,8 +815,6 @@
                 <div class="site-state-item site-state-categories">
                   <a href="/categories/index.html">
                     
-                    
-                      
                     
                       
                     
@@ -850,8 +848,6 @@
                 <div class="site-state-item site-state-tags">
                   <a href="/tags/index.html">
                     
-                    
-                      
                     
                       
                     
