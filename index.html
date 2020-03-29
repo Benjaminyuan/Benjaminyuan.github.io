@@ -277,7 +277,7 @@
       
     
 
-    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags<span class="badge">22</span></a>
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags<span class="badge">24</span></a>
 
   </li>
         
@@ -296,7 +296,7 @@
       
     
 
-    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories<span class="badge">10</span></a>
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories<span class="badge">11</span></a>
 
   </li>
         
@@ -315,7 +315,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives<span class="badge">14</span></a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives<span class="badge">11</span></a>
 
   </li>
         
@@ -453,7 +453,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/09/Linux-kernel/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/09/design-patterns/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="BenjaminYuan">
@@ -473,7 +473,7 @@
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2020/02/09/Linux-kernel/" class="post-title-link" itemprop="http://yoursite.com/index.html">Linux_kernel</a>
+                <a href="/2020/02/09/design-patterns/" class="post-title-link" itemprop="http://yoursite.com/index.html">design_patterns</a>
               
             
           </h1>
@@ -498,7 +498,7 @@
                 
               
 
-              <time title="Created: 2020-02-09 15:05:18 / Modified: 15:05:33" itemprop="dateCreated datePublished" datetime="2020-02-09T15:05:18+08:00">2020-02-09</time>
+              <time title="Created: 2020-02-09 19:43:00 / Modified: 19:57:07" itemprop="dateCreated datePublished" datetime="2020-02-09T19:43:00+08:00">2020-02-09</time>
             
 
             
@@ -537,295 +537,179 @@
 
       
         
+          <p>设计模式笔记<br>
+          <!--noindex-->
           
-            <h1 id="内核简介"><a href="#内核简介" class="headerlink" title="内核简介"></a>内核简介</h1><h2 id="内核组成"><a href="#内核组成" class="headerlink" title="内核组成?"></a>内核组成?</h2><ul>
-<li>负责响应中断的<strong>中断服务程序</strong></li>
-<li>负责<strong>管理多个进程，分享处理器时间</strong>的调用程序</li>
-<li>复制<strong>进程地址空间的内存管理程序</strong></li>
-<li>网络、进程间通讯等系统服务程序<h2 id="Linux内核和Unix内核的比较"><a href="#Linux内核和Unix内核的比较" class="headerlink" title="Linux内核和Unix内核的比较"></a>Linux内核和Unix内核的比较</h2></li>
-<li>所有Unix内核同宗同源，提供的API是一样的</li>
-<li>Unix内核需要硬件提供MMU管理内存， Linux一般不需要<h2 id="微内核和单内核设计比较"><a href="#微内核和单内核设计比较" class="headerlink" title="微内核和单内核设计比较"></a>微内核和单内核设计比较</h2></li>
-<li>单内核所有的服务都在同一地址空间，内核可以直接<strong>调用函数</strong>，微内核的功能被划分为多个独立的过程，每个过程被叫做服务器，所有的服务器都运行在各自的地址空间上，服务器之间的通讯需要通过<strong>消息传递</strong>（IPC）。</li>
-<li>IPC的开销大于函数调用<h3 id="Linux的优点"><a href="#Linux的优点" class="headerlink" title="Linux的优点"></a>Linux的优点</h3></li>
-<li>Linux是单内核，但是Linux吸取了微内核的精华，支持<strong>模块化设计</strong>、<strong>抢占式内核</strong>、<strong>支持内核线程</strong>、<strong>动态装载内核模块</strong>  <h2 id="Linux和Unix的差异"><a href="#Linux和Unix的差异" class="headerlink" title="Linux和Unix的差异"></a>Linux和Unix的差异</h2></li>
-<li>Linux支持动态加载内核模块，单内核，但是可以在允许时动态的卸载和加载除部分内核代码</li>
-<li>Linux支持对称多处理器（SMP），<strong>传统Unix并不支持</strong></li>
-<li>Linux内核可以抢占，Linux内核具有<strong>允许在内核运行的任务优先执行</strong>的能力，</li>
-<li>Linux内核不区分线程和其他一般的进程。对于内核来说，所有进程都一样，只不过一些共享的资源不同<h2 id="Linux内核版本"><a href="#Linux内核版本" class="headerlink" title="Linux内核版本"></a>Linux内核版本</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//  主版本号          修订版本号</span></span><br><span class="line"><span class="comment">//  ｜                  |</span></span><br><span class="line"><span class="comment">//  2     .     6    .  26    .    1</span></span><br><span class="line"><span class="comment">//              |                 ｜</span></span><br><span class="line"><span class="comment">//            从版本号          稳定版本号</span></span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h1 id="进程管理"><a href="#进程管理" class="headerlink" title="进程管理"></a>进程管理</h1><h2 id="进程"><a href="#进程" class="headerlink" title="进程"></a>进程</h2><ul>
-<li>线程：拥有独立的程序计数器，进程栈，一组进程寄存器</li>
-<li>内核调度对象是<strong>线程</strong></li>
-<li>进程是<strong>处于执行期的程序</strong>以及<strong>相关的资源</strong>的总称</li>
-<li>线程：fork()-&gt;clone()<h2 id="进程描述符及任务结构"><a href="#进程描述符及任务结构" class="headerlink" title="进程描述符及任务结构"></a>进程描述符及任务结构</h2></li>
-<li>进程描述符：task_struct</li>
-<li>任务队列：task_struct的双向链表<h3 id="分配进程描述符"><a href="#分配进程描述符" class="headerlink" title="分配进程描述符"></a>分配进程描述符</h3></li>
-<li>Linux通过<strong>slab分配器</strong>分配，2.6以前，各个进程的task_struct存放在他们内核栈的尾端，（方便查找），2.6之后，slab分配器动态生成task_struck，所以只需要在栈低(对于向下增长的栈来说)或栈顶(对于向上增长的栈来说)/创建一个struct thread_info<h3 id="进程描述符存放"><a href="#进程描述符存放" class="headerlink" title="进程描述符存放"></a>进程描述符存放</h3></li>
-<li>pid:唯一标识进程（int），最大值为32768（short int 短整数的最大值）</li>
-<li>current宏查找当前正在运行的进程。<ul>
-<li>x86 体系：利用计算偏移间接地查找task_struct结构（抹去低13位）</li>
-<li>专门的寄存器存储thread_info地址<h3 id="进程状态"><a href="#进程状态" class="headerlink" title="进程状态"></a>进程状态</h3></li>
-</ul>
-</li>
-<li>TASK_RUNNING：运行或者在任务队列中等待执行</li>
-<li>TASK_INTERRUPTIBLE：进程正在睡眠，等待某些条件达成，或者收到信号被唤醒</li>
-<li>TASK_UNINTERRUPTIBLE：不可以被信号唤醒</li>
-<li>_TASK_TRACED：被其他进程追踪。</li>
-<li>_TASK_STOPPED：进程停止执行：没有投入运行也不能投入运行<h3 id="设置当前进程状态"><a href="#设置当前进程状态" class="headerlink" title="设置当前进程状态"></a>设置当前进程状态</h3></li>
-<li>set_task_state(task,state)<h3 id="进程上下文"><a href="#进程上下文" class="headerlink" title="进程上下文"></a>进程上下文</h3></li>
-<li>程序执行了系统调用，或触发了某个异常，它就陷入了内核空间，内核代表进程执行处于“进程上下文”中，在此上下文中current宏是有效的<h3 id="进程家族树"><a href="#进程家族树" class="headerlink" title="进程家族树"></a>进程家族树</h3></li>
-<li>所有的进程都是PID为1的进程的后代<h3 id="进程创建"><a href="#进程创建" class="headerlink" title="进程创建"></a>进程创建</h3></li>
-<li>fork()调用：拷贝当前进程创建一个子进程。子进程和父进程的区别仅仅在于PID，PPID(父进程的PID)和<strong>某些资源</strong>和<strong>统计量（挂起的信号，没有必要别继承）</strong><h3 id="写时拷贝"><a href="#写时拷贝" class="headerlink" title="写时拷贝"></a>写时拷贝</h3></li>
-<li>fork()使用copy-on-write页实现，fork()的开销主要在于<strong>复制父进程的页表</strong>以及给<strong>子进程创建唯一的PID</strong><h3 id="fork"><a href="#fork" class="headerlink" title="fork()"></a>fork()</h3></li>
-<li><p>调用链</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">\\ fork() -&gt; clone() -&gt; do_fork() -&gt; copy_process() -&gt;  dup_task_struct()</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>copy_proces()</p>
-<ul>
-<li>调用dup_task_struct()为新进程创建一个<strong>内核栈</strong>、<strong>thread_info结构</strong>和<strong>task_struct</strong>（此时与当前线程无任何差别）</li>
-<li>确保创建子进程后，分配给用户的资源没有超过限制</li>
-<li>子进程状态设置为<strong>TASK_UNITERRUPTIBLE</strong>，保证不会投入运行</li>
-<li>copy_flags()<strong>更新task_struct的flags成员</strong>，确保一些flag被设置或清零（代表是否拥有超级用户权限的PF_SUPERPRIV清零，表明进程还没有调用exec()函数的PF_FORKNOEXEC标志被设置）</li>
-<li>调用alloc_pid()为新进程分配一个有效的PID</li>
-<li>根据传递给clone的参数标志不同，copy_process<strong>拷贝或共享打开的文件</strong>、<strong>文件系统信息</strong>、<strong>信号处理函数</strong>、<strong>进程地址空间和命名空间</strong>等。共享的话不拷贝，不共享则拷贝。</li>
-<li>返回一个指向子进程的指针。</li>
-</ul>
-</li>
-<li>回到do_fork()<ul>
-<li>copy_process调用成功后，新创建的子进程被唤醒并让其投入运行<h3 id="vfork"><a href="#vfork" class="headerlink" title="vfork()"></a>vfork()</h3></li>
-</ul>
-</li>
-<li>除了不拷贝父进程的页表项外，vfork()和fork()功能一致<h2 id="线程在Linux的实现"><a href="#线程在Linux的实现" class="headerlink" title="线程在Linux的实现"></a>线程在Linux的实现</h2></li>
-<li>线程：进程间的共享资源的手段。<h3 id="创建线程"><a href="#创建线程" class="headerlink" title="创建线程"></a>创建线程</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">clone(CLONE_VM|CLONE_FS|CLONE_FILES|CLONE_SIGHAND,<span class="number">0</span>);</span><br><span class="line"><span class="comment">//共享地址空间、文件系统资源、文件描述符、信号处理程序</span></span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h3 id="内核线程"><a href="#内核线程" class="headerlink" title="内核线程"></a>内核线程</h3><ul>
-<li>内核线程和普通线程的区别：内核线程没有独立的地址空间（指向地址空间的mm指针被设置为NULL）,内核线程只在内核空间运行，从来不到用户空间去。<h2 id="进程终结"><a href="#进程终结" class="headerlink" title="进程终结"></a>进程终结</h2></li>
-<li>终结（可以显示调用exit()）动作：释放资源，传递信号给父进程</li>
-<li>主要工作由do_exit()完成<ul>
-<li>将task_struct中的标志成员设置为PF_EXITING</li>
-<li>调用del_timer_sync()删除任意内核定时器，确保没有定时器在排队</li>
-<li>BSD的进程记账功能是开启的话，调用acct_update_integrals()来输出记栈信息</li>
-<li>exit_mm()函数释放进程占用的mm_struct，如果没有别的进程使用他们，就彻底释放它们。</li>
-<li>sem__exit()如果进程排队等候IPC信号，它则离队</li>
-<li>exit_files()和exit_fs()递减文件描述符，文件系统数据的引用计数，如果某个引用计数数值降为0，此时可以释放</li>
-<li>存放task_struct的exit_code成员中的任务退出代码置为exit()提供的退出代码，方便父进程随时检索</li>
-<li>exit_notify()向父进程发送信号，给子进程重新找养父，并把线程状态设置为EXIT_ZOMBIE</li>
-<li>调用schedule()切换到新的进程。</li>
-</ul>
-</li>
-<li>处于EXIT_ZOMBIE状态的进程占用内存为内核栈，thread_info结构和stak_struct结构，唯一作用是给父进程提供信息。在父进程获取已终结的子进程信息后，或者通知内核它并不关注那些信息后，子进程的task_struct结构才被释放，</li>
-<li>wait()：挂起一个进程，直到其中的一个进程退出。（会释放内核栈和thread_info的结构所占的页，并释放task_struct所占的slab高速缓存<h1 id="进程调度"><a href="#进程调度" class="headerlink" title="进程调度"></a>进程调度</h1><h2 id="多任务"><a href="#多任务" class="headerlink" title="多任务"></a>多任务</h2></li>
-<li>现代操作系统对程序一般采用动态时间片计算的方式，并且引入了可配置的计算策略。（但是Linux不是）<h2 id="Linux的进程调度"><a href="#Linux的进程调度" class="headerlink" title="Linux的进程调度"></a>Linux的进程调度</h2></li>
-<li>Linux2.5：采用O(1)调度程序</li>
-<li>Linux2.6初期：引入新的调度算法，其中最著名的是：“反转楼梯最后期限调度算法”(RSDL)</li>
-<li>Linux2.6.23内核版本中替代了O(1)调度算法，取而代之的是（完全公平调度算法）CFS <h2 id="策略"><a href="#策略" class="headerlink" title="策略"></a>策略</h2><h3 id="I-O消耗型和处理器消耗型的进程"><a href="#I-O消耗型和处理器消耗型的进程" class="headerlink" title="I/O消耗型和处理器消耗型的进程"></a>I/O消耗型和处理器消耗型的进程</h3></li>
-<li>I/O消耗型：大多时间在等待I/O请求或者提交I/O请求。</li>
-<li>处理器消耗型：进程时间大多数用在执行代码上。<h3 id="进程优先级"><a href="#进程优先级" class="headerlink" title="进程优先级"></a>进程优先级</h3><blockquote>
-<p>Linux采用两种不同的优先级</p>
-</blockquote>
-</li>
-<li>nice值<ul>
-<li>range: -20到+19</li>
-<li>nice越低优先级越高</li>
-<li>nice是所有Unix系统中的标准化的概念，但是由于调度算法不同，运用方式不同</li>
-<li>Mac OS X，进程的nice值代表分配给进程的时间片的绝对值，而Linux系统，nice值则代表时间片的比例。</li>
-</ul>
-</li>
-<li>实时优先级<ul>
-<li>默认值：0到99，越高线程优先级越高<h3 id="时间片"><a href="#时间片" class="headerlink" title="时间片"></a>时间片</h3></li>
-</ul>
-</li>
-<li>表明线程在被抢占前能够持续运行的时间。调度策略必须规定一个时间片</li>
-<li>Linux的CFS调度器并没有直接分配时间片到进程，而是将处理器的使用比划分给了线程，这样使得线程获得的处理器时间其实是和系统负载密切相关的。<strong>nice值作为权重</strong>调整进程所使用的处理器时间使用比。</li>
-<li>Linux的抢占行为：当一个进程进入可运行状态时，抢占时机取决于新的可运行程序消耗多少处理器使用比。如果消耗的使用比 比当前进程小，则新进程立刻投入运行，否则推迟运行。<h2 id="Linux调度算法"><a href="#Linux调度算法" class="headerlink" title="Linux调度算法"></a>Linux调度算法</h2><h3 id="调度器类"><a href="#调度器类" class="headerlink" title="调度器类"></a>调度器类</h3></li>
-<li>Linux调度器使用模块的方式提供，使得不同类型的进程可以有针对性地选择调度算法。</li>
-<li>Unix系统中的进程调度<ul>
-<li>两点：进程优先级、时间片</li>
-<li>问题：分配绝对的时间片会引发固定的切换频率</li>
-</ul>
-</li>
-<li>完全公平调度(CFS)是一个<strong>针对普通进程</strong>的调度类，Linux中称为 SCHED_NORMAL<ul>
-<li>CFS完全摈弃时间片而是分配给进程一个处理器使用比重</li>
-<li>CFS理念：进程调度的效果应如同系统具备一个理想中的完美多任务处理器</li>
-<li>周转：允许每个进程运行一段时间、循环轮转、选择运行最少的进程作为下一个运行进程。</li>
-<li>CFS在所有可运行的进程总数基础上计算出一个进程应该运行多久，而不是依靠nice值来计算时间片。nice值在CFS中被作为进程获得的处理器运行比的权重，越高的nice值获得越低的处理器使用权重。CFS进程获得的时间片底线默认值为1ms（防止频繁切换）</li>
-<li>任何线程所获得的处理器时间是他自己和其他所有可运行进程nice值的<strong>相对差值</strong>决定的<h2 id="Linux调度的实现"><a href="#Linux调度的实现" class="headerlink" title="Linux调度的实现"></a>Linux调度的实现</h2><h3 id="时间记账"><a href="#时间记账" class="headerlink" title="时间记账"></a>时间记账</h3></li>
-</ul>
-</li>
-<li>CFS使用调度器实体结构：struct sched_entity来追踪进程运行记账，struct task_struct中名为se的成员变量</li>
-<li>虚拟实时：vruntime，进程的虚拟运行时间（进过所有可运行进程总数的标准化）<ul>
-<li>系统定时器周期性调用update_curr计算进程上次计算到当前计算的delta_exec，通过进程总数对运行时间进程加权运算，最后将权重值与运行进程的vruntime相加<h3 id="进程选择"><a href="#进程选择" class="headerlink" title="进程选择"></a>进程选择</h3></li>
-</ul>
-</li>
-<li>核心：当要选择下一个进程时，它会挑一个具有最小vruntime的进程。</li>
-<li>CFS通过红黑树来组织可运行的进程队列：CFS选择算法可以总结为运行rbtree中的最左边的叶子节点所代表的那个进程</li>
-<li>删除进程发生在 进程阻塞（不可运行态）或者终止时（结束运行）<h3 id="调度器入口"><a href="#调度器入口" class="headerlink" title="调度器入口"></a>调度器入口</h3></li>
-<li>schedule()：通常都需要和一个具体的调度类相关联（高优先级优先），调用pick_next_task()选择进程<h3 id="睡眠和唤醒"><a href="#睡眠和唤醒" class="headerlink" title="睡眠和唤醒"></a>睡眠和唤醒</h3></li>
-<li>等待队列：等待某些时间发生的的进程简单链表，内核用wake_queue_head_t来代表等待队列</li>
-<li>创建：DECLARE_WAITQUEUE()静态创建或init_waitqueue_head()动态创建</li>
-<li><p>加入等待队列</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">DEFINE_WAIT(wait);</span><br><span class="line">add_wait_queue(q,&amp;wait);</span><br><span class="line"><span class="keyword">while</span>(!condition)&#123;</span><br><span class="line">    prepare_to_wait(&amp;q,&amp;wait,TASK_INTERRUPTIBLE);</span><br><span class="line">    <span class="keyword">if</span>(signal_pending(current))</span><br><span class="line">    <span class="comment">//处理信号</span></span><br><span class="line">    schedule();</span><br><span class="line">&#125;</span><br><span class="line">finish_wait(&amp;q,&amp;wait);</span><br></pre></td></tr></table></figure>
-<ul>
-<li>调用DECLARE_WAITQUEUE()创建一个等待队列</li>
-<li>add_wait_queue()把自己加入队列中，该队列会在进程等待的条件满足是唤醒，时间发生时，对等待队列执行wake_up()操作</li>
-<li>prepare_to_wait()将进程状态变为TASK_INTERRUPTIBLE or TASK_UNINTERRUPTIBLE</li>
-<li>如果状态被设置为TASK_INTERRUPTIBLE，则信号唤醒进程（伪唤醒）</li>
-<li>进程被唤醒的时候，它会<strong>再次检查</strong>条件是否为真，如果是则退出循环，否则再次调用schedule()并一直重复这步操作</li>
-<li>当条件满足后，进程将自己设置为TASK_RUNNING并调用finish_wait()方法把自己退出等待队列</li>
-</ul>
-</li>
-<li>唤醒<ul>
-<li>wake_up()进行，唤醒指定的等待队列上的所有进程。</li>
-<li>调用函数try_to_wake_up()将进程设置为TASK_RUNNING状态</li>
-<li>调用enqueue_task()将进程放入红黑树中。</li>
-<li>如果被唤醒的进程优先级比当前正在执行的进程优先级高，还要设置need_resched标志。通常哪段代码促使等待条件达成，就要负责随后调用wake_up()函数。<h2 id="抢占和上下文切换"><a href="#抢占和上下文切换" class="headerlink" title="抢占和上下文切换"></a>抢占和上下文切换</h2></li>
-</ul>
-</li>
-<li>上下文切换：可执行进程切换到另外一个可执行线程。当一个进程被选出来准备投入运行时，schedule() 会调用context_switch()<ul>
-<li>switch_mm()负责把虚拟内存从上一个进程映射切换到新进程中</li>
-<li>switch_to()该函数负责从上一个进程的处理器状态切换到新进程的处理器状态（保存、恢复栈信息和寄存器信息）。</li>
-<li>内核提供一个need_resched标志（每一个进程都包括一个标志）来表明是否需要重新执行一次调度。<ul>
-<li>当进程被抢占时，scheduler_tick()就会设置这个标志</li>
-<li>当优先级高的进程进入可执行状态的时候，try_to_wake_up()也会设置这个标志</li>
-<li>返回用户空间以及从中断返回的时候，内核也会检查need_resched标志，如果被设置，内核会在<strong>继续执行之前</strong>调用调度程序</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="用户抢占"><a href="#用户抢占" class="headerlink" title="用户抢占"></a>用户抢占</h3><ul>
-<li>用户抢占发生<ul>
-<li>系统返回用户空间时</li>
-<li>从中断处理程序返回用户空间时<h3 id="内核抢占"><a href="#内核抢占" class="headerlink" title="内核抢占"></a>内核抢占</h3></li>
-</ul>
-</li>
-<li>只要调度是安全的，内核可以在任何时间抢占正在执行的任务</li>
-<li>支持<ul>
-<li>为每一个进程的thread_info引入preempt_count计数器，初值为0，每当使用锁的时候数值加1，释放锁的时候数值减1，数值为0时可以抢占。</li>
-<li>need_resched被设置，同时preempt_count为0时，调度程序就会被调用</li>
-</ul>
-</li>
-<li>发生时机<ul>
-<li>中断处理程序正在执行，且返回内核空间之前</li>
-<li>内核代码再一次具有可抢占性的时候</li>
-<li>如果内核中的任务显示调用schedule()</li>
-<li>如果内核中的任务阻塞（同样调用schedule())<h3 id="实时调度策略"><a href="#实时调度策略" class="headerlink" title="实时调度策略"></a>实时调度策略</h3></li>
-</ul>
-</li>
-<li>两种调度策略：SCHED_FIFO和SCHED_RR</li>
-<li>SCHED_FIFO<ul>
-<li>处于可以运行状态的SCHED_FIFO级进程会比任何SCHED_NORMAL级的进程都先得到调度</li>
-<li>一旦SCHED_FIFO级进程处于可执行状态，就会一直执行（可以被高优先级抢占），同级的SCHED_FIFO进程轮流执行，直到自己受阻塞或者显式地释放处理器为止</li>
-</ul>
-</li>
-<li>SCHED_RR<ul>
-<li>SCHED_RR与SCHED_FIFO大致相同</li>
-<li>SCHED_RR是带时间片的SCHED_FIFO,时间片用于调度同一优先级<h3 id="处理器绑定"><a href="#处理器绑定" class="headerlink" title="处理器绑定"></a>处理器绑定</h3></li>
-</ul>
-</li>
-<li>Linux提供强制的处理器绑定机制。</li>
-<li>保存在task_strcut 的cpus_allowed位掩码，默认所有位被设置<h3 id="放弃处理器时间"><a href="#放弃处理器时间" class="headerlink" title="放弃处理器时间"></a>放弃处理器时间</h3></li>
-<li>Linux通过sched_yield()系统调用，让进程显示地将处理其时间让给其他等待执行进程<h1 id="系统调用"><a href="#系统调用" class="headerlink" title="系统调用"></a>系统调用</h1><h2 id="内核通讯"><a href="#内核通讯" class="headerlink" title="内核通讯"></a>内核通讯</h2></li>
-<li>Linux中<strong>系统调用</strong>是<strong>用户空间访问内核</strong>的<strong>唯一手段</strong><h2 id="POSIX、API、C库调用关系"><a href="#POSIX、API、C库调用关系" class="headerlink" title="POSIX、API、C库调用关系"></a>POSIX、API、C库调用关系</h2></li>
-<li>应用程序–&gt; C库–&gt; 内核</li>
-<li>Unix接口设计：“提供机制而不是策略”,机制：“需要提供什么样的功能”，策略：“怎样实现这些功能”<h2 id="系统调用-1"><a href="#系统调用-1" class="headerlink" title="系统调用"></a>系统调用</h2></li>
-<li>通常通过C库中定义的函数调用来进行</li>
-<li>系统调用出错的时候C库会把错误码写入<strong>errno</strong>全局变量，调用perror()库函数，可以把变量翻译成用户可以理解的错误字符串</li>
-<li><p>getpid()系统调用</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SYSCALL_DEFINE0(getpid)&#123;</span><br><span class="line">    <span class="keyword">return</span> task_tgid_vnr(current);<span class="comment">//return current-&gt;tgid</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>SYSCALL_DEFINE0 只是一个宏，定义一个无参数的系统调用</li>
-<li>SYSCALL_DEFINE<n>(functionName,param_1_type,param_1,type return_param)</n></li>
-</ul>
-</li>
-<li><p>定义</p>
-<ul>
-<li><p>asmlinkage：编译指令，通知编译器仅从栈中提取该函数的参数</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">asmlinkage <span class="keyword">long</span> <span class="title">sys_getpid</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>命名：sys_functionName()</p>
-<h3 id="系统调用号"><a href="#系统调用号" class="headerlink" title="系统调用号"></a>系统调用号</h3></li>
-</ul>
-</li>
-<li>Linux中，每个系统调用被赋予一个系统调用号，一旦分配就不能再有任何变更</li>
-<li>如果一个系统调用被删除，防止编译的代码出错</li>
-<li>Linux有一个“未实现”系统调用<strong>sys_in_syscall()</strong>，它除了<strong>返回-ENOSYS</strong>不做任何事情，为错误的系统调用而设的。</li>
-<li>系统调用表：sys_call_table（x86-64中，它定义于arch/i386/kernel/syscall_64.c<h3 id="系统调用性能"><a href="#系统调用性能" class="headerlink" title="系统调用性能"></a>系统调用性能</h3></li>
-<li>Linux系统调用比许多操作系统执行要快（很多，指谁？），上下文切换时间较短，系统调用处理程序和每个系统调用本身就很简洁<h2 id="系统调用处理程序"><a href="#系统调用处理程序" class="headerlink" title="系统调用处理程序"></a>系统调用处理程序</h2></li>
-<li>用户空间的程序<strong>无法直接执行内核代码</strong>，因此应用程序需要用某种方式通知系统，告诉内核自己需要执行一个系统调用。</li>
-<li>策略：系统切换到内核态，代表应用程序在内核空间执行系统调用</li>
-<li>通知内核机制：软中断<ul>
-<li>通过引发一个异常来促使系统切换到内核态去执行异常处理程序，此时的异常处理程序实际上是系统调用处理程序。</li>
-<li>在X86系统上预定义的软中断是中断号128,通过int $0x80指令触发该中断，该指令会触发一个异常导致系统切换到内核态并执行128号异常处理程序–system_call()<h3 id="指定恰当的系统调用"><a href="#指定恰当的系统调用" class="headerlink" title="指定恰当的系统调用"></a>指定恰当的系统调用</h3></li>
-</ul>
-</li>
-<li>陷入内核的同时需要将系统调用号传给内核<ul>
-<li>X86上，系统调用号是通过eax寄存器传递给内核的</li>
-<li>system_call()函数<ul>
-<li>通过传递给定的系统调用号与NR_syscalls做比较来检查有效性,如果大于等于 NR_syscalls，该函数返回-ENOSYS，否则执行响应的系统调用<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">call *<span class="title">sys_call_table</span><span class="params">(,%rax,<span class="number">8</span>)</span></span></span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="参数传递"><a href="#参数传递" class="headerlink" title="参数传递"></a>参数传递</h3><ul>
-<li>最简单的方式：将参数传入寄存器中，x86-32系统上，ebx、ecx、edx、esi和edi按照顺序存放前5个参数，需要6个或者六个以上使，用一个单独的寄存器存放指向指向这些参数的用户地址<h2 id="系统调用实现"><a href="#系统调用实现" class="headerlink" title="系统调用实现"></a>系统调用实现</h2><h3 id="实现系统调用"><a href="#实现系统调用" class="headerlink" title="实现系统调用"></a>实现系统调用</h3></li>
-<li>要点：“提供机制而不是策略”<h3 id="参数验证"><a href="#参数验证" class="headerlink" title="参数验证"></a>参数验证</h3></li>
-<li>检查传入参数合法性<ul>
-<li>I/O调用：文件描述符是否有效</li>
-<li>进程相关：进程PID是否有效</li>
-<li>资源访问：<ul>
-<li>用户指针指向的内存属于用户空间</li>
-<li>指针指向的内存区域在进程的地址空间里</li>
-<li>进程不能绕过内存访问限制</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>定义系统调用实例<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">SYSCALL_DEFINE3(silly_copy,<span class="keyword">unsigned</span> <span class="keyword">long</span> *,src,<span class="keyword">unsigned</span> <span class="keyword">long</span> * dst,<span class="keyword">unsigned</span> <span class="keyword">long</span> len)&#123;</span><br><span class="line">  <span class="keyword">unsigned</span> <span class="keyword">long</span> buf;</span><br><span class="line">  <span class="comment">//copy_from_user都是返回没有完成拷贝的字节</span></span><br><span class="line">  <span class="keyword">if</span>(copy_from_user(&amp;buf,src,len))&#123;</span><br><span class="line">      <span class="keyword">return</span> -EFAULT;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span>(copy_to_user(dst,&amp;buf,len))&#123;</span><br><span class="line">      <span class="keyword">return</span> -EFAULT;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> len;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h2 id="系统调用上下文"><a href="#系统调用上下文" class="headerlink" title="系统调用上下文"></a>系统调用上下文</h2><ul>
-<li>系统在执行系统调用时处于<strong>进程上下文</strong></li>
-<li>current执行当前任务，即引发系统调用的那个进程<h3 id="绑定系统调用"><a href="#绑定系统调用" class="headerlink" title="绑定系统调用"></a>绑定系统调用</h3></li>
-<li><a href="https://syscalls.kernelgrok.com/" target="_blank" rel="noopener">Linux系统调用表</a></li>
-<li>首先在系统调用表中加入一个表项，从0开始</li>
-<li>对于所支持的各种体系结构，系统调用号都必须定义于\&lt;asm\/unistd.h>中</li>
-<li>系统调用必须被编译成内核映像（放在kernel/下的一个相关文件中就行来了）</li>
-<li>定义一个名为foo()的系统调用为例<ul>
-<li>加入系统调用表（entry.s)(Linux5.4中x86系统调用表位置：arch/x86/entry/syscalls/syscall_64.tbl)</li>
-<li>添加系统调用号(Linux5.4中x86系统调用号定义位置：arch/sh/include/uapi/asm/unistd_64.h）</li>
-<li>编写系统调用<ul>
-<li>用DEFINE\&lt;n>的宏定义（最后展开是一样的）<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">asmlinkage returnType <span class="title">funcName</span><span class="params">(type params)</span></span>&#123;</span><br><span class="line">  <span class="comment">// code </span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h2 id="从用户空间访问系统调用"><a href="#从用户空间访问系统调用" class="headerlink" title="从用户空间访问系统调用"></a>从用户空间访问系统调用</h2><ul>
-<li>库</li>
-<li>系统调用宏形式,_syscall<em>n</em>()<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> NR_open 5 _syscall3(long,open,const char*,filename,int,flags,int,mode)</span></span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h1 id="内核数据结构"><a href="#内核数据结构" class="headerlink" title="内核数据结构"></a>内核数据结构</h1><h2 id="链表"><a href="#链表" class="headerlink" title="链表"></a>链表</h2><ul>
-<li><p>Linux链表不是将数据结构塞入链表，而是将链表节点塞入数据结构</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//链表结构</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">list_head</span>&#123;</span></span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">list_head</span> *<span class="title">next</span>;</span></span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">list_head</span> *<span class="title">prev</span>;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>通过宏container_of()我们可以很方便地从链表指针找到父结构中包含的任何变量</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">fox</span> &#123;</span></span><br><span class="line">  <span class="keyword">unsigned</span> <span class="keyword">long</span> tail_length;</span><br><span class="line">  <span class="keyword">unsigned</span> <span class="keyword">long</span> weight;</span><br><span class="line">  <span class="keyword">bool</span> is_fantastic;</span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">list_head</span> <span class="title">list</span>;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>Linux提供一系列操作链表API</p>
-<h2 id="队列"><a href="#队列" class="headerlink" title="队列"></a>队列</h2><h2 id="映射"><a href="#映射" class="headerlink" title="映射"></a>映射</h2><h2 id="二叉树"><a href="#二叉树" class="headerlink" title="二叉树"></a>二叉树</h2></li>
-</ul>
-
-          
+            <div class="post-button text-center">
+              <a class="btn" href="/2020/02/09/design-patterns/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+         
+          <!--/noindex-->
         
       
-    </div>
+    </p></div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/09/Linux-kernel/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="BenjaminYuan">
+      <meta itemprop="description" content="记录生活点滴">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Benji'blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2020/02/09/Linux-kernel/" class="post-title-link" itemprop="http://yoursite.com/index.html">Linux Kernel</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2020-02-09 15:05:18" itemprop="dateCreated datePublished" datetime="2020-02-09T15:05:18+08:00">2020-02-09</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2020-03-17 16:22:20" itemprop="dateModified" datetime="2020-03-17T16:22:20+08:00">2020-03-17</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>《Linux内核设计与实现》笔记<br>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2020/02/09/Linux-kernel/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+         
+          <!--/noindex-->
+        
+      
+    </p></div>
 
     
 
@@ -897,7 +781,7 @@
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2020/02/08/jvm/" class="post-title-link" itemprop="http://yoursite.com/index.html">Jvm笔记</a>
+                <a href="/2020/02/08/jvm/" class="post-title-link" itemprop="http://yoursite.com/index.html">JVM笔记</a>
               
             
           </h1>
@@ -922,12 +806,24 @@
                 
               
 
-              <time title="Created: 2020-02-08 20:02:49 / Modified: 19:59:11" itemprop="dateCreated datePublished" datetime="2020-02-08T20:02:49+08:00">2020-02-08</time>
+              <time title="Created: 2020-02-08 20:02:49" itemprop="dateCreated datePublished" datetime="2020-02-08T20:02:49+08:00">2020-02-08</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2020-03-28 16:50:45" itemprop="dateModified" datetime="2020-03-28T16:50:45+08:00">2020-03-28</time>
               
             
           </span>
@@ -944,7 +840,7 @@
                 <span class="post-meta-item-text">In</span>
               
               
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/Jvm/" itemprop="url" rel="index"><span itemprop="name">Jvm</span></a></span>
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/JVM/" itemprop="url" rel="index"><span itemprop="name">JVM</span></a></span>
 
                 
                 
@@ -979,7 +875,7 @@
 
       
         
-          <p>Jvm<br>
+          <p>JVM<br>
           <!--noindex-->
           
             <div class="post-button text-center">
@@ -1105,7 +1001,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2020-02-08 19:52:41" itemprop="dateModified" datetime="2020-02-08T19:52:41+08:00">2020-02-08</time>
+                <time title="Modified: 2020-03-29 09:11:53" itemprop="dateModified" datetime="2020-03-29T09:11:53+08:00">2020-03-29</time>
               
             
           </span>
@@ -1265,7 +1161,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2020-02-07 12:12:58" itemprop="dateModified" datetime="2020-02-07T12:12:58+08:00">2020-02-07</time>
+                <time title="Modified: 2020-03-05 13:50:44" itemprop="dateModified" datetime="2020-03-05T13:50:44+08:00">2020-03-05</time>
               
             
           </span>
@@ -1299,323 +1195,11 @@
 
       
         
-          
-            <a id="more"></a>
-<h2 id="4-进程及进程管理"><a href="#4-进程及进程管理" class="headerlink" title="4 进程及进程管理"></a>4 进程及进程管理</h2><h3 id="4-1-进程"><a href="#4-1-进程" class="headerlink" title="4.1 进程"></a>4.1 进程</h3><blockquote>
-<p>简单地说：进程是计算机系统有限资源地基本单位，在<strong>不支持线程</strong>的处理机上是调度的基本单位(否则是线程)</p>
-</blockquote>
-<h3 id="进程的状态变化"><a href="#进程的状态变化" class="headerlink" title="进程的状态变化"></a>进程的状态变化</h3><ul>
-<li>运行</li>
-<li>就绪</li>
-<li><p>等待</p>
-<p>  状态变迁图:</p>
-<p>  <img src="../images/os_process_change.png" alt=""></p>
-<h3 id="进程的控制"><a href="#进程的控制" class="headerlink" title="进程的控制"></a>进程的控制</h3><blockquote>
-<h4 id="功能"><a href="#功能" class="headerlink" title="功能"></a>功能</h4><ul>
-<li>进程控制</li>
-<li>进程调度</li>
-<li>进程间的同步协调 </li>
-</ul>
-</blockquote>
-<h4 id="进程创建-操作原语"><a href="#进程创建-操作原语" class="headerlink" title="进程创建(操作原语)"></a>进程创建(操作原语)</h4><blockquote>
-<p>过程</p>
-<ul>
-<li><strong>形成</strong>进程控制块PCB，填充进程标识符，进程优先级(PCB块并不是创建时才生成，系统会维持一个PCB池，空闲时PCB进程标识符存放 ‘-1’)</li>
-<li>UNIX 或Linux系统中，父进程创建子进程时，该子进程继承父进程占用的系统资源，以及<strong>除进程内部系统标示符以外</strong>的其他特性</li>
-</ul>
-</blockquote>
-<h4 id="UNIX和Linux系统创建进程及应用实例-调用fork系统调用"><a href="#UNIX和Linux系统创建进程及应用实例-调用fork系统调用" class="headerlink" title="UNIX和Linux系统创建进程及应用实例(调用fork系统调用)"></a>UNIX和Linux系统创建进程及应用实例(调用fork系统调用)</h4></li>
-<li>分配PCB</li>
-<li>为子进程分配一个唯一的PID(进程标识号)</li>
-<li><strong>拷贝</strong>父进程<strong>数据段</strong>(不会有多线程线程修改父进程的变量的危险操作)和堆栈段数据到新的主存区，正文段(代码段)引用计数+1(即共享代码段)</li>
-<li>增加与进程相关联的文件表和索引节点表的引用数，即子进程可以使用父进程打开的文件</li>
-<li>子进程返回0,父进程返回子进程进程号(PID)<h4 id="进程和线程具体使用"><a href="#进程和线程具体使用" class="headerlink" title="进程和线程具体使用"></a>进程和线程具体使用</h4></li>
-<li><a href="https://github.com/Benjaminyuan/OS" target="_blank" rel="noopener">github仓库</a><h4 id="进程撤销"><a href="#进程撤销" class="headerlink" title="进程撤销"></a>进程撤销</h4></li>
-<li>归还PCB -&gt; PCB资源池，占用资源 -&gt; 父进程</li>
-<li>转进调度程序<h4 id="进程等待"><a href="#进程等待" class="headerlink" title="进程等待"></a>进程等待</h4></li>
-<li>CPU现场保留至PCB现场保护区</li>
-<li>PCB插入到等待队列<h4 id="进程唤醒"><a href="#进程唤醒" class="headerlink" title="进程唤醒"></a>进程唤醒</h4></li>
-<li>被唤醒，转为就绪态</li>
-<li>PCB插入就绪队列</li>
-</ul>
-<h3 id="4-4-进程之间的约束关系"><a href="#4-4-进程之间的约束关系" class="headerlink" title="4.4 进程之间的约束关系"></a>4.4 进程之间的约束关系</h3><ul>
-<li>互斥 -&gt; 存在临界区</li>
-<li>同步 -&gt; 进程执行有顺序限制</li>
-</ul>
-<h3 id="4-5-同步机构"><a href="#4-5-同步机构" class="headerlink" title="4.5 同步机构"></a>4.5 同步机构</h3><blockquote>
-<h3 id="操作系统提供的同步机构"><a href="#操作系统提供的同步机构" class="headerlink" title="操作系统提供的同步机构"></a>操作系统提供的同步机构</h3><ul>
-<li>锁</li>
-<li>信号灯(信号量) 和P,V操作</li>
-</ul>
-</blockquote>
-<h4 id="锁"><a href="#锁" class="headerlink" title="锁"></a>锁</h4><ul>
-<li>可以把它想像成现实生活中的锁，机制是差不多的。</li>
-</ul>
-<h4 id="信号灯"><a href="#信号灯" class="headerlink" title="信号灯"></a>信号灯</h4><ul>
-<li>一组确定的二元组(s,q)</li>
-<li>P操作，以P(s)为例<blockquote>
-<ul>
-<li>s减1</li>
-<li>如果结果 &gt;= 0 ,则进程继续执行</li>
-<li>小于0，线程被封锁，并将它(前面提到过，这里插入的是进程的PCB)插入到该信号灯的等待队列中，然后进入调度程序</li>
-</ul>
-</blockquote>
-</li>
-<li>V操作，以V(s)为例<blockquote>
-<ul>
-<li>s值加1</li>
-<li>如果结果大于0，进程<strong>继续执行</strong></li>
-<li>如果结果小于或者等于零，则从该信号灯的等待队列中移除一个进程，解除它的等待状态，然后返回本进程<strong>继续执行</strong></li>
-<li>V操作不会使当前线程状态变化</li>
-</ul>
-</blockquote>
-<h3 id="4-6线程互斥和同步的实现"><a href="#4-6线程互斥和同步的实现" class="headerlink" title="4.6线程互斥和同步的实现"></a>4.6线程互斥和同步的实现</h3><blockquote>
-<p>总的来说，常见的就那么几种，直接举几个用信号灯实现的例子</p>
-</blockquote>
-<h4 id="简单互斥"><a href="#简单互斥" class="headerlink" title="简单互斥"></a>简单互斥</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 伪代码</span></span><br><span class="line"><span class="comment">// 这里定义cobegin 和coend之间的程序是同时执行的</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line">main()&#123;</span><br><span class="line">    <span class="keyword">int</span> mutex = <span class="number">1</span> ;</span><br><span class="line">    cobegin </span><br><span class="line">        p_a();</span><br><span class="line">        p_b();</span><br><span class="line">    coend </span><br><span class="line">&#125;</span><br><span class="line">p_a()&#123;</span><br><span class="line">    p(mutex)</span><br><span class="line">    <span class="comment">// do something </span></span><br><span class="line">    v(mutex)</span><br><span class="line">&#125;</span><br><span class="line">p_b()&#123;</span><br><span class="line">    p(mutex)</span><br><span class="line">    <span class="comment">// do something </span></span><br><span class="line">    v(mutex)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h4 id="简单的先后"><a href="#简单的先后" class="headerlink" title="简单的先后"></a>简单的先后</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">    <span class="comment">// 伪代码，一个看病的例子，先看病，再化验，最后诊断</span></span><br><span class="line">    main()&#123;</span><br><span class="line">        <span class="keyword">int</span> s1 = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> s2 = <span class="number">0</span>;</span><br><span class="line">        cobegin</span><br><span class="line">        labora();</span><br><span class="line">        diagnosis();</span><br><span class="line">        coend</span><br><span class="line">    &#125;</span><br><span class="line">labora()&#123;</span><br><span class="line">    <span class="keyword">while</span>(化验工作未完成)&#123;</span><br><span class="line">        p(s1);</span><br><span class="line">        化验工作;</span><br><span class="line">        v(s2);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">diagnosis()&#123;</span><br><span class="line">    <span class="keyword">while</span>(看病工作未完成)&#123;</span><br><span class="line">        看病;</span><br><span class="line">        v(s1);</span><br><span class="line">        p(s2);</span><br><span class="line">        诊断</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="多级先后关系"><a href="#多级先后关系" class="headerlink" title="多级先后关系"></a>多级先后关系</h4><blockquote>
-<h4 id="实现思路"><a href="#实现思路" class="headerlink" title="实现思路"></a>实现思路</h4><p>和简单先后的思想差不多，如果要让线程-1在另外一个线程-2后面执行，只需要控制信号灯的值在线程-1 执行完之前都小于等于0即可</p>
-</blockquote>
-<h4 id="生成者消费者问题"><a href="#生成者消费者问题" class="headerlink" title="生成者消费者问题"></a>生成者消费者问题</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 一个有界缓冲区 多个消费者度，多个生产者写问题</span></span><br><span class="line"><span class="comment">//        _ _ _ _ _ _ _ _ </span></span><br><span class="line"><span class="comment">// 读 &lt;-- | | | | | | | | &lt;-- 写</span></span><br><span class="line"><span class="comment">//    &lt;-- |_|_|_|_|_|_|_| &lt;-- </span></span><br><span class="line">main()&#123;</span><br><span class="line">    <span class="keyword">int</span> full = <span class="number">0</span>;   <span class="comment">//缓冲区可读的缓冲块数目</span></span><br><span class="line">    <span class="keyword">int</span> empty = n;  <span class="comment">// 缓冲区可写的缓冲区数目</span></span><br><span class="line">    <span class="keyword">int</span> mutex = <span class="number">1</span>;  <span class="comment">// 同时只能有一个线程能够写/读缓冲区</span></span><br><span class="line">    cobegin</span><br><span class="line">    p1();p2();p3();pk();</span><br><span class="line">    c1();c2();c3();ck();</span><br><span class="line">    coend</span><br><span class="line">&#125;</span><br><span class="line">producer()&#123;</span><br><span class="line">    <span class="keyword">while</span>(<span class="comment">/*生产未完成*/</span>)&#123;</span><br><span class="line">        <span class="comment">//生产一个产品;</span></span><br><span class="line">        p(empty);</span><br><span class="line">        p(mutex);</span><br><span class="line">       <span class="comment">// 写一个缓冲块</span></span><br><span class="line">        v(mutex);</span><br><span class="line">        v(full);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">consumer()&#123;</span><br><span class="line">    <span class="keyword">while</span>(<span class="comment">/*还要继续消费*/</span>)&#123;</span><br><span class="line">        p(full);</span><br><span class="line">        p(mutex);</span><br><span class="line">        <span class="comment">// 读一个缓冲块;</span></span><br><span class="line">        v(mutex);</span><br><span class="line">        v(empty);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="4-7进程通信"><a href="#4-7进程通信" class="headerlink" title="4.7进程通信"></a>4.7进程通信</h3><h4 id="进程通信的几种方式"><a href="#进程通信的几种方式" class="headerlink" title="进程通信的几种方式"></a>进程通信的几种方式</h4><ul>
-<li>消息缓冲通信<ul>
-<li>在进程的主存空间设置一个接收区，然后用接收原语(原语可以理解为原子性操作，即操作不可分割)接收消息。</li>
-</ul>
-</li>
-<li>信箱通信<ul>
-<li>用户空间信箱</li>
-<li>系统空间信箱<h3 id="4-8线程"><a href="#4-8线程" class="headerlink" title="4.8线程"></a>4.8线程</h3><blockquote>
-<p>概念提出 -&gt; 为了进一步提高系统的并行处理能力</p>
-</blockquote>
-<h4 id="线程描述"><a href="#线程描述" class="headerlink" title="线程描述"></a>线程描述</h4></li>
-</ul>
-</li>
-<li>线程是进程的一条<strong>执行路径</strong></li>
-<li>私有堆栈和处理机环境(PC,CPU运行时间,寄存器)</li>
-<li>共享父进程的主存(想一下和子进程的区别？)</li>
-<li>任务调度的基本单位(一般地，进程是系统<strong>资源分配</strong>的基本单位，线程是<strong>系统调度</strong>的基本单位)<h4 id="内核线程和用户线程"><a href="#内核线程和用户线程" class="headerlink" title="内核线程和用户线程"></a>内核线程和用户线程</h4></li>
-<li>内核线程由操作系统支持，运行在内核空间</li>
-<li>用户线程是在内核的支持下，在用户层通过线程库实现(即用户态线程和内核线程不一定是1:1，也有可能是多对一)。<h3 id="Linux下进程和进程管理"><a href="#Linux下进程和进程管理" class="headerlink" title="Linux下进程和进程管理"></a>Linux下进程和进程管理</h3><blockquote>
-<ul>
-<li>Linux下面，线程被视为一个与其他进程共享某些资源的<strong>特殊进程</strong>  </li>
-<li>PCB -&gt; task_struct</li>
-<li>进程状态基本和上述一致，但是等待状态有TASK_INTERUPTIBLE和TASK_UNINTERUPTIBLE，即是和否可以被中断改变其等待状态</li>
-</ul>
-</blockquote>
-</li>
-</ul>
-<h2 id="Linux"><a href="#Linux" class="headerlink" title="Linux"></a>Linux</h2><h3 id="查看当前系统启动时间"><a href="#查看当前系统启动时间" class="headerlink" title="查看当前系统启动时间"></a>查看当前系统启动时间</h3><ul>
-<li>top</li>
-<li>w</li>
-<li>uptime </li>
-<li><h3 id="fg-bg-ctrl-z-jobs"><a href="#fg-bg-ctrl-z-jobs" class="headerlink" title="fg,bg,ctrl+z,jobs"></a>fg,bg,ctrl+z,jobs</h3></li>
-<li>fg +作业号，将后台程序调度到前台</li>
-<li>bg 与fg相反</li>
-<li>ctrl+z将程序挂起</li>
-<li>jobs查看正在运行的任务<h3 id="tar"><a href="#tar" class="headerlink" title="tar"></a>tar</h3></li>
-<li>-c:compress，打包</li>
-<li>-x:extract, 提取</li>
-<li>-g:gzip，提取或压缩</li>
-<li>-j:bzip2，提取或压缩</li>
-<li>-v:verbose(详细)，显示指令执行过程</li>
-<li>-f:指定提取或压缩后的文件名以及位置<h3 id="软链接和硬链接"><a href="#软链接和硬链接" class="headerlink" title="软链接和硬链接"></a>软链接和硬链接</h3></li>
-<li>硬链接和文件本身的inode号是一样的</li>
-<li>相当于软链接是保存链一个绝对路径</li>
-</ul>
-<h3 id="Linux查看进程命令"><a href="#Linux查看进程命令" class="headerlink" title="Linux查看进程命令"></a>Linux查看进程命令</h3><ul>
-<li>processes Statistic</li>
-<li>ps -aux 查看系统所有的进程</li>
-<li>ps -IA 查看所有系统的数据</li>
-<li>pa axif 连通部分进程树状态</li>
-<li>pstree </li>
-<li>top</li>
-</ul>
-<p><a href="/images/status.png"></a></p>
-<h3 id="进程间通讯"><a href="#进程间通讯" class="headerlink" title="进程间通讯"></a>进程间通讯</h3><ul>
-<li>信号量</li>
-<li>信号</li>
-<li>管道</li>
-<li>socket</li>
-<li>消息队列</li>
-<li>共享内存(最快)</li>
-<li>文件锁<h3 id="进程间的比较"><a href="#进程间的比较" class="headerlink" title="进程间的比较"></a>进程间的比较</h3></li>
-<li>管道：速度慢，容量有限，只有父子进程能通讯</li>
-<li>FIFO：任何进程间都能通讯，但速度慢</li>
-<li>消息队列：容量受到系统限制，且要注意第一次读的时候，要考虑上一次没有读完数据的问题</li>
-<li>信号量：不能传递复杂消息，只能用来同步</li>
-<li>共享内存区：能够很容易控制容量，速度快，但要保持同步，比如一个进程在写的时候，另一个进程要注意读写的问题，相当于线程中的线程安全，当然，共享内存区同样可以用作线程间通讯，不过没这个必要，线程间本来就已经共享了同一进程内的一块内存</li>
-</ul>
-<h2 id="一些细节"><a href="#一些细节" class="headerlink" title="一些细节"></a>一些细节</h2><h3 id="操作系统中-heap-和-stack-的区别"><a href="#操作系统中-heap-和-stack-的区别" class="headerlink" title="操作系统中 heap 和 stack 的区别"></a>操作系统中 heap 和 stack 的区别</h3><ul>
-<li>栈:由操作系统自动分配释放，存放函数的参数值，局部变量的值等。</li>
-<li>堆:一般由程序员分配释放，若程序员不释放，程序结束后OS自动回收</li>
-<li>栈使用的是一级缓存，堆使用的是二级缓存。</li>
-</ul>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-       
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/13/Jpa-model/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="BenjaminYuan">
-      <meta itemprop="description" content="记录生活点滴">
-      <meta itemprop="image" content="/images/avatar.jpeg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Benji'blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/04/13/Jpa-model/" class="post-title-link" itemprop="http://yoursite.com/index.html">Jpa-model</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2019-04-13 11:26:43 / Modified: 12:03:08" itemprop="dateCreated datePublished" datetime="2019-04-13T11:26:43+08:00">2019-04-13</time>
-            
-
-            
-              
-
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/Sring/" itemprop="url" rel="index"><span itemprop="name">Sring</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>记录Java persistence常用注射</p>
+          <p>操作系统学习笔记<br>
           <!--noindex-->
           
             <div class="post-button text-center">
-              <a class="btn" href="/2019/04/13/Jpa-model/#more" rel="contents">
+              <a class="btn" href="/2020/01/01/OS/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -1623,7 +1207,7 @@
           <!--/noindex-->
         
       
-    </div>
+    </p></div>
 
     
 
@@ -1695,7 +1279,7 @@
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2019/04/11/redis/" class="post-title-link" itemprop="http://yoursite.com/index.html">redis</a>
+                <a href="/2019/04/11/redis/" class="post-title-link" itemprop="http://yoursite.com/index.html">Redis</a>
               
             
           </h1>
@@ -1737,7 +1321,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-04-12 16:31:44" itemprop="dateModified" datetime="2019-04-12T16:31:44+08:00">2019-04-12</time>
+                <time title="Modified: 2020-03-25 21:15:19" itemprop="dateModified" datetime="2020-03-25T21:15:19+08:00">2020-03-25</time>
               
             
           </span>
@@ -1873,7 +1457,7 @@
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2019/03/18/algorithms/" class="post-title-link" itemprop="http://yoursite.com/index.html">algorithms</a>
+                <a href="/2019/03/18/algorithms/" class="post-title-link" itemprop="http://yoursite.com/index.html">Algorithms</a>
               
             
           </h1>
@@ -1915,7 +1499,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2020-02-07 11:54:51" itemprop="dateModified" datetime="2020-02-07T11:54:51+08:00">2020-02-07</time>
+                <time title="Modified: 2020-03-03 17:56:45" itemprop="dateModified" datetime="2020-03-03T17:56:45+08:00">2020-03-03</time>
               
             
           </span>
@@ -1949,189 +1533,11 @@
 
       
         
-          <p>​    复习算法，还没有看完，先总结一波（算法怎么看得完QAQ </p>
+          <p>复习算法，还没有看完，先总结一波（算法怎么看得完QAQ </p>
           <!--noindex-->
           
             <div class="post-button text-center">
               <a class="btn" href="/2019/03/18/algorithms/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-         
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-       
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/28/JavaReviewQuestion/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="BenjaminYuan">
-      <meta itemprop="description" content="记录生活点滴">
-      <meta itemprop="image" content="/images/avatar.jpeg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Benji'blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/02/28/JavaReviewQuestion/" class="post-title-link" itemprop="http://yoursite.com/index.html">JavaReviewQuestion</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2019-02-28 16:59:52" itemprop="dateCreated datePublished" datetime="2019-02-28T16:59:52+08:00">2019-02-28</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2020-02-07 12:05:29" itemprop="dateModified" datetime="2020-02-07T12:05:29+08:00">2020-02-07</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/JavaForJob/" itemprop="url" rel="index"><span itemprop="name">JavaForJob</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="一些常见的Java面试问题"><a href="#一些常见的Java面试问题" class="headerlink" title="一些常见的Java面试问题"></a>一些常见的Java面试问题</h2>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2019/02/28/JavaReviewQuestion/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -2211,7 +1617,7 @@
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2019/02/27/network/" class="post-title-link" itemprop="http://yoursite.com/index.html">network</a>
+                <a href="/2019/02/27/network/" class="post-title-link" itemprop="http://yoursite.com/index.html">Network</a>
               
             
           </h1>
@@ -2253,7 +1659,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2020-02-07 14:15:22" itemprop="dateModified" datetime="2020-02-07T14:15:22+08:00">2020-02-07</time>
+                <time title="Modified: 2020-03-25 22:05:39" itemprop="dateModified" datetime="2020-03-25T22:05:39+08:00">2020-03-25</time>
               
             
           </span>
@@ -2305,7 +1711,8 @@
 
       
         
-          <h2 id="常见问题"><a href="#常见问题" class="headerlink" title="常见问题"></a>常见问题</h2><h3 id="ping"><a href="#ping" class="headerlink" title="ping"></a>ping</h3><ul>
+          
+            <h2 id="常见问题"><a href="#常见问题" class="headerlink" title="常见问题"></a>常见问题</h2><h3 id="ping"><a href="#ping" class="headerlink" title="ping"></a>ping</h3><ul>
 <li>ICMP(internet Control Message Protocol)<h3 id="http和https的区别"><a href="#http和https的区别" class="headerlink" title="http和https的区别"></a>http和https的区别</h3></li>
 <li>http = http+ssl</li>
 <li>http端口80，https端口443</li>
@@ -2316,13 +1723,313 @@
 <li>https会是页面加载时间延长50%，增加10%～20%的耗电<h3 id="TCP"><a href="#TCP" class="headerlink" title="TCP"></a>TCP</h3></li>
 <li>三次握手目的：信息对等和防止超时;</li>
 <li>四次握手目的</li>
-<li>TCP连接断开过程：<br>1、客户端TCP模块在收到应用程序的通知后，发送FIN，seq=x。<br>2、服务器收到FIN报文段，发送ACK，确认号=x+1，并且通知应用程序客户端关闭了连接。客户端收到ACK报文段。<br>3、服务器端的应用程序通知TCP关闭连接，服务器端TCP发送FIN+ACK，seq=y，确认号=x+1（这里ACK只是一般性的捎带ACK，TCP总是这样，以增强健壮性，反正也不费力气，从原理上说，对连接断开不是必须的）。<br>4、客户端收到FIN+ACK报文段后，发送ACK，确认号y+1。服务器收到ACK报文段后，连接断开。<br>  第二步是不能省略的<br>  因为，第二步中，服务器端通知应用程序并获得反馈信息可能需要可观的时间，这可能涉及人机交互操作，也可能服务器应用层暂时还不想关闭连接。第二步结束后，服务器还可以继续通过这条连接发送数据给客户端，客户端已经不能发送数据了，但是仍然可以回复ACK。第二步中服务器立即发送确认是为了防止客户端重传FIN报文。<h3 id="CDN原理"><a href="#CDN原理" class="headerlink" title="CDN原理"></a>CDN原理</h3></li>
+<li>TCP连接断开过程：<br>1、客户端TCP模块在收到应用程序的通知后，发送FIN，seq=x。<br>2、服务器收到FIN报文段，发送ACK，确认号=x+1，并且通知应用程序客户端关闭了连接。客户端收到ACK报文段。<br>3、服务器端的应用程序通知TCP关闭连接，服务器端TCP发送FIN+ACK，seq=y，确认号=x+1（这里ACK只是一般性的捎带ACK，TCP总是这样，以增强健壮性，反正也不费力气，从原理上说，对连接断开不是必须的）。<br>4、客户端收到FIN+ACK报文段后，发送ACK，确认号y+1。服务器收到ACK报文段后，连接断开。<br>  第二步是不能省略的<br>  因为，第二步中，服务器端通知应用程序并获得反馈信息可能需要可观的时间，这可能涉及人机交互操作，也可能服务器应用层暂时还不想关闭连接。第二步结束后，服务器还可以继续通过这条连接发送数据给客户端，客户端已经不能发送数据了，但是仍然可以回复ACK。第二步中服务器立即发送确认是为了防止客户端重传FIN报文。</li>
+<li>time_wait 2msl：</li>
+<li><strong>保证这次连接的重复数据段从网络中消失</strong></li>
+<li><strong>保证TCP协议的全双工连接能够可靠关闭</strong></li>
+</ul>
+<h3 id="CDN原理"><a href="#CDN原理" class="headerlink" title="CDN原理"></a>CDN原理</h3><ul>
 <li>CDN是构建在网络之上的内容分发网络，依靠部署在各地的边缘服务器，通过中心平台的负载均衡、内容分发、调度等功能模块，使用户就近获取所需内容，降低网络拥塞，提高用户访问响应速度和命中率。CDN的关键技术主要有内容存储和分发技术。</li>
 </ul>
+<h3 id="套接字"><a href="#套接字" class="headerlink" title="套接字"></a>套接字</h3><p><a href="https://www.cnblogs.com/skynet/archive/2010/12/12/1903949.html" target="_blank" rel="noopener"></a></p>
+<h4 id="一个套接字准备好读（满足任一）。"><a href="#一个套接字准备好读（满足任一）。" class="headerlink" title="一个套接字准备好读（满足任一）。"></a>一个套接字准备好读（满足任一）。</h4><ol>
+<li>该套接字接收缓冲区中的数据字节数大于等于套接字接收缓存区低水位。对于TCP和UDP套接字而言，<strong>缓冲区低水位的值默认为1</strong>。那就意味着，默认情况下，只要缓冲区中有数据，那就是可读的。我们可以通过使用SO_RCVLOWAT套接字选项(参见setsockopt函数)来设置该套接字的低水位大小。此种描述符就绪(可读)的情况下，当我们使用read/recv等对该套接字执行读操作的时候，套接字不会阻塞，而是成功返回一个大于0的值（即可读数据的大小）。</li>
+<li>该连接的读半部关闭（也就是接收了FIN的TCP连接）。对这样的套接字的读操作，将不会阻塞，而是返回0（也就是EOF）。</li>
+<li>该套接字是一个listen的监听套接字，并且目前已经完成的连接数不为0。对这样的套接字进行accept操作通常不会阻塞。</li>
+<li>有一个错误套接字待处理。对这样的套接字的读操作将不阻塞并返回-1（也就是返回了一个错误），同时把errno设置成确切的错误条件。这些待处理错误(pending error)也可以通过指定SO_ERROR套接字选项调用getsockopt获取并清除。</li>
+</ol>
+<h4 id="一个套接字准备好写的条件（满足任一）。"><a href="#一个套接字准备好写的条件（满足任一）。" class="headerlink" title="一个套接字准备好写的条件（满足任一）。"></a>一个套接字准备好写的条件（满足任一）。</h4><ol>
+<li>该套接字<strong>发送缓冲区中的可用空间字节数大于等于套接字发送缓存区低水位标记时</strong>，并且该套接字已经成功连接（UDP套接字不需要连接）。对于TCP和UDP而言，这个低水位的值默认为<strong>2048bytes</strong>，而套接字默认的发送缓冲区大小是8k，这就意味着一般一个套接字连接成功后，就是处于可写状态的。我们可以通过SO_SNDLOWAT套接字选项（参见setsockopt函数）来设置这个低水位。此种情况下，我们设置该套接字为非阻塞，对该套接字进行写操作(如write,send等)，将不阻塞，并返回一个正值（例如由传输层接受的字节数，即发送的数据大小）。</li>
+<li>该连接的写半部关闭(主动发送FIN包的TCP连接)。对这样的套接字的写操作将会产生SIGPIPE信号。所以我们的网络程序基本都要自定义处理SIGPIPE信号。因为SIGPIPE信号的默认处理方式是程序退出。</li>
+<li>使用非阻塞的connect套接字已建立连接，或者connect已经以失败告终。即connect有结果了。</li>
+<li>有一个错误的套接字待处理。对这样的套接字的写操作将不阻塞并返回-1（也就是返回了一个错误），同时把errno设置成确切的错误条件。这些待处理的错误也可以通过指定SO_ERROR套接字选项调用getsockopt获取并清除。</li>
+</ol>
+<h4 id="close和shutdown的区别"><a href="#close和shutdown的区别" class="headerlink" title="close和shutdown的区别"></a>close和shutdown的区别</h4><ul>
+<li>shutdown破坏读/写连接</li>
+<li><p>close减引用计数</p>
+<h4 id="UNIX-Domain-Socket"><a href="#UNIX-Domain-Socket" class="headerlink" title="UNIX Domain Socket"></a>UNIX Domain Socket</h4></li>
+<li><p>用于IPC,不需要经过网络协议栈，不需要打包拆包、计算校验和、维护序号和应答等，只是将应用层数据从一个进程拷贝到另一个进程。UNIX Domain Socket有<code>SOCK_DGRAM</code>或<code>SOCK_STREAM</code>两种工作模式，类似于UDP和TCP，但是<code>面向消息的UNIX Domain Socket也是可靠的</code>，消息既<code>不会丢失</code>也<code>不会顺序错乱</code></p>
+</li>
+<li><p>创建</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">socket(AF_UNIX,SOCK_DGRAM,<span class="number">0</span>);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>因为应用于IPC，所以UNIXDomain socket不需要IP和端口，用文件路径来表示“网络地址”</p>
+<ul>
+<li>UNIXDomain socket用结构体sockaddr_un表示，是一个socket类型的文件在文件系统中的路径，这个socket文件由bind()调用创建，如果调用bind()时该文件已存在，则bind()错误返回。</li>
+<li>UNIX Domain Socket客户端一般要显式调用bind函数，而不象网络socket一样依赖系统自动分配的地址</li>
+</ul>
+</li>
+</ul>
+<h3 id="IP地址类型"><a href="#IP地址类型" class="headerlink" title="IP地址类型"></a>IP地址类型</h3><ul>
+<li>IP: 网络ID+主机ID</li>
+<li>A类地址<ul>
+<li>一个字节网络ID+3字节主机地址构成</li>
+<li>网络地址最高位为 0</li>
+<li>range: 1.0.0.0–126.0.0.0</li>
+</ul>
+</li>
+<li>B类地址<ul>
+<li>2个网络IP地址+2个主机地址</li>
+<li>网络地址最高位为 10（即:128的二进制10000000)</li>
+<li>range:128.0.0.0–191.255,255,255</li>
+</ul>
+</li>
+<li>C类地址<ul>
+<li>3byte网络地址+1byte主机地址</li>
+<li>最高位 110</li>
+<li>range: 192.0.0.0–223.255.255.255</li>
+</ul>
+</li>
+<li>D类地址<ul>
+<li>广播地址<h3 id="保留地址"><a href="#保留地址" class="headerlink" title="保留地址"></a>保留地址</h3></li>
+</ul>
+</li>
+<li>A类保留地址10.0.0.0–10.255.255.255</li>
+<li>B类保留地址172.16.0.0–172.31.255.255</li>
+<li>C类保留地址192.168.0.0–192.168.255.255<h3 id="广播地址"><a href="#广播地址" class="headerlink" title="广播地址"></a>广播地址</h3></li>
+<li>主机位置1</li>
+<li>如果有子网隐码如：/17,则后17置为1;<h3 id="线材"><a href="#线材" class="headerlink" title="线材"></a>线材</h3></li>
+<li>双绞线Max:100m</li>
+<li><p>同轴电缆:1000m</p>
+<h3 id="HTTP2"><a href="#HTTP2" class="headerlink" title="HTTP2"></a>HTTP2</h3></li>
+<li><p><a href="https://developers.google.com/web/fundamentals/performance/http2?hl=zh-cn" target="_blank" rel="noopener">Google的一篇博客</a></p>
+</li>
+</ul>
+<p>HTTP3</p>
+<h2 id="epoll、poll、select"><a href="#epoll、poll、select" class="headerlink" title="epoll、poll、select"></a>epoll、poll、select</h2><h3 id="I-O模型"><a href="#I-O模型" class="headerlink" title="I/O模型"></a>I/O模型</h3><ul>
+<li><a href="https://wenchao.ren/2019/07/Select%E3%80%81Epoll%E3%80%81KQueue%E5%8C%BA%E5%88%AB/" target="_blank" rel="noopener">转发博客</a></li>
+<li><img src="../images/iomodel.png" alt=""><h3 id="IO方式"><a href="#IO方式" class="headerlink" title="IO方式"></a>IO方式</h3></li>
+<li>同步IO和异步IO的区别就在于：数据访问的时候进程是否阻塞</li>
+<li>阻塞IO和非阻塞IO的区别就在于：应用程序的调用是否立即返回<h3 id="I-O多路复用"><a href="#I-O多路复用" class="headerlink" title="I/O多路复用"></a>I/O多路复用</h3></li>
+<li>内核发现进程指定的一个或多个I/O条件满足时，就通知进程。</li>
+<li>select是POSIX定义的，epoll是Linux所特有<h3 id="select"><a href="#select" class="headerlink" title="select"></a>select</h3></li>
+<li>特点<ul>
+<li>bitmap的原因文件描述符有限</li>
+<li>数据频繁的内核和用户态之间的拷贝</li>
+<li>需要轮询fd数组</li>
+</ul>
+</li>
+</ul>
+<h3 id="poll"><a href="#poll" class="headerlink" title="poll"></a>poll</h3><ul>
+<li><p>特点</p>
+<ul>
+<li>链表存储，监听的文件描述符没有限制</li>
+<li>需要轮询<h3 id="epoll"><a href="#epoll" class="headerlink" title="epoll"></a>epoll</h3></li>
+</ul>
+</li>
+<li><p>特点</p>
+<ul>
+<li>epoll使用一个文件描述符管理多个描述符</li>
+<li>监视的描述符数量不受限制，它所支持的FD上限是最大可以打开文件的数目</li>
+<li>IO的效率不会随着监视fd的数量的增长而下降。epoll不同于select和poll轮询的方式，而是通过每个fd定义的回调函数来实现的。只有就绪的fd才会执行回调函数</li>
+<li><code>epoll_wait</code>阻塞等待内核通知。<h4 id="ET和LT模式"><a href="#ET和LT模式" class="headerlink" title="ET和LT模式"></a>ET和LT模式</h4></li>
+</ul>
+</li>
+<li><p>默认采用LT模式，LT支持阻塞和非阻塞套，ET模式只支持非阻塞套接字，其效率要高于LT模式</p>
+</li>
+<li><p>LT的读写模式</p>
+<ul>
+<li>LT对于read操作比较简单，有read事件就读，读多读少都没有问题</li>
+<li>一般来说socket在空闲状态时发送缓冲区一定是不满的，假如fd一直在监控中，那么会一直通知写事件，不胜其烦，所以必须保证没有数据要发送的时候，要把fd的写事件监控从epoll列表中删除，需要的时候再加入回去</li>
+</ul>
+</li>
+<li><p><strong>ET的读写操作</strong></p>
+<ul>
+<li>fd可读则返回可读事件，若开发者没有把所有数据读取完毕，epoll不会再次通知read事件</li>
+<li>若发送缓冲区未满，epoll通知write事件，直到开发者填满发送缓冲区，epoll才会在下次发送缓冲区由满变成未满时通知write事件</li>
+<li>ET模式下accept存在的问题，多个连接同时到达，服务器的TCP就绪队列瞬间积累多个就绪连接，由于是边缘触发模式，epoll只会通知一次，accept只处理一个连接，导致TCP就绪队列中剩下的连接都得不到处理，解决办法是用while循环抱住accept调用，处理完TCP就绪队列中的所有连接后再退出循环</li>
+</ul>
+</li>
+<li><p><strong>ET模式的线程饥饿问题</strong></p>
+<ul>
+<li>如果某个socket源源不断地收到非常多的数据，在试图读取完所有数据的过程中，有可能会造成其他的socket得不到处理，从而造成饥饿问题</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong>LE和ET场景</strong><ul>
+<li>在很容易触发EPOLLOUT，则使用ET，ET模式下，当再次epoll返回EPOLLOUT事件时，继续写出待写出的数据，当没有数据需要写出时，不处理直接略过即可。而LT模式则需要先打开EPOLLOUT，当没有数据需要写出时，再关闭EPOLLOUT（否则会一直返回EPOLLOUT事件）</li>
+</ul>
+</li>
+</ul>
+<h4 id="EPOLLSHOTONE"><a href="#EPOLLSHOTONE" class="headerlink" title="EPOLLSHOTONE"></a>EPOLLSHOTONE</h4><ul>
+<li>A线程读完某socket上数据后开始处理这些数据，此时该socket上又有新数据可读，B线程被唤醒读新的数据，造成2个线程同时操作一个socket的局面 ，EPOLLONESHOT保证一个socket连接在任一时刻只被一个线程处理</li>
+<li>如果对描述符socket注册了EPOLLONESHOT事件，那么操作系统<strong>最多触发其上注册的一个可读、可写或者异常事件，且只触发一次</strong>。想要下次再触发则必须使用epoll_ctl重置该描述符上注册的事件，包括EPOLLONESHOT 事件</li>
+</ul>
+<h4 id="epoll惊群问题"><a href="#epoll惊群问题" class="headerlink" title="epoll惊群问题"></a>epoll惊群问题</h4><ul>
+<li>但是在epoll中仍然存在惊群问题，表现起来就是当多个进程/线程调用epoll_wait时会阻塞等待，当内核触发可读写事件，所有进程/线程都会进行响应，但是<strong>实际上只有一个进程/线程真实处理这些事件</strong>。</li>
+</ul>
+<p>###关于Reactor和PProactor模式</p>
+<ul>
+<li><p><a href="https://www.zhihu.com/question/26943938" target="_blank" rel="noopener">知乎问题</a></p>
+</li>
+<li><p>两者也有相同点：demultiplexor负责提交IO操作(异步)、查询设备是否可操作(同步)，然后当条件满足时，就回调handler</p>
+</li>
+<li>不同点在于，异步情况下(Proactor)，当回调handler时，表示IO操作已经完成；同步情况下(Reactor)，回调handler时，表示IO设备可以进行某个操作(read/write)</li>
+</ul>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/24/person-summary-md/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="BenjaminYuan">
+      <meta itemprop="description" content="记录生活点滴">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Benji'blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2018/12/24/person-summary-md/" class="post-title-link" itemprop="http://yoursite.com/index.html">person_summary.md</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2018-12-24 13:23:13 / Modified: 13:30:05" itemprop="dateCreated datePublished" datetime="2018-12-24T13:23:13+08:00">2018-12-24</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/学期总结/" itemprop="url" rel="index"><span itemprop="name">学期总结</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="web学期总结"><a href="#web学期总结" class="headerlink" title="web学期总结"></a>web学期总结</h1>
           <!--noindex-->
           
             <div class="post-button text-center">
-              <a class="btn" href="/2019/02/27/network/#more" rel="contents">
+              <a class="btn" href="/2018/12/24/person-summary-md/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -2382,7 +2089,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/21/JavaSpringUsingAnnotation/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/09/docker/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="BenjaminYuan">
@@ -2402,7 +2109,7 @@
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2019/01/21/JavaSpringUsingAnnotation/" class="post-title-link" itemprop="http://yoursite.com/index.html">JavaSpringUsingAnnotation.md</a>
+                <a href="/2018/12/09/docker/" class="post-title-link" itemprop="http://yoursite.com/index.html">Docker入门总结</a>
               
             
           </h1>
@@ -2427,7 +2134,7 @@
                 
               
 
-              <time title="Created: 2019-01-21 15:41:33" itemprop="dateCreated datePublished" datetime="2019-01-21T15:41:33+08:00">2019-01-21</time>
+              <time title="Created: 2018-12-09 14:15:27" itemprop="dateCreated datePublished" datetime="2018-12-09T14:15:27+08:00">2018-12-09</time>
             
 
             
@@ -2444,7 +2151,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-04-13 11:11:38" itemprop="dateModified" datetime="2019-04-13T11:11:38+08:00">2019-04-13</time>
+                <time title="Modified: 2020-02-28 20:08:43" itemprop="dateModified" datetime="2020-02-28T20:08:43+08:00">2020-02-28</time>
               
             
           </span>
@@ -2461,7 +2168,7 @@
                 <span class="post-meta-item-text">In</span>
               
               
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/JavaSpring/" itemprop="url" rel="index"><span itemprop="name">JavaSpring</span></a></span>
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/运维/" itemprop="url" rel="index"><span itemprop="name">运维</span></a></span>
 
                 
                 
@@ -2496,11 +2203,11 @@
 
       
         
-          <h2 id="JavaSpringUsingAnnotation"><a href="#JavaSpringUsingAnnotation" class="headerlink" title="JavaSpringUsingAnnotation"></a>JavaSpringUsingAnnotation</h2>
+          <h2 id="这是我个人学习使用Docker的知识总结，如果想要系统的学习参照官方文档"><a href="#这是我个人学习使用Docker的知识总结，如果想要系统的学习参照官方文档" class="headerlink" title="这是我个人学习使用Docker的知识总结，如果想要系统的学习参照官方文档"></a>这是我个人学习使用Docker的知识总结，如果想要系统的学习参照<a href="https://docs.docker.com/v17.09/get-started/" target="_blank" rel="noopener">官方文档</a></h2>
           <!--noindex-->
           
             <div class="post-button text-center">
-              <a class="btn" href="/2019/01/21/JavaSpringUsingAnnotation/#more" rel="contents">
+              <a class="btn" href="/2018/12/09/docker/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -2594,7 +2301,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">14</span>
+                    <span class="site-state-item-count">11</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -2627,7 +2334,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">9</span>
+                      
+                    
+                    <span class="site-state-item-count">6</span>
                     <span class="site-state-item-name">categories</span>
                   </a>
                 </div>
@@ -2684,7 +2393,11 @@
                     
                       
                     
-                    <span class="site-state-item-count">19</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">13</span>
                     <span class="site-state-item-name">tags</span>
                   </a>
                 </div>

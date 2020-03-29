@@ -110,17 +110,17 @@
 
 
 
-  <meta name="description" content="内核简介内核组成? 负责响应中断的中断服务程序 负责管理多个进程，分享处理器时间的调用程序 复制进程地址空间的内存管理程序 网络、进程间通讯等系统服务程序Linux内核和Unix内核的比较 所有Unix内核同宗同源，提供的API是一样的 Unix内核需要硬件提供MMU管理内存， Linux一般不需要微内核和单内核设计比较 单内核所有的服务都在同一地址空间，内核可以直接调用函数，微内核的功能被划分为">
+  <meta name="description" content="《Linux内核设计与实现》笔记">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Linux_kernel">
+<meta property="og:title" content="Linux Kernel">
 <meta property="og:url" content="http://yoursite.com/2020/02/09/Linux-kernel/index.html">
 <meta property="og:site_name" content="Benji&#39;blog">
-<meta property="og:description" content="内核简介内核组成? 负责响应中断的中断服务程序 负责管理多个进程，分享处理器时间的调用程序 复制进程地址空间的内存管理程序 网络、进程间通讯等系统服务程序Linux内核和Unix内核的比较 所有Unix内核同宗同源，提供的API是一样的 Unix内核需要硬件提供MMU管理内存， Linux一般不需要微内核和单内核设计比较 单内核所有的服务都在同一地址空间，内核可以直接调用函数，微内核的功能被划分为">
+<meta property="og:description" content="《Linux内核设计与实现》笔记">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2020-02-09T07:05:33.963Z">
+<meta property="og:updated_time" content="2020-03-17T08:22:20.779Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Linux_kernel">
-<meta name="twitter:description" content="内核简介内核组成? 负责响应中断的中断服务程序 负责管理多个进程，分享处理器时间的调用程序 复制进程地址空间的内存管理程序 网络、进程间通讯等系统服务程序Linux内核和Unix内核的比较 所有Unix内核同宗同源，提供的API是一样的 Unix内核需要硬件提供MMU管理内存， Linux一般不需要微内核和单内核设计比较 单内核所有的服务都在同一地址空间，内核可以直接调用函数，微内核的功能被划分为">
+<meta name="twitter:title" content="Linux Kernel">
+<meta name="twitter:description" content="《Linux内核设计与实现》笔记">
 
 
 
@@ -137,7 +137,7 @@
   };
 </script>
 
-  <title>Linux_kernel | Benji'blog</title>
+  <title>Linux Kernel | Benji'blog</title>
   
 
 
@@ -277,7 +277,7 @@
       
     
 
-    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags<span class="badge">22</span></a>
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags<span class="badge">24</span></a>
 
   </li>
         
@@ -296,7 +296,7 @@
       
     
 
-    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories<span class="badge">10</span></a>
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories<span class="badge">11</span></a>
 
   </li>
         
@@ -315,7 +315,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives<span class="badge">14</span></a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives<span class="badge">11</span></a>
 
   </li>
         
@@ -470,7 +470,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Linux_kernel
+          <h1 class="post-title" itemprop="name headline">Linux Kernel
               
             
           </h1>
@@ -495,12 +495,24 @@
                 
               
 
-              <time title="Created: 2020-02-09 15:05:18 / Modified: 15:05:33" itemprop="dateCreated datePublished" datetime="2020-02-09T15:05:18+08:00">2020-02-09</time>
+              <time title="Created: 2020-02-09 15:05:18" itemprop="dateCreated datePublished" datetime="2020-02-09T15:05:18+08:00">2020-02-09</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2020-03-17 16:22:20" itemprop="dateModified" datetime="2020-03-17T16:22:20+08:00">2020-03-17</time>
               
             
           </span>
@@ -533,7 +545,8 @@
       
 
       
-        <h1 id="内核简介"><a href="#内核简介" class="headerlink" title="内核简介"></a>内核简介</h1><h2 id="内核组成"><a href="#内核组成" class="headerlink" title="内核组成?"></a>内核组成?</h2><ul>
+        <p>《Linux内核设计与实现》笔记<br><a id="more"></a></p>
+<h1 id="内核简介"><a href="#内核简介" class="headerlink" title="内核简介"></a>内核简介</h1><h2 id="内核组成"><a href="#内核组成" class="headerlink" title="内核组成?"></a>内核组成?</h2><ul>
 <li>负责响应中断的<strong>中断服务程序</strong></li>
 <li>负责<strong>管理多个进程，分享处理器时间</strong>的调用程序</li>
 <li>复制<strong>进程地址空间的内存管理程序</strong></li>
@@ -600,7 +613,7 @@
 <li>终结（可以显示调用exit()）动作：释放资源，传递信号给父进程</li>
 <li>主要工作由do_exit()完成<ul>
 <li>将task_struct中的标志成员设置为PF_EXITING</li>
-<li>调用del_timer_sync()删除任意内核定时器，确保没有定时器在排队</li>
+<li>调用del_timer_sync()<code>删除任意内核定时器</code>，确保没有定时器在排队</li>
 <li>BSD的进程记账功能是开启的话，调用acct_update_integrals()来输出记栈信息</li>
 <li>exit_mm()函数释放进程占用的mm_struct，如果没有别的进程使用他们，就彻底释放它们。</li>
 <li>sem__exit()如果进程排队等候IPC信号，它则离队</li>
@@ -875,8 +888,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2020/02/08/jvm/" rel="next" title="Jvm笔记">
-                <i class="fa fa-chevron-left"></i> Jvm笔记
+              <a href="/2020/02/08/jvm/" rel="next" title="JVM笔记">
+                <i class="fa fa-chevron-left"></i> JVM笔记
               </a>
             
           </div>
@@ -884,6 +897,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/02/09/design-patterns/" rel="prev" title="design_patterns">
+                design_patterns <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -955,7 +972,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">14</span>
+                    <span class="site-state-item-count">11</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -988,7 +1005,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">9</span>
+                      
+                    
+                    <span class="site-state-item-count">6</span>
                     <span class="site-state-item-name">categories</span>
                   </a>
                 </div>
@@ -1045,7 +1064,11 @@
                     
                       
                     
-                    <span class="site-state-item-count">19</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">13</span>
                     <span class="site-state-item-name">tags</span>
                   </a>
                 </div>

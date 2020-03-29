@@ -120,7 +120,8 @@
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/images/dockerdiff.jpg">
 <meta property="og:image" content="http://yoursite.com/images/architecture.svg">
-<meta property="og:updated_time" content="2019-03-20T12:40:06.973Z">
+<meta property="og:image" content="http://yoursite.com/2018/12/09/images/network.namespace.jpg">
+<meta property="og:updated_time" content="2020-02-28T12:08:43.118Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Docker入门总结">
 <meta name="twitter:description" content="这是我个人学习使用Docker的知识总结，如果想要系统的学习参照官方文档">
@@ -281,7 +282,7 @@
       
     
 
-    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags<span class="badge">22</span></a>
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags<span class="badge">24</span></a>
 
   </li>
         
@@ -300,7 +301,7 @@
       
     
 
-    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories<span class="badge">10</span></a>
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories<span class="badge">11</span></a>
 
   </li>
         
@@ -319,7 +320,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives<span class="badge">14</span></a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives<span class="badge">11</span></a>
 
   </li>
         
@@ -516,7 +517,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-03-20 20:40:06" itemprop="dateModified" datetime="2019-03-20T20:40:06+08:00">2019-03-20</time>
+                <time title="Modified: 2020-02-28 20:08:43" itemprop="dateModified" datetime="2020-02-28T20:08:43+08:00">2020-02-28</time>
               
             
           </span>
@@ -616,7 +617,7 @@
 </ul>
 <h2 id="Docker-build"><a href="#Docker-build" class="headerlink" title="Docker build"></a>Docker build</h2><ul>
 <li><p>首先，先要建立一个Dockerfile。Dockerfile里面写的代码可以理解为创建image的一个流程，当然实际生成一个image后面有很多看不到的过程, (以搭建一个nodejs后端服务器为例):</p>
-<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">FROM</span> node: version</span><br><span class="line"><span class="comment"># 首先指定镜像基础，这里是构建node环境并指定版本</span></span><br><span class="line"><span class="keyword">COPY</span><span class="bash"> . /app </span></span><br><span class="line"><span class="bash"><span class="comment"># 指定工作目录</span></span></span><br><span class="line"><span class="bash">WORKDIR /app</span></span><br><span class="line"><span class="bash"><span class="comment"># 将当前目录拷贝到images的/app目录</span></span></span><br><span class="line"><span class="bash">RUN	npm install --repository=https://registry.npm.taobao.org</span></span><br><span class="line"><span class="bash"><span class="comment"># 安装nodeJS程序的依赖</span></span></span><br><span class="line"><span class="bash">EXPOSE 8008</span></span><br><span class="line"><span class="bash"><span class="comment"># 开放image的3000端口</span></span></span><br><span class="line"><span class="bash">CMD  [<span class="string">"node"</span>, <span class="string">"server.js"</span>]</span></span><br><span class="line"><span class="bash"><span class="comment"># 在container运行时执行 node server.js</span></span></span><br></pre></td></tr></table></figure>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">FROM</span> node: version</span><br><span class="line"><span class="comment"># 首先指定镜像基础，这里是构建node环境并指定版本</span></span><br><span class="line"><span class="keyword">COPY</span> . /app </span><br><span class="line"># 指定工作目录</span><br><span class="line">WORKDIR /app</span><br><span class="line"># 将当前目录拷贝到images的/app目录</span><br><span class="line">RUN	npm install --repository=https://registry.npm.taobao.org</span><br><span class="line"># 安装nodeJS程序的依赖</span><br><span class="line">EXPOSE 8008</span><br><span class="line"># 开放image的3000端口</span><br><span class="line">CMD  ["node", "server.js"]</span><br><span class="line"># 在container运行时执行 node server.js</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>创建dockerfile之后，再新建.dockerignore 文件，这里主要是排除一些不要被build的文件</p>
 <figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">.git </span><br><span class="line">node_modules</span><br><span class="line">npm-debug.log</span><br><span class="line"><span class="comment"># 这里主要是排除git，和nodejs的模块，需要的模块在在build的时候 RUN npm install 会自动安装</span></span><br></pre></td></tr></table></figure>
@@ -642,7 +643,36 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1. docker attch [option] containerId</span><br><span class="line">//忘记怎么使用的可以docker attch --help </span><br><span class="line">2. docker exec [options] </span><br><span class="line">//如:进入redis, $ docker exec containerId redis-cli</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-<h2 id="Docker-的一些推荐"><a href="#Docker-的一些推荐" class="headerlink" title="Docker 的一些推荐"></a>Docker 的一些推荐</h2><ul>
+<h2 id="Docker实现细节"><a href="#Docker实现细节" class="headerlink" title="Docker实现细节"></a>Docker实现细节</h2><ul>
+<li><p><a href="https://draveness.me/docker" target="_blank" rel="noopener">贴一篇博客</a></p>
+<h4 id="CGroups"><a href="#CGroups" class="headerlink" title="CGroups"></a>CGroups</h4></li>
+</ul>
+<h4 id="Namespaces"><a href="#Namespaces" class="headerlink" title="Namespaces"></a>Namespaces</h4><ul>
+<li><p>clone中使用，提供了对UTS（ UNIX Time-sharing System ）、IPC、mount、PID、network、User等的隔离机制</p>
+<ul>
+<li><p>UTS namespace（UTS namespaces）： 用来隔离系统的 hostname 以及 NIS domain name</p>
+</li>
+<li><p>IPC namespace（CLONE_NEWIPC），IPC有共享内存、信号量、消息队列等方法，只有在同一个Namespace下的进程才能相互通信</p>
+</li>
+<li><p>PID namespace（CLONE_NEWPID）：将子进程的pid在容器中变成1</p>
+</li>
+<li><p>Mount Namespace（CLONE_NEWNS）：建立一个独立的文件系统</p>
+</li>
+<li><p>User Namespace，使用了这个参数后，内部看到的UID和GID已经与外部不同了，默认显示为65534（不知道外部的，所以设置最大值）,可设置</p>
+</li>
+<li><p>Network Namespace（CLONE_NEWNET）：</p>
+<p><img src="../images/network.namespace.jpg" alt=""></p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="Docker镜像分层"><a href="#Docker镜像分层" class="headerlink" title="Docker镜像分层"></a>Docker镜像分层</h3><ul>
+<li>对于Linux镜像：docker镜像在运行的时候直接使用docker宿主机器的kernel。</li>
+</ul>
+<hr>
+<ul>
+<li><p>Docker 的一些推荐</p>
+</li>
 <li><p><a href="http://www.ruanyifeng.com/blog/2018/02/docker-tutorial.html" target="_blank" rel="noopener">阮一峰Docker入门教程</a></p>
 </li>
 <li><p><a href="http://www.ruanyifeng.com/blog/2018/02/docker-tutorial.html" target="_blank" rel="noopener">阮一峰Docker微服务</a></p>
@@ -729,8 +759,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/12/16/JavaSpringMvc/" rel="prev" title="JavaSpringMvc">
-                JavaSpringMvc <i class="fa fa-chevron-right"></i>
+              <a href="/2018/12/24/person-summary-md/" rel="prev" title="person_summary.md">
+                person_summary.md <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -803,7 +833,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">14</span>
+                    <span class="site-state-item-count">11</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -836,7 +866,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">9</span>
+                      
+                    
+                    <span class="site-state-item-count">6</span>
                     <span class="site-state-item-name">categories</span>
                   </a>
                 </div>
@@ -893,7 +925,11 @@
                     
                       
                     
-                    <span class="site-state-item-count">19</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">13</span>
                     <span class="site-state-item-name">tags</span>
                   </a>
                 </div>
@@ -941,7 +977,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#这是我个人学习使用Docker的知识总结，如果想要系统的学习参照官方文档"><span class="nav-number">1.</span> <span class="nav-text">这是我个人学习使用Docker的知识总结，如果想要系统的学习参照官方文档</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#简单理解"><span class="nav-number">2.</span> <span class="nav-text">简单理解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#docker的结构"><span class="nav-number">3.</span> <span class="nav-text">docker的结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Docker-build"><span class="nav-number">4.</span> <span class="nav-text">Docker build</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Docker-Run"><span class="nav-number">5.</span> <span class="nav-text">Docker Run</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Docker-命令的一些细节"><span class="nav-number">6.</span> <span class="nav-text">Docker 命令的一些细节</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Docker-的一些推荐"><span class="nav-number">7.</span> <span class="nav-text">Docker 的一些推荐</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#这是我个人学习使用Docker的知识总结，如果想要系统的学习参照官方文档"><span class="nav-number">1.</span> <span class="nav-text">这是我个人学习使用Docker的知识总结，如果想要系统的学习参照官方文档</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#简单理解"><span class="nav-number">2.</span> <span class="nav-text">简单理解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#docker的结构"><span class="nav-number">3.</span> <span class="nav-text">docker的结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Docker-build"><span class="nav-number">4.</span> <span class="nav-text">Docker build</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Docker-Run"><span class="nav-number">5.</span> <span class="nav-text">Docker Run</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Docker-命令的一些细节"><span class="nav-number">6.</span> <span class="nav-text">Docker 命令的一些细节</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Docker实现细节"><span class="nav-number">7.</span> <span class="nav-text">Docker实现细节</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#CGroups"><span class="nav-number">7.0.1.</span> <span class="nav-text">CGroups</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Namespaces"><span class="nav-number">7.0.2.</span> <span class="nav-text">Namespaces</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Docker镜像分层"><span class="nav-number">7.1.</span> <span class="nav-text">Docker镜像分层</span></a></li></ol></div>
             
 
           </div>

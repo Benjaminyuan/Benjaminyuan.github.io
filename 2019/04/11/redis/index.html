@@ -113,15 +113,20 @@
   <meta name="description" content="1读《redis in action》笔记">
 <meta name="keywords" content="redis">
 <meta property="og:type" content="article">
-<meta property="og:title" content="redis">
+<meta property="og:title" content="Redis">
 <meta property="og:url" content="http://yoursite.com/2019/04/11/redis/index.html">
 <meta property="og:site_name" content="Benji&#39;blog">
 <meta property="og:description" content="1读《redis in action》笔记">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-04-12T08:31:44.272Z">
+<meta property="og:image" content="http://yoursite.com/2019/04/11/images/redis_io.png">
+<meta property="og:image" content="http://yoursite.com/Users/mac/Documents/Blog/hexoBlog/source/images/multi_plex.png">
+<meta property="og:image" content="http://yoursite.com/Users/mac/Documents/Blog/hexoBlog/source/images/redis_schdule.png">
+<meta property="og:image" content="http://yoursite.com/Users/mac/Documents/Blog/hexoBlog/source/images/redis_runtime.png">
+<meta property="og:updated_time" content="2020-03-25T13:15:19.582Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="redis">
+<meta name="twitter:title" content="Redis">
 <meta name="twitter:description" content="1读《redis in action》笔记">
+<meta name="twitter:image" content="http://yoursite.com/2019/04/11/images/redis_io.png">
 
 
 
@@ -138,7 +143,7 @@
   };
 </script>
 
-  <title>redis | Benji'blog</title>
+  <title>Redis | Benji'blog</title>
   
 
 
@@ -278,7 +283,7 @@
       
     
 
-    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags<span class="badge">22</span></a>
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags<span class="badge">24</span></a>
 
   </li>
         
@@ -297,7 +302,7 @@
       
     
 
-    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories<span class="badge">10</span></a>
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories<span class="badge">11</span></a>
 
   </li>
         
@@ -316,7 +321,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives<span class="badge">14</span></a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives<span class="badge">11</span></a>
 
   </li>
         
@@ -471,7 +476,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">redis
+          <h1 class="post-title" itemprop="name headline">Redis
               
             
           </h1>
@@ -513,7 +518,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-04-12 16:31:44" itemprop="dateModified" datetime="2019-04-12T16:31:44+08:00">2019-04-12</time>
+                <time title="Modified: 2020-03-25 21:15:19" itemprop="dateModified" datetime="2020-03-25T21:15:19+08:00">2020-03-25</time>
               
             
           </span>
@@ -612,6 +617,104 @@
 </ul>
 </li>
 </ul>
+<h1 id="Redis设计与实现"><a href="#Redis设计与实现" class="headerlink" title="Redis设计与实现"></a>Redis设计与实现</h1><h2 id="事件"><a href="#事件" class="headerlink" title="事件"></a>事件</h2><blockquote>
+<p>  redis的事件分为两种：文件事件和时间事件</p>
+</blockquote>
+<h3 id="文件事件"><a href="#文件事件" class="headerlink" title="文件事件"></a>文件事件</h3><blockquote>
+<p>  基于Reactor模式的网络事件处理器，使用I/O复用来监听多个套接字</p>
+</blockquote>
+<h4 id="文件处理器的组成"><a href="#文件处理器的组成" class="headerlink" title="文件处理器的组成"></a>文件处理器的组成</h4><p><img src="../images/redis_io.png" alt=""></p>
+<ul>
+<li>尽管多个文件事件可能会并发地出现，但I/O多路复用程序总是会将所有产生事件的套接字都放到一个队列里面，然后通过这个队列，以<strong>有序（sequentially）、同步（synchronously）、每次一个套接字的</strong>方式向文件事件分派器传送套接字。当上一个套接字产生的事件被处理完毕之后（该套接字为事件所关联的事件处理器执行完毕），I/O多路复用程序才会继续向文件事件分派器传送下一个套接字</li>
+</ul>
+<h4 id="I-O多路复用的实现"><a href="#I-O多路复用的实现" class="headerlink" title="I/O多路复用的实现"></a>I/O多路复用的实现</h4><p><img src="/Users/mac/Documents/Blog/hexoBlog/source/images/multi_plex.png" alt=""></p>
+<ul>
+<li><p>Redis的I/O多路复用程序的<strong>所有功能</strong>都是通过包装常见的select、epoll、evport和kqueue这些I/O多路复用函数库来实现的</p>
+<blockquote>
+<p>  evport &gt; epoll &gt; kqueue &gt; select</p>
+</blockquote>
+</li>
+</ul>
+<h4 id="事件类型"><a href="#事件类型" class="headerlink" title="事件类型"></a>事件类型</h4><ul>
+<li>AE_READABLE事件<ul>
+<li><strong>客户端</strong>对套接字执行write操作，或者执行close操作，会在服务端产生AE_READABLE事件</li>
+<li>新的可应答（acceptable）套接字出现</li>
+<li></li>
+</ul>
+</li>
+<li>AE_WRITABLE事件<ul>
+<li><strong>客户端</strong>对套接字执行read操作，会在服务端产生AE_WRITABLE事件</li>
+</ul>
+</li>
+</ul>
+<h4 id="文件事件处理器"><a href="#文件事件处理器" class="headerlink" title="文件事件处理器"></a>文件事件处理器</h4><ul>
+<li>连接应答处理器。<ul>
+<li>服务器对客户端的连接请求进行应答</li>
+</ul>
+</li>
+<li>命令请求处理器<ul>
+<li>服务器接收客户端发来的命令请求</li>
+</ul>
+</li>
+<li>命令回复处理器<ul>
+<li>服务器向客户端发送命令回复</li>
+</ul>
+</li>
+<li>复制处理器。<ul>
+<li>当主服务器和从服务器进行复制操作时</li>
+</ul>
+</li>
+</ul>
+<h3 id="时间事件"><a href="#时间事件" class="headerlink" title="时间事件"></a>时间事件</h3><ul>
+<li><p>定时事件</p>
+</li>
+<li><p>周期性事件</p>
+</li>
+</ul>
+<h4 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h4><ul>
+<li><p>一个时间事件主要由以下三个属性组成：</p>
+<ul>
+<li>id：服务器为时间事件创建的全局唯一ID（标识号）,ID号按从小到大的顺序递增，新事件的ID号比旧事件的ID号要大。</li>
+<li>when：毫秒精度的UNIX时间戳，记录了时间事件的到达（arrive）时间。</li>
+<li>timeProc：时间事件处理器，一个函数。当时间事件到达时，服务器就会调用相应的处理器来处理事件。</li>
+</ul>
+</li>
+<li><p>服务器将所有时间事件都放在一个<strong>无序链表</strong>(指不按when的大小排序)中，每当时间事件执行器运行时，它就<strong>遍历整个链表</strong>，查找所有已到达的时间事件，并调用相应的事件处理器</p>
+</li>
+<li><p>正常模式下的Redis服务器只使用serverCron一个时间事件，而在benchmark模式下，服务器也只使用两个时间事件，所以无序不会影响性能</p>
+</li>
+</ul>
+<h4 id="时间事件应用实例：serverCron函数"><a href="#时间事件应用实例：serverCron函数" class="headerlink" title="时间事件应用实例：serverCron函数"></a>时间事件应用实例：serverCron函数</h4><ul>
+<li><p>持续运行的Redis服务器需要定期对自身的资源和状态进行检查和调整</p>
+<ul>
+<li>更新服务器的各类统计信息，比如时间、内存占用、数据库占用情况等。</li>
+<li>清理数据库中的过期键值对</li>
+<li>关闭和清理连接失效的客户端。</li>
+<li>尝试进行AOF或RDB持久化操作。</li>
+<li>如果服务器是主服务器，那么对从服务器进行定期同步</li>
+<li>如果处于集群模式，对集群进行定期同步和连接测试</li>
+</ul>
+</li>
+<li><p>Redis服务器以<strong>周期性事件</strong>的方式来运行serverCron函数，在服务器运行期间，每隔一段时间，serverCron，2.6为100毫秒运行一次，2.8开始可配置</p>
+</li>
+</ul>
+<h3 id="事件调度"><a href="#事件调度" class="headerlink" title="事件调度"></a>事件调度</h3><ul>
+<li>伪代码</li>
+</ul>
+<p><img src="/Users/mac/Documents/Blog/hexoBlog/source/images/redis_schdule.png" alt=""></p>
+<ul>
+<li>processFileEvents()是虚构的，在实际中，处理已产生文件事件的代码是直接写在aeProcessEvents函数里面的</li>
+<li><p><img src="/Users/mac/Documents/Blog/hexoBlog/source/images/redis_runtime.png" alt=""></p>
+</li>
+<li><p>事件调度原则</p>
+<ul>
+<li>aeApiPoll函数的最大阻塞时间由<strong>到达时间最接近当前时间的时间事件决定</strong>，这个方法既可以避免服务器对时间事件进行频繁的轮询（忙等待），也可以确保aeApiPoll函数不会阻塞过长时间</li>
+<li>因为文件事件是随机出现的，如果等待并处理完一次文件事件之后，仍<strong>未有任何时间事件到达</strong>，那么服务器将再次<strong>等待并处理文件事件</strong>。随着文件事件的不断执行，时间会逐渐向时间事件所设置的到达时间逼近，并最终来到到达时间，这时服务器就可以开始处理到达的时间事件了</li>
+<li>对文件事件和时间事件的处理都是同步、有序、原子地执行的，服务器不会中途中断事件处理，也不会对事件进行抢占，所以为了减少程序阻塞的时间，有需要时主动让出执行权，从而降低造成事件饥饿的可能性。比如说，在命令回复处理器将一个命令回复写入到客户端套接字时，如果写入字节数超过了一个预设常量的话，命令回复处理器就会主动用break跳出写入循环，将余下的数据留到下次再写；另外，时间事件也会将非常耗时的持久化操作放到子线程或者子进程执</li>
+<li>因为时间事件在文件事件之后执行，并且事件之间不会出现抢占，所以时间事件的实际处理时间，通常会比时间事件设定的到达时间稍晚一些。</li>
+</ul>
+</li>
+</ul>
 
       
     </div>
@@ -677,8 +780,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/03/18/algorithms/" rel="next" title="algorithms">
-                <i class="fa fa-chevron-left"></i> algorithms
+              <a href="/2019/03/18/algorithms/" rel="next" title="Algorithms">
+                <i class="fa fa-chevron-left"></i> Algorithms
               </a>
             
           </div>
@@ -687,8 +790,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/04/13/Jpa-model/" rel="prev" title="Jpa-model">
-                Jpa-model <i class="fa fa-chevron-right"></i>
+              <a href="/2020/01/01/OS/" rel="prev" title="OS">
+                OS <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -761,7 +864,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">14</span>
+                    <span class="site-state-item-count">11</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -794,7 +897,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">9</span>
+                      
+                    
+                    <span class="site-state-item-count">6</span>
                     <span class="site-state-item-name">categories</span>
                   </a>
                 </div>
@@ -851,7 +956,11 @@
                     
                       
                     
-                    <span class="site-state-item-count">19</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">13</span>
                     <span class="site-state-item-name">tags</span>
                   </a>
                 </div>
@@ -899,7 +1008,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#redis事务"><span class="nav-number">1.</span> <span class="nav-text">redis事务</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#事务型流水线"><span class="nav-number">1.1.</span> <span class="nav-text">事务型流水线</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#关键指令"><span class="nav-number">1.1.1.</span> <span class="nav-text">关键指令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#非事务型流水线"><span class="nav-number">1.1.2.</span> <span class="nav-text">非事务型流水线</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#redis-性能测试"><span class="nav-number">1.1.3.</span> <span class="nav-text">redis 性能测试</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#构建应用程序组件"><span class="nav-number">2.</span> <span class="nav-text">构建应用程序组件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#自动补全"><span class="nav-number">2.1.</span> <span class="nav-text">自动补全</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#简单自动补全"><span class="nav-number">2.1.1.</span> <span class="nav-text">简单自动补全</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#利用有序集合的特性"><span class="nav-number">2.1.2.</span> <span class="nav-text">利用有序集合的特性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#构建分布式锁"><span class="nav-number">2.1.3.</span> <span class="nav-text">构建分布式锁</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#计数信号量"><span class="nav-number">2.1.4.</span> <span class="nav-text">计数信号量</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#redis事务"><span class="nav-number">1.</span> <span class="nav-text">redis事务</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#事务型流水线"><span class="nav-number">1.1.</span> <span class="nav-text">事务型流水线</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#关键指令"><span class="nav-number">1.1.1.</span> <span class="nav-text">关键指令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#非事务型流水线"><span class="nav-number">1.1.2.</span> <span class="nav-text">非事务型流水线</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#redis-性能测试"><span class="nav-number">1.1.3.</span> <span class="nav-text">redis 性能测试</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#构建应用程序组件"><span class="nav-number">2.</span> <span class="nav-text">构建应用程序组件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#自动补全"><span class="nav-number">2.1.</span> <span class="nav-text">自动补全</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#简单自动补全"><span class="nav-number">2.1.1.</span> <span class="nav-text">简单自动补全</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#利用有序集合的特性"><span class="nav-number">2.1.2.</span> <span class="nav-text">利用有序集合的特性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#构建分布式锁"><span class="nav-number">2.1.3.</span> <span class="nav-text">构建分布式锁</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#计数信号量"><span class="nav-number">2.1.4.</span> <span class="nav-text">计数信号量</span></a></li></ol></li></ol></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#Redis设计与实现"><span class="nav-number"></span> <span class="nav-text">Redis设计与实现</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#事件"><span class="nav-number">1.</span> <span class="nav-text">事件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#文件事件"><span class="nav-number">1.1.</span> <span class="nav-text">文件事件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#文件处理器的组成"><span class="nav-number">1.1.1.</span> <span class="nav-text">文件处理器的组成</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#I-O多路复用的实现"><span class="nav-number">1.1.2.</span> <span class="nav-text">I/O多路复用的实现</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#事件类型"><span class="nav-number">1.1.3.</span> <span class="nav-text">事件类型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#文件事件处理器"><span class="nav-number">1.1.4.</span> <span class="nav-text">文件事件处理器</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#时间事件"><span class="nav-number">1.2.</span> <span class="nav-text">时间事件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#实现"><span class="nav-number">1.2.1.</span> <span class="nav-text">实现</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#时间事件应用实例：serverCron函数"><span class="nav-number">1.2.2.</span> <span class="nav-text">时间事件应用实例：serverCron函数</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#事件调度"><span class="nav-number">1.3.</span> <span class="nav-text">事件调度</span></a></li></ol></li></ol></li></div>
             
 
           </div>
