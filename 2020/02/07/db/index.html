@@ -118,7 +118,7 @@
 <meta property="og:site_name" content="Benji&#39;blog">
 <meta property="og:description" content="DataBase">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2020-03-29T01:11:53.154Z">
+<meta property="og:updated_time" content="2020-05-06T14:37:02.099Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数据库相关知识笔记">
 <meta name="twitter:description" content="DataBase">
@@ -278,7 +278,7 @@
       
     
 
-    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags<span class="badge">24</span></a>
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags<span class="badge">25</span></a>
 
   </li>
         
@@ -316,7 +316,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives<span class="badge">11</span></a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives<span class="badge">12</span></a>
 
   </li>
         
@@ -513,7 +513,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2020-03-29 09:11:53" itemprop="dateModified" datetime="2020-03-29T09:11:53+08:00">2020-03-29</time>
+                <time title="Modified: 2020-05-06 22:37:02" itemprop="dateModified" datetime="2020-05-06T22:37:02+08:00">2020-05-06</time>
               
             
           </span>
@@ -577,7 +577,13 @@
 <ul>
 <li>使用 !=时</li>
 </ul>
-<h2 id="mysql"><a href="#mysql" class="headerlink" title="mysql"></a>mysql</h2><h3 id="事务级别"><a href="#事务级别" class="headerlink" title="事务级别"></a>事务级别</h3><blockquote>
+<h2 id="mysql"><a href="#mysql" class="headerlink" title="mysql"></a>mysql</h2><h3 id="Mysqldump"><a href="#Mysqldump" class="headerlink" title="Mysqldump"></a>Mysqldump</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Usage: mysqldump [OPTIONS] database [tables]</span><br><span class="line">OR     mysqldump [OPTIONS] --databases [OPTIONS] DB1 [DB2 DB3...]</span><br><span class="line">OR     mysqldump [OPTIONS] --all-databases [OPTIONS]</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysqldump -uroot -p*** --databases  DBName &gt; dest_file</span><br></pre></td></tr></table></figure>
+<ul>
+<li>条件导出</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysqldump -uroot -proot --databases db1 --tables a1 --where=&apos;id=1&apos;</span><br></pre></td></tr></table></figure>
+<h3 id="事务级别"><a href="#事务级别" class="headerlink" title="事务级别"></a>事务级别</h3><blockquote>
 <p>  为了<strong>有效保证并发读取数据的正确性</strong>，提出的事务隔离级别。我们的数据库锁，也是<strong>为了构建这些隔离级别存在的</strong>。</p>
 </blockquote>
 <ul>
@@ -595,7 +601,7 @@
 </ul>
 <h3 id="mysql引擎"><a href="#mysql引擎" class="headerlink" title="mysql引擎"></a>mysql引擎</h3><ul>
 <li>MyISAM较高的插入，查询速度，担不支持事务，B+tree作为索引结构，索引文件仅仅保存地址</li>
-<li>InnoDB,支持事务，行锁定和外键。数据文件本身就是索引文件<ul>
+<li>InnoDB,支持事务，行锁定和外键。<strong>数据文件本身就是索引文件</strong><ul>
 <li>InnoDB表数据组织方式是主键聚簇索引。二级索引通过索引键值加主键值组合来唯一确定一条记录</li>
 </ul>
 </li>
@@ -660,6 +666,21 @@
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> Student.Sid,Student.Sname,t1.sumscore,t1.coursecount  <span class="keyword">from</span>  Student <span class="keyword">left</span> <span class="keyword">join</span>(<span class="keyword">select</span> SC.Sid, <span class="keyword">sum</span>(SC.score) <span class="keyword">as</span> sumscore ,<span class="keyword">count</span>(SC.Cid) <span class="keyword">as</span> coursecount <span class="keyword">from</span> SC  <span class="keyword">group</span> <span class="keyword">by</span> SC.SID) <span class="keyword">as</span> t1  <span class="keyword">on</span> Student.Sid=t1.Sid;</span><br></pre></td></tr></table></figure>
 <p>HAVING</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> student.*,t1.avgscore</span><br><span class="line"><span class="keyword">from</span> student <span class="keyword">inner</span> <span class="keyword">JOIN</span>(</span><br><span class="line"><span class="keyword">select</span> sc.SId ,<span class="keyword">AVG</span>(sc.score)<span class="keyword">as</span> avgscore</span><br><span class="line"><span class="keyword">from</span> sc </span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> sc.SId</span><br><span class="line"><span class="keyword">HAVING</span> <span class="keyword">AVG</span>(sc.score)&gt;=<span class="number">60</span>)<span class="keyword">as</span> t1 <span class="keyword">on</span> student.SId=t1.SId</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>批处理</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 设定结束符号</span></span><br><span class="line"> delimiter ;</span><br><span class="line"> </span><br><span class="line"> create procedure load_t (count int unsigned) begin  set @c=0; while @c &lt; count Do insert into t  select null,repeat(char(97+rand()*26),10); set @c=@c+1; end while; end;$$</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="日期操作-类型为date的column"><a href="#日期操作-类型为date的column" class="headerlink" title="日期操作(类型为date的column)"></a>日期操作(类型为date的column)</h2><h3 id="比较"><a href="#比较" class="headerlink" title="比较"></a>比较</h3><ul>
+<li>datediff(date1,date2)<ul>
+<li>比较date1和date2相差的天数，有正负</li>
+</ul>
+</li>
+<li>timestampdiff(time_unit,date1,date2)<ul>
+<li>time_unit指定结果单位，如比较日期天数(day,date1,date2)</li>
+</ul>
+</li>
+</ul>
 
       
     </div>
@@ -809,7 +830,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">11</span>
+                    <span class="site-state-item-count">12</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -856,6 +877,8 @@
                 <div class="site-state-item site-state-tags">
                   <a href="/tags/index.html">
                     
+                    
+                      
                     
                       
                     
@@ -953,7 +976,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#DataBase"><span class="nav-number">1.</span> <span class="nav-text">DataBase</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#索引的一篇文章"><span class="nav-number">1.1.</span> <span class="nav-text">索引的一篇文章</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ACID"><span class="nav-number">1.2.</span> <span class="nav-text">ACID</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#索引的类型"><span class="nav-number">1.3.</span> <span class="nav-text">索引的类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#主键和唯一索引的区别"><span class="nav-number">1.4.</span> <span class="nav-text">主键和唯一索引的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#索引的优点"><span class="nav-number">1.5.</span> <span class="nav-text">索引的优点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#索引的缺点"><span class="nav-number">1.6.</span> <span class="nav-text">索引的缺点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#索引失效"><span class="nav-number">1.7.</span> <span class="nav-text">索引失效</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mysql"><span class="nav-number">2.</span> <span class="nav-text">mysql</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#事务级别"><span class="nav-number">2.1.</span> <span class="nav-text">事务级别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#编码问题"><span class="nav-number">2.2.</span> <span class="nav-text">编码问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mysql引擎"><span class="nav-number">2.3.</span> <span class="nav-text">mysql引擎</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BTree和B-Tree"><span class="nav-number">2.4.</span> <span class="nav-text">BTree和B+Tree</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MVCC"><span class="nav-number">2.5.</span> <span class="nav-text">MVCC</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#MVCC逻辑流程"><span class="nav-number">2.5.1.</span> <span class="nav-text">MVCC逻辑流程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#InnoDB-MVCC的实现"><span class="nav-number">2.5.2.</span> <span class="nav-text">InnoDB MVCC的实现</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#WAL实现一致性"><span class="nav-number">2.6.</span> <span class="nav-text">WAL实现一致性</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SQL常见"><span class="nav-number">3.</span> <span class="nav-text">SQL常见</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#统计"><span class="nav-number">3.1.</span> <span class="nav-text">统计</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#包含"><span class="nav-number">3.2.</span> <span class="nav-text">包含</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#join"><span class="nav-number">3.2.1.</span> <span class="nav-text">join</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#DataBase"><span class="nav-number">1.</span> <span class="nav-text">DataBase</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#索引的一篇文章"><span class="nav-number">1.1.</span> <span class="nav-text">索引的一篇文章</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ACID"><span class="nav-number">1.2.</span> <span class="nav-text">ACID</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#索引的类型"><span class="nav-number">1.3.</span> <span class="nav-text">索引的类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#主键和唯一索引的区别"><span class="nav-number">1.4.</span> <span class="nav-text">主键和唯一索引的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#索引的优点"><span class="nav-number">1.5.</span> <span class="nav-text">索引的优点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#索引的缺点"><span class="nav-number">1.6.</span> <span class="nav-text">索引的缺点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#索引失效"><span class="nav-number">1.7.</span> <span class="nav-text">索引失效</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mysql"><span class="nav-number">2.</span> <span class="nav-text">mysql</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Mysqldump"><span class="nav-number">2.1.</span> <span class="nav-text">Mysqldump</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#事务级别"><span class="nav-number">2.2.</span> <span class="nav-text">事务级别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#编码问题"><span class="nav-number">2.3.</span> <span class="nav-text">编码问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mysql引擎"><span class="nav-number">2.4.</span> <span class="nav-text">mysql引擎</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BTree和B-Tree"><span class="nav-number">2.5.</span> <span class="nav-text">BTree和B+Tree</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MVCC"><span class="nav-number">2.6.</span> <span class="nav-text">MVCC</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#MVCC逻辑流程"><span class="nav-number">2.6.1.</span> <span class="nav-text">MVCC逻辑流程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#InnoDB-MVCC的实现"><span class="nav-number">2.6.2.</span> <span class="nav-text">InnoDB MVCC的实现</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#WAL实现一致性"><span class="nav-number">2.7.</span> <span class="nav-text">WAL实现一致性</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SQL常见"><span class="nav-number">3.</span> <span class="nav-text">SQL常见</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#统计"><span class="nav-number">3.1.</span> <span class="nav-text">统计</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#包含"><span class="nav-number">3.2.</span> <span class="nav-text">包含</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#join"><span class="nav-number">3.2.1.</span> <span class="nav-text">join</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#日期操作-类型为date的column"><span class="nav-number">4.</span> <span class="nav-text">日期操作(类型为date的column)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#比较"><span class="nav-number">4.1.</span> <span class="nav-text">比较</span></a></li></ol></li></ol></div>
             
 
           </div>

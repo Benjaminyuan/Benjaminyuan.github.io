@@ -117,7 +117,7 @@
 <meta property="og:site_name" content="Benji&#39;blog">
 <meta property="og:description" content="《Linux内核设计与实现》笔记">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2020-03-17T08:22:20.779Z">
+<meta property="og:updated_time" content="2020-04-29T01:41:35.747Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux Kernel">
 <meta name="twitter:description" content="《Linux内核设计与实现》笔记">
@@ -277,7 +277,7 @@
       
     
 
-    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags<span class="badge">24</span></a>
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags<span class="badge">25</span></a>
 
   </li>
         
@@ -315,7 +315,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives<span class="badge">11</span></a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives<span class="badge">12</span></a>
 
   </li>
         
@@ -512,7 +512,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2020-03-17 16:22:20" itemprop="dateModified" datetime="2020-03-17T16:22:20+08:00">2020-03-17</time>
+                <time title="Modified: 2020-04-29 09:41:35" itemprop="dateModified" datetime="2020-04-29T09:41:35+08:00">2020-04-29</time>
               
             
           </span>
@@ -555,8 +555,10 @@
 <li>Unix内核需要硬件提供MMU管理内存， Linux一般不需要<h2 id="微内核和单内核设计比较"><a href="#微内核和单内核设计比较" class="headerlink" title="微内核和单内核设计比较"></a>微内核和单内核设计比较</h2></li>
 <li>单内核所有的服务都在同一地址空间，内核可以直接<strong>调用函数</strong>，微内核的功能被划分为多个独立的过程，每个过程被叫做服务器，所有的服务器都运行在各自的地址空间上，服务器之间的通讯需要通过<strong>消息传递</strong>（IPC）。</li>
 <li>IPC的开销大于函数调用<h3 id="Linux的优点"><a href="#Linux的优点" class="headerlink" title="Linux的优点"></a>Linux的优点</h3></li>
-<li>Linux是单内核，但是Linux吸取了微内核的精华，支持<strong>模块化设计</strong>、<strong>抢占式内核</strong>、<strong>支持内核线程</strong>、<strong>动态装载内核模块</strong>  <h2 id="Linux和Unix的差异"><a href="#Linux和Unix的差异" class="headerlink" title="Linux和Unix的差异"></a>Linux和Unix的差异</h2></li>
-<li>Linux支持动态加载内核模块，单内核，但是可以在允许时动态的卸载和加载除部分内核代码</li>
+<li><p>Linux是单内核，但是Linux吸取了微内核的精华，支持<strong>模块化设计</strong>、<strong>抢占式内核</strong>、<strong>支持内核线程</strong>、<strong>动态装载内核模块</strong>  </p>
+<h2 id="Linux和Unix的差异"><a href="#Linux和Unix的差异" class="headerlink" title="Linux和Unix的差异"></a>Linux和Unix的差异</h2></li>
+<li><p>Linux支持动态加载内核模块，单内核，但是可以在允许时动态的卸载和加载除部分内核代码</p>
+</li>
 <li>Linux支持对称多处理器（SMP），<strong>传统Unix并不支持</strong></li>
 <li>Linux内核可以抢占，Linux内核具有<strong>允许在内核运行的任务优先执行</strong>的能力，</li>
 <li>Linux内核不区分线程和其他一般的进程。对于内核来说，所有进程都一样，只不过一些共享的资源不同<h2 id="Linux内核版本"><a href="#Linux内核版本" class="headerlink" title="Linux内核版本"></a>Linux内核版本</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//  主版本号          修订版本号</span></span><br><span class="line"><span class="comment">//  ｜                  |</span></span><br><span class="line"><span class="comment">//  2     .     6    .  26    .    1</span></span><br><span class="line"><span class="comment">//              |                 ｜</span></span><br><span class="line"><span class="comment">//            从版本号          稳定版本号</span></span><br></pre></td></tr></table></figure>
@@ -568,8 +570,10 @@
 <li>进程是<strong>处于执行期的程序</strong>以及<strong>相关的资源</strong>的总称</li>
 <li>线程：fork()-&gt;clone()<h2 id="进程描述符及任务结构"><a href="#进程描述符及任务结构" class="headerlink" title="进程描述符及任务结构"></a>进程描述符及任务结构</h2></li>
 <li>进程描述符：task_struct</li>
-<li>任务队列：task_struct的双向链表<h3 id="分配进程描述符"><a href="#分配进程描述符" class="headerlink" title="分配进程描述符"></a>分配进程描述符</h3></li>
-<li>Linux通过<strong>slab分配器</strong>分配，2.6以前，各个进程的task_struct存放在他们内核栈的尾端，（方便查找），2.6之后，slab分配器动态生成task_struck，所以只需要在栈低(对于向下增长的栈来说)或栈顶(对于向上增长的栈来说)/创建一个struct thread_info<h3 id="进程描述符存放"><a href="#进程描述符存放" class="headerlink" title="进程描述符存放"></a>进程描述符存放</h3></li>
+<li><p>任务队列：task_struct的双向链表</p>
+<h3 id="分配进程描述符"><a href="#分配进程描述符" class="headerlink" title="分配进程描述符"></a>分配进程描述符</h3></li>
+<li><p>Linux通过<strong>slab分配器</strong>分配，2.6以前，各个进程的task_struct存放在他们内核栈的尾端，（方便查找），2.6之后，slab分配器动态生成task_struck，所以只需要在栈低(对于向下增长的栈来说)或栈顶(对于向上增长的栈来说)/创建一个struct thread_info</p>
+<h3 id="进程描述符存放"><a href="#进程描述符存放" class="headerlink" title="进程描述符存放"></a>进程描述符存放</h3></li>
 <li>pid:唯一标识进程（int），最大值为32768（short int 短整数的最大值）</li>
 <li>current宏查找当前正在运行的进程。<ul>
 <li>x86 体系：利用计算偏移间接地查找task_struct结构（抹去低13位）</li>
@@ -624,7 +628,9 @@
 </ul>
 </li>
 <li>处于EXIT_ZOMBIE状态的进程占用内存为内核栈，thread_info结构和stak_struct结构，唯一作用是给父进程提供信息。在父进程获取已终结的子进程信息后，或者通知内核它并不关注那些信息后，子进程的task_struct结构才被释放，</li>
-<li>wait()：挂起一个进程，直到其中的一个进程退出。（会释放内核栈和thread_info的结构所占的页，并释放task_struct所占的slab高速缓存<h1 id="进程调度"><a href="#进程调度" class="headerlink" title="进程调度"></a>进程调度</h1><h2 id="多任务"><a href="#多任务" class="headerlink" title="多任务"></a>多任务</h2></li>
+<li>wait()：挂起一个进程，直到其中的一个进程退出。（会释放内核栈和thread_info的结构所占的页，并释放task_struct所占的slab高速缓存<h1 id="进程调度"><a href="#进程调度" class="headerlink" title="进程调度"></a>进程调度</h1></li>
+</ul>
+<h2 id="多任务"><a href="#多任务" class="headerlink" title="多任务"></a>多任务</h2><ul>
 <li>现代操作系统对程序一般采用动态时间片计算的方式，并且引入了可配置的计算策略。（但是Linux不是）<h2 id="Linux的进程调度"><a href="#Linux的进程调度" class="headerlink" title="Linux的进程调度"></a>Linux的进程调度</h2></li>
 <li>Linux2.5：采用O(1)调度程序</li>
 <li>Linux2.6初期：引入新的调度算法，其中最著名的是：“反转楼梯最后期限调度算法”(RSDL)</li>
@@ -641,13 +647,17 @@
 <li>Mac OS X，进程的nice值代表分配给进程的时间片的绝对值，而Linux系统，nice值则代表时间片的比例。</li>
 </ul>
 </li>
-<li>实时优先级<ul>
+<li><p>实时优先级</p>
+<ul>
 <li>默认值：0到99，越高线程优先级越高<h3 id="时间片"><a href="#时间片" class="headerlink" title="时间片"></a>时间片</h3></li>
 </ul>
 </li>
-<li>表明线程在被抢占前能够持续运行的时间。调度策略必须规定一个时间片</li>
+<li><p>表明线程在被抢占前能够持续运行的时间。调度策略必须规定一个时间片</p>
+</li>
 <li>Linux的CFS调度器并没有直接分配时间片到进程，而是将处理器的使用比划分给了线程，这样使得线程获得的处理器时间其实是和系统负载密切相关的。<strong>nice值作为权重</strong>调整进程所使用的处理器时间使用比。</li>
-<li>Linux的抢占行为：当一个进程进入可运行状态时，抢占时机取决于新的可运行程序消耗多少处理器使用比。如果消耗的使用比 比当前进程小，则新进程立刻投入运行，否则推迟运行。<h2 id="Linux调度算法"><a href="#Linux调度算法" class="headerlink" title="Linux调度算法"></a>Linux调度算法</h2><h3 id="调度器类"><a href="#调度器类" class="headerlink" title="调度器类"></a>调度器类</h3></li>
+<li>Linux的抢占行为：当一个进程进入可运行状态时，抢占时机取决于新的可运行程序消耗多少处理器使用比。如果消耗的使用比 比当前进程小，则新进程立刻投入运行，否则推迟运行。<h2 id="Linux调度算法"><a href="#Linux调度算法" class="headerlink" title="Linux调度算法"></a>Linux调度算法</h2></li>
+</ul>
+<h3 id="调度器类"><a href="#调度器类" class="headerlink" title="调度器类"></a>调度器类</h3><ul>
 <li>Linux调度器使用模块的方式提供，使得不同类型的进程可以有针对性地选择调度算法。</li>
 <li>Unix系统中的进程调度<ul>
 <li>两点：进程优先级、时间片</li>
@@ -972,7 +982,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">11</span>
+                    <span class="site-state-item-count">12</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -1019,6 +1029,8 @@
                 <div class="site-state-item site-state-tags">
                   <a href="/tags/index.html">
                     
+                    
+                      
                     
                       
                     

@@ -117,7 +117,7 @@
 <meta property="og:site_name" content="Benji&#39;blog">
 <meta property="og:description" content="设计模式笔记">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2020-02-09T11:57:07.560Z">
+<meta property="og:updated_time" content="2020-05-11T12:50:05.935Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="design_patterns">
 <meta name="twitter:description" content="设计模式笔记">
@@ -277,7 +277,7 @@
       
     
 
-    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags<span class="badge">24</span></a>
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags<span class="badge">25</span></a>
 
   </li>
         
@@ -315,7 +315,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives<span class="badge">11</span></a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives<span class="badge">12</span></a>
 
   </li>
         
@@ -495,12 +495,24 @@
                 
               
 
-              <time title="Created: 2020-02-09 19:43:00 / Modified: 19:57:07" itemprop="dateCreated datePublished" datetime="2020-02-09T19:43:00+08:00">2020-02-09</time>
+              <time title="Created: 2020-02-09 19:43:00" itemprop="dateCreated datePublished" datetime="2020-02-09T19:43:00+08:00">2020-02-09</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2020-05-11 20:50:05" itemprop="dateModified" datetime="2020-05-11T20:50:05+08:00">2020-05-11</time>
               
             
           </span>
@@ -546,6 +558,32 @@
 <li>开闭原则的基础，针对接口编程，依赖于抽象而不依赖于具体<h3 id="接口隔离原则"><a href="#接口隔离原则" class="headerlink" title="接口隔离原则"></a>接口隔离原则</h3></li>
 <li>使用多个隔离的接口，比使用单个要好</li>
 <li>降低类之间的耦合度<h3 id="最少知道原则"><a href="#最少知道原则" class="headerlink" title="最少知道原则"></a>最少知道原则</h3><h3 id="合成复用原则"><a href="#合成复用原则" class="headerlink" title="合成复用原则"></a>合成复用原则</h3></li>
+</ul>
+<h2 id="领域模型"><a href="#领域模型" class="headerlink" title="领域模型"></a>领域模型</h2><h3 id="失血模式"><a href="#失血模式" class="headerlink" title="失血模式"></a>失血模式</h3><ul>
+<li>失血模型中，domain object 只有属性的get,set方法的纯数据类，所有业务逻辑都由Service层来完成的，由于没有dao,<strong>Service直接操作数据库</strong>，进行数据持久化。</li>
+<li>单纯的POJO</li>
+</ul>
+<h3 id="贫血模型"><a href="#贫血模型" class="headerlink" title="贫血模型"></a>贫血模型</h3><ul>
+<li><p>贫血模型中，domain object包含了不依赖于持久化的原子领域逻辑，而组合逻辑在service层。</p>
+<ul>
+<li>service：组合服务</li>
+<li>Model:get/set方法，还包含原子服务</li>
+<li>dao：数据持久化</li>
+</ul>
+</li>
+<li><p>简单地说就是只有状态</p>
+</li>
+</ul>
+<h3 id="充血模型"><a href="#充血模型" class="headerlink" title="充血模型"></a>充血模型</h3><ul>
+<li>充血模型中，绝大多数业务逻辑都应该domain Object 里面，包括持久化逻辑，而Service层是很薄的一层，仅仅封装事物和少量逻辑，不和Dao层打交道<ul>
+<li>service：组合服务</li>
+<li>model： 除get/set方法，还包含原子服务</li>
+</ul>
+</li>
+<li>状态和行为。</li>
+</ul>
+<h2 id="肿血模型"><a href="#肿血模型" class="headerlink" title="肿血模型"></a>肿血模型</h2><ul>
+<li>该模型取消了Service层，只剩下domain object 和Dao 层，在domain object的domain logic上面封装事物。</li>
 </ul>
 
       
@@ -615,6 +653,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/05/11/tricks/" rel="prev" title="">
+                 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -686,7 +728,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">11</span>
+                    <span class="site-state-item-count">12</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -733,6 +775,8 @@
                 <div class="site-state-item site-state-tags">
                   <a href="/tags/index.html">
                     
+                    
+                      
                     
                       
                     
@@ -830,7 +874,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#设计模式类型"><span class="nav-number">1.</span> <span class="nav-text">设计模式类型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#创建型模式"><span class="nav-number">1.1.</span> <span class="nav-text">创建型模式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#工厂模式"><span class="nav-number">1.1.1.</span> <span class="nav-text">工厂模式</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#结构型模式"><span class="nav-number">1.2.</span> <span class="nav-text">结构型模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#行为型模式"><span class="nav-number">1.3.</span> <span class="nav-text">行为型模式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#设计模式原则"><span class="nav-number">2.</span> <span class="nav-text">设计模式原则</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#开闭原则"><span class="nav-number">2.1.</span> <span class="nav-text">开闭原则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#里氏替换原则"><span class="nav-number">2.2.</span> <span class="nav-text">里氏替换原则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#依赖倒转原则"><span class="nav-number">2.3.</span> <span class="nav-text">依赖倒转原则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#接口隔离原则"><span class="nav-number">2.4.</span> <span class="nav-text">接口隔离原则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#最少知道原则"><span class="nav-number">2.5.</span> <span class="nav-text">最少知道原则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#合成复用原则"><span class="nav-number">2.6.</span> <span class="nav-text">合成复用原则</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#设计模式类型"><span class="nav-number">1.</span> <span class="nav-text">设计模式类型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#创建型模式"><span class="nav-number">1.1.</span> <span class="nav-text">创建型模式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#工厂模式"><span class="nav-number">1.1.1.</span> <span class="nav-text">工厂模式</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#结构型模式"><span class="nav-number">1.2.</span> <span class="nav-text">结构型模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#行为型模式"><span class="nav-number">1.3.</span> <span class="nav-text">行为型模式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#设计模式原则"><span class="nav-number">2.</span> <span class="nav-text">设计模式原则</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#开闭原则"><span class="nav-number">2.1.</span> <span class="nav-text">开闭原则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#里氏替换原则"><span class="nav-number">2.2.</span> <span class="nav-text">里氏替换原则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#依赖倒转原则"><span class="nav-number">2.3.</span> <span class="nav-text">依赖倒转原则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#接口隔离原则"><span class="nav-number">2.4.</span> <span class="nav-text">接口隔离原则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#最少知道原则"><span class="nav-number">2.5.</span> <span class="nav-text">最少知道原则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#合成复用原则"><span class="nav-number">2.6.</span> <span class="nav-text">合成复用原则</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#领域模型"><span class="nav-number">3.</span> <span class="nav-text">领域模型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#失血模式"><span class="nav-number">3.1.</span> <span class="nav-text">失血模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#贫血模型"><span class="nav-number">3.2.</span> <span class="nav-text">贫血模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#充血模型"><span class="nav-number">3.3.</span> <span class="nav-text">充血模型</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#肿血模型"><span class="nav-number">4.</span> <span class="nav-text">肿血模型</span></a></li></ol></div>
             
 
           </div>
