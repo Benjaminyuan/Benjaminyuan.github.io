@@ -110,30 +110,28 @@
 
 
 
-  <meta name="description" content="1读《redis in action》笔记">
-<meta name="keywords" content="redis">
+  <meta name="description" content="一些系统设计的常见思路">
+<meta name="keywords" content="system_design">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Redis">
-<meta property="og:url" content="http://yoursite.com/2019/04/11/redis/index.html">
+<meta property="og:title" content="system_design">
+<meta property="og:url" content="http://yoursite.com/2020/05/15/system_design/index.html">
 <meta property="og:site_name" content="Benji&#39;blog">
-<meta property="og:description" content="1读《redis in action》笔记">
+<meta property="og:description" content="一些系统设计的常见思路">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="http://yoursite.com/2019/04/11/images/redis_io.png">
-<meta property="og:image" content="http://yoursite.com/Users/mac/Documents/Blog/hexoBlog/source/images/multi_plex.png">
-<meta property="og:image" content="http://yoursite.com/Users/mac/Documents/Blog/hexoBlog/source/images/redis_schdule.png">
-<meta property="og:image" content="http://yoursite.com/Users/mac/Documents/Blog/hexoBlog/source/images/redis_runtime.png">
-<meta property="og:updated_time" content="2020-03-31T05:55:30.186Z">
+<meta property="og:image" content="http://121.40.136.3/wp-content/uploads/2015/04/snowflake-64bit.jpg">
+<meta property="og:image" content="http://yoursite.com/Users/mac/Documents/Blog/hexoBlog/source/images/count-min-sketch.jpg">
+<meta property="og:updated_time" content="2020-05-16T04:35:24.666Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Redis">
-<meta name="twitter:description" content="1读《redis in action》笔记">
-<meta name="twitter:image" content="http://yoursite.com/2019/04/11/images/redis_io.png">
+<meta name="twitter:title" content="system_design">
+<meta name="twitter:description" content="一些系统设计的常见思路">
+<meta name="twitter:image" content="http://121.40.136.3/wp-content/uploads/2015/04/snowflake-64bit.jpg">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/04/11/redis/">
+  <link rel="canonical" href="http://yoursite.com/2020/05/15/system_design/">
 
 
 
@@ -143,7 +141,7 @@
   };
 </script>
 
-  <title>Redis | Benji'blog</title>
+  <title>system_design | Benji'blog</title>
   
 
 
@@ -459,7 +457,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/11/redis/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/15/system_design/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="BenjaminYuan">
@@ -476,7 +474,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Redis
+          <h1 class="post-title" itemprop="name headline">system_design
               
             
           </h1>
@@ -501,7 +499,7 @@
                 
               
 
-              <time title="Created: 2019-04-11 12:49:30" itemprop="dateCreated datePublished" datetime="2019-04-11T12:49:30+08:00">2019-04-11</time>
+              <time title="Created: 2020-05-15 13:39:52" itemprop="dateCreated datePublished" datetime="2020-05-15T13:39:52+08:00">2020-05-15</time>
             
 
             
@@ -518,29 +516,11 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2020-03-31 13:55:30" itemprop="dateModified" datetime="2020-03-31T13:55:30+08:00">2020-03-31</time>
+                <time title="Modified: 2020-05-16 12:35:24" itemprop="dateModified" datetime="2020-05-16T12:35:24+08:00">2020-05-16</time>
               
             
           </span>
 
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/redis/" itemprop="url" rel="index"><span itemprop="name">redis</span></a></span>
-
-                
-                
-              
-            </span>
           
 
           
@@ -569,151 +549,151 @@
       
 
       
-        <figure class="highlight md"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">读《redis in action》笔记</span><br></pre></td></tr></table></figure>
-<a id="more"></a>
-<h2 id="redis事务"><a href="#redis事务" class="headerlink" title="redis事务"></a>redis事务</h2><h3 id="事务型流水线"><a href="#事务型流水线" class="headerlink" title="事务型流水线"></a>事务型流水线</h3><h4 id="关键指令"><a href="#关键指令" class="headerlink" title="关键指令"></a>关键指令</h4><ul>
-<li>MULTI:声明事务</li>
-<li>WATCH: 在事务过程中观察指定键值</li>
-<li>EXEC:执行事务</li>
-<li><p>DISCARD: 在WATCH后执行，取消WATCH和清空已经进入事务队列的命令</p>
-<h4 id="非事务型流水线"><a href="#非事务型流水线" class="headerlink" title="非事务型流水线"></a>非事务型流水线</h4>  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conn.pipeline(<span class="keyword">False</span>)</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>当命令的执行结果不影响另外一个命令输入时，可以不使用MULTI和EXEC执行事务</p>
-</li>
-<li>减少了应用程序和redis之间的通讯次数,可以提升redis性能</li>
+        <p>一些系统设计的常见思路<br><a id="more"></a></p>
+<h2 id="分布式ID生成器"><a href="#分布式ID生成器" class="headerlink" title="分布式ID生成器"></a>分布式ID生成器</h2><h3 id="常见"><a href="#常见" class="headerlink" title="常见"></a>常见</h3><ul>
+<li>用户ID</li>
+<li>微博ID</li>
+<li>聊天消息ID</li>
+<li>帖子ID</li>
+<li>订单ID</li>
 </ul>
-<h4 id="redis-性能测试"><a href="#redis-性能测试" class="headerlink" title="redis 性能测试"></a>redis 性能测试</h4><ul>
-<li>  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">redis-benchmark -c 1 -q</span><br><span class="line"><span class="comment"># -c client 只选定一个client进行测试</span></span><br><span class="line"><span class="comment"># -q简化输出</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>性能问题</p>
-<ul>
-<li>单个客户端达到redis-bench 的50%-60% 的性能</li>
-<li>不使用流水线的预期</li>
-<li>性能达到25%-30% </li>
-<li>对于每个指令都使用了新的连接<h2 id="构建应用程序组件"><a href="#构建应用程序组件" class="headerlink" title="构建应用程序组件"></a>构建应用程序组件</h2><h3 id="自动补全"><a href="#自动补全" class="headerlink" title="自动补全"></a>自动补全</h3><h4 id="简单自动补全"><a href="#简单自动补全" class="headerlink" title="简单自动补全"></a>简单自动补全</h4></li>
+<h3 id="要求"><a href="#要求" class="headerlink" title="要求"></a>要求</h3><ul>
+<li>全局唯一</li>
+<li>尽可能短</li>
+<li>全局粗略有序</li>
+</ul>
+<h3 id="UUID"><a href="#UUID" class="headerlink" title="UUID"></a>UUID</h3><ul>
+<li>mongoDB的objectID<ul>
+<li>4bytes的Unix Timestamp</li>
+<li>3bytes的机器ID</li>
+<li>2bytes的进程ID</li>
+<li>3bytes的计数器</li>
 </ul>
 </li>
-<li>维护一个列表</li>
-<li>在push联系人之前先删除该联系人，将其放在最前面</li>
-<li>减枝<h4 id="利用有序集合的特性"><a href="#利用有序集合的特性" class="headerlink" title="利用有序集合的特性"></a>利用有序集合的特性</h4></li>
-<li><p>利用有序集合的特性来减少排序的开销</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; zrange complete 0 -1</span><br><span class="line">1) <span class="string">"abc"</span></span><br><span class="line">2) <span class="string">"abc`"</span></span><br><span class="line">3) <span class="string">"abcd"</span></span><br><span class="line">4) <span class="string">"abce"</span></span><br><span class="line">5) <span class="string">"abcz"</span></span><br><span class="line">6) <span class="string">"abc&#123;"</span></span><br><span class="line">7) <span class="string">"c"</span></span><br></pre></td></tr></table></figure>
+</ul>
+<h3 id="多台Mysql服务器"><a href="#多台Mysql服务器" class="headerlink" title="多台Mysql服务器"></a>多台Mysql服务器</h3><ul>
+<li>假设用8台MySQL服务器协同工作，第一台MySQL初始值是1，每次自增8，第二台MySQL初始值是2，每次自增8，依次类推。前面用一个 round-robin load balancer 挡着，每来一个请求，由 round-robin balancer 随机地将请求发给8台MySQL中的任意一个，然后返回一个ID。</li>
+</ul>
+<h3 id="Twitter-Snowflake"><a href="#Twitter-Snowflake" class="headerlink" title="Twitter Snowflake"></a>Twitter Snowflake</h3><p>比如 Twitter 有个成熟的开源项目，就是专门生成ID的，<a href="https://github.com/twitter/snowflake" target="_blank" rel="noopener">Twitter Snowflake</a> 。Snowflake的核心算法如下：</p>
+<p><img src="http://121.40.136.3/wp-content/uploads/2015/04/snowflake-64bit.jpg" alt="img"></p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>​    有的面试官会问，如何让ID可以粗略的按照时间排序？上面的这种格式的ID，<strong>含有时间戳且在高位</strong>，恰好满足要求。如果面试官又问，如何保证ID严格有序呢？在分布式这个场景下，是做不到的，要想高性能，只能做到粗略有序，无法保证严格有序</p>
+<h2 id="短网址服务-TinyURL"><a href="#短网址服务-TinyURL" class="headerlink" title="短网址服务(TinyURL)"></a>短网址服务(TinyURL)</h2><h3 id="短网址的长度"><a href="#短网址的长度" class="headerlink" title="短网址的长度"></a>短网址的长度</h3><ul>
+<li>7bytes就可以了</li>
+<li>最大62^7=3521614606208个网址</li>
+<li>62 = 26*2+10</li>
+</ul>
+<h3 id="一对一还是一对多映射"><a href="#一对一还是一对多映射" class="headerlink" title="一对一还是一对多映射"></a>一对一还是一对多映射</h3><p>​     <strong>一对多</strong>：以这个7位长度的短网址作为唯一ID，这个ID下可以挂各种信息，比如生成该网址的用户名，所在网站，HTTP头部的 User Agent等信息，收集了这些信息，才有可能在后面做大数据分析，挖掘数据的价值。短网址服务商的一大盈利来源就是这些数据。</p>
+<h3 id="如何计算短网址"><a href="#如何计算短网址" class="headerlink" title="如何计算短网址"></a>如何计算短网址</h3><ul>
+<li>分布式ID生成器</li>
+</ul>
+<h3 id="如何存储"><a href="#如何存储" class="headerlink" title="如何存储"></a>如何存储</h3><ul>
+<li>Key-Value存储器</li>
+</ul>
+<h3 id="301还是302重定向"><a href="#301还是302重定向" class="headerlink" title="301还是302重定向"></a>301还是302重定向</h3><ul>
+<li>301浏览器会记住长url，那我们就无法统计到短地址被点击的次数了，也无法收集用户的Cookie, User Agent 等信息，这些信息可以用来做很多有意思的大数据分析，也是短网址服务商的主要盈利来源。所以302方便记录访问信息</li>
+</ul>
+<h3 id="预防攻击"><a href="#预防攻击" class="headerlink" title="预防攻击"></a>预防攻击</h3><ul>
+<li>可以用一台Redis作为缓存服务器，存储的不是 ID-&gt;长网址，而是 长网址-&gt;ID，仅存储一天以内的数据，用LRU机制进行淘汰，如果黑客大量发同一个长网址过来，直接从缓存服务器里返回短网址即可，他就无法耗光我们的ID了。</li>
+</ul>
+<h2 id="API限速"><a href="#API限速" class="headerlink" title="API限速"></a>API限速</h2><h3 id="设计一个API访问限速类，实现如下接口"><a href="#设计一个API访问限速类，实现如下接口" class="headerlink" title="设计一个API访问限速类，实现如下接口"></a>设计一个API访问限速类，实现如下接口</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">RateLimit</span> </span>&#123;</span><br><span class="line"><span class="comment">/** Sets the rate, from 1 to 1000000 queries per second */</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">setQPS</span><span class="params">(<span class="keyword">int</span> qps)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/** accept or reject a request, called when request is received */</span></span><br><span class="line"><span class="function"><span class="keyword">boolean</span> <span class="title">allowThisRequest</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RateLimitImpl</span> <span class="keyword">implements</span> <span class="title">RateLimit</span></span>&#123;</span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">int</span> qps;</span><br><span class="line">  <span class="keyword">private</span> List&lt;Long&gt; queue;</span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  <span class="function"><span class="keyword">void</span> <span class="title">setQPS</span><span class="params">(<span class="keyword">int</span> qps)</span></span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.qps = qps;</span><br><span class="line">    queue = <span class="keyword">new</span> LinkedList&lt;&gt;();</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  <span class="function"><span class="keyword">boolean</span> <span class="title">allowThisRequest</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (qps &lt;= <span class="number">0</span>) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    <span class="keyword">long</span> now = System.currentTimeMillis();</span><br><span class="line">    <span class="keyword">while</span>(now - queue.peek()) &gt; <span class="number">1000</span>)&#123;</span><br><span class="line">      queue.poll();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(queue.size() &lt; <span class="keyword">this</span>.qps)&#123;</span><br><span class="line">      queue.add(now);</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">false</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="实时输出最近一个小时内访问频率最高的10个IP"><a href="#实时输出最近一个小时内访问频率最高的10个IP" class="headerlink" title="实时输出最近一个小时内访问频率最高的10个IP"></a>实时输出最近一个小时内访问频率最高的10个IP</h2><h3 id="要求-1"><a href="#要求-1" class="headerlink" title="要求"></a>要求</h3><ul>
+<li>实时输出</li>
+<li>从当前时间向前数的1个小时</li>
+<li>QPS可能会达到10W/s</li>
+</ul>
+<h3 id="解法"><a href="#解法" class="headerlink" title="解法"></a>解法</h3><ol>
+<li>QPS是 10万/秒，即一秒内最高有 10万个请求，那么一个小时内就有 100000*3600=360000000≈2^{28.4}228.4，向上取整，大概是 2^{29}229个请求，也不是很大。我们在内存中建立3600个<code>HashMap</code>，放在一个数组里，每秒对应一个HashMap，IP地址为key, 出现次数作为value。这样，一个小时内最多有2^{29}229个pair，每个pair占8字节，总内存大概是 2^{29} \times 8=2^{32}229×8=232字节，即4GB，单机完全可以存下。</li>
+<li>同时还要新建一个固定大小为10的小根堆，用于存放当前出现次数最大的10个IP。堆顶是10个IP里频率最小的IP。</li>
+<li>每次来一个请求，就把该秒对应的HashMap里对应的IP计数器增1，并查询该IP是否已经在堆中存在，<ul>
+<li>如果不存在，则把该IP在3600个HashMap的计数器加起来，与堆顶IP的出现次数进行比较，如果大于堆顶元素，则替换掉堆顶元素，如果小于，则什么也不做</li>
+<li>如果已经存在，则把堆中该IP的计数器也增1，并调整堆</li>
+</ul>
 </li>
-<li><p>通过讲每个元素的分值设置为0，则通过ASCII编码排序</p>
-</li>
-<li>其他的语言原理是一样的<h4 id="构建分布式锁"><a href="#构建分布式锁" class="headerlink" title="构建分布式锁"></a>构建分布式锁</h4></li>
-<li><p>简易锁</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">import</span> uuid</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">acquire_lock</span><span class="params">(conn,lockname,acquire_timeout= <span class="number">10</span>)</span>:</span></span><br><span class="line">    identifier = str(uuid.uuid4())</span><br><span class="line">    end = time.time()+acquire_lock</span><br><span class="line">    <span class="keyword">while</span> time.time()&lt;end:</span><br><span class="line">        <span class="keyword">if</span> conn.setnx(<span class="string">'lock:'</span>+lockname,identifier):</span><br><span class="line">            <span class="keyword">return</span> identifier</span><br><span class="line">        time.sleep(<span class="number">0.01</span>)</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">False</span></span><br><span class="line"><span class="string">''' 问题</span></span><br><span class="line"><span class="string">    1.当前锁失效后会有很多线程去请求锁，会出现多个线程获取锁的情况</span></span><br><span class="line"><span class="string">    2.锁的持有者崩溃后不会自动释放</span></span><br><span class="line"><span class="string">'''</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>带超时的锁</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> uuid</span><br><span class="line"><span class="keyword">import</span> math</span><br><span class="line"><span class="keyword">import</span> time </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">acquire_lock_with_timeout</span><span class="params">(conn,lockname,acquire_time = <span class="number">10</span>,lock_timeout=<span class="number">10</span>)</span>:</span></span><br><span class="line">identifier = str(uuid.uuid4())</span><br><span class="line">lockname =<span class="string">'lock:'</span>+ lockname</span><br><span class="line">lock_timeout = int(math.ceil(lock_timeout))</span><br><span class="line">end = time.time()+acquire_time</span><br><span class="line"><span class="keyword">while</span> time.time()&lt;end:</span><br><span class="line">    <span class="keyword">if</span> conn.setnx(lockname,identifier):</span><br><span class="line">        conn.expire(lockname,lock_timeout)</span><br><span class="line">        <span class="keyword">return</span> identifier</span><br><span class="line">    <span class="keyword">elif</span> <span class="keyword">not</span> conn.ttl(lockname):</span><br><span class="line">        <span class="comment">#防止持有锁的线程崩溃</span></span><br><span class="line">        conn.expire(lockname,lock_timeout)</span><br><span class="line">    time.sleep(<span class="number">0.001</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">return</span> <span class="keyword">False</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>锁的几个关注点</p>
-<ul>
-<li>锁的持有者</li>
-<li>锁持有者崩溃</li>
-<li>锁的持有者超时<h4 id="计数信号量"><a href="#计数信号量" class="headerlink" title="计数信号量"></a>计数信号量</h4></li>
+<li>需要有一个后台常驻线程，每过一秒，把最旧的那个HashMap销毁，并为当前这一秒新建一个HashMap，这样维持一个一小时的窗口。</li>
+<li>每次查询top 10的IP地址时，把堆里10个IP地址返回来即可。</li>
+</ol>
+<h2 id="负载均衡"><a href="#负载均衡" class="headerlink" title="负载均衡"></a>负载均衡</h2><ul>
 <li></li>
 </ul>
+<h2 id="大数据"><a href="#大数据" class="headerlink" title="大数据"></a>大数据</h2><h3 id="数据流采样"><a href="#数据流采样" class="headerlink" title="数据流采样"></a>数据流采样</h3><h4 id="K-1"><a href="#K-1" class="headerlink" title="K=1"></a>K=1</h4><ul>
+<li>我们先考虑最简单的情况，k=1，即只需要随机抽取一个样本出来。抽样方法如下：<ol>
+<li>当第一个整数到达时，保存该整数</li>
+<li>当第2个整数到达时，以1/2的概率使用该整数替换第1个整数，以1/2的概率丢弃改整数</li>
+<li>当第i个整数到达时，以\dfrac{1}{i}<em>i</em>1的概率使用第i个整数替换被选中的整数，以 $1-\dfrac{1}{i}$的概率丢弃第i个整数</li>
+</ol>
 </li>
 </ul>
-<h1 id="Redis设计与实现"><a href="#Redis设计与实现" class="headerlink" title="Redis设计与实现"></a>Redis设计与实现</h1><h2 id="事件"><a href="#事件" class="headerlink" title="事件"></a>事件</h2><blockquote>
-<p>  redis的事件分为两种：文件事件和时间事件</p>
-</blockquote>
-<h3 id="文件事件"><a href="#文件事件" class="headerlink" title="文件事件"></a>文件事件</h3><blockquote>
-<p>  基于Reactor模式的网络事件处理器，使用I/O复用来监听多个套接字</p>
-</blockquote>
-<h4 id="文件处理器的组成"><a href="#文件处理器的组成" class="headerlink" title="文件处理器的组成"></a>文件处理器的组成</h4><p><img src="../images/redis_io.png" alt=""></p>
+<h4 id="证明"><a href="#证明" class="headerlink" title="证明"></a>证明</h4><p>​    假设数据流目前已经流出共n个整数，这个方法能保证每个元素被选中的概率是\dfrac{1}{n}<em>n</em>1吗？用数学归纳法，证明如下：</p>
+<ol>
+<li>当n=1时，由于是第1个数，被选中的概率是100%，命题成立</li>
+<li>假设当n=m(m&gt;=1)时，命题成立，即前m个数，每一个被选中的概率是$ \dfrac{1}{m}$</li>
+<li>当n=m+1时，第m+1个数被选中的概率是$ \dfrac{1}{m+1}$, 前m个数被选中的概率是$\dfrac{1}{m} \cdot (1-\dfrac{1}{m+1})=\dfrac{1}{m+1}$，命题依然成立</li>
+</ol>
+<p>由1，2，3知n&gt;=1时命题成立，证毕</p>
+<h4 id="K-gt-1"><a href="#K-gt-1" class="headerlink" title="K &gt; 1"></a>K &gt; 1</h4><ul>
+<li>当 k &gt; 1，需要随机采样多个样本时，方法跟上面很类似，<ol>
+<li>前k个整数到达时，全部保留，即被选中的概率是 100%，</li>
+<li>第i个整数到达时，以k/i<em>k</em>/<em>i</em>的概率替换k个数中的某一个，以$ 1-\dfrac{k}{i}$的概率丢弃，保留k个数不变</li>
+</ol>
+</li>
+</ul>
+<h4 id="证明-1"><a href="#证明-1" class="headerlink" title="证明"></a>证明</h4><ol>
+<li>当n=m(m&lt;=k)时，被选中的概率是100%，命题成立</li>
+<li>假设当n=m(m&gt;k)时，命题成立，即前m个数，每一个被选中的概率是 \dfrac{1}{m}<em>m</em>1</li>
+<li>当n=m+1时，第m+1个数被选中的概率是 $$\dfrac{k}{m+1}$$ 前m个数被选中的概率是$\dfrac{1}{m} \cdot [\dfrac{k}{m+1} \cdot (1-\dfrac{1}{k})+1-\dfrac{k}{m+1}]=\dfrac{1}{m+1}$，命题依然成立</li>
+<li>由1，2，3知n&gt;=1时命题成立，证毕</li>
+</ol>
+<h3 id="基数统计"><a href="#基数统计" class="headerlink" title="基数统计"></a>基数统计</h3><h4 id="HashSet"><a href="#HashSet" class="headerlink" title="HashSet"></a>HashSet</h4><h4 id="BitMap"><a href="#BitMap" class="headerlink" title="BitMap"></a>BitMap</h4><h4 id="Linear-Counting"><a href="#Linear-Counting" class="headerlink" title="Linear Counting"></a>Linear Counting</h4><ul>
+<li>选择一个哈希函数h，其结果服从均匀分布</li>
+<li>开一个长度为m的bitmap，均初始化为0(m设为多大后面有讨论)</li>
+<li>数据流每来一个元素，计算其哈希值并对m取模，然后将该位置为1</li>
+<li>查询时，设bitmap中还有u个bit为0，则不同元素的总数近似为$ -m\log\dfrac{u}{m}$</li>
+</ul>
+<h4 id="LogLog-Counting"><a href="#LogLog-Counting" class="headerlink" title="LogLog Counting"></a>LogLog Counting</h4><ol>
+<li>均匀随机化。选取一个哈希函数h应用于所有元素，然后对哈希后的值进行基数估计。哈希函数h必须满足如下条件，<ol>
+<li>哈希碰撞可以忽略不计。哈希函数h要尽可能的减少冲突</li>
+<li>h的结果是均匀分布的。也就是说无论原始数据的分布如何，其哈希后的结果几乎服从均匀分布（完全服从均匀分布是不可能的，D. Knuth已经证明不可能通过一个哈希函数将一组不服从均匀分布的数据映射为绝对均匀分布，但是很多哈希函数可以生成几乎服从均匀分布的结果，这里我们忽略这种理论上的差异，认为哈希结果就是服从均匀分布）。</li>
+<li>哈希后的结果是固定长度的</li>
+</ol>
+</li>
+<li>对于元素计算出哈希值，由于每个哈希值是等长的，令长度为L</li>
+<li>对每个哈希值，从高到低找到第一个1出现的位置，取这个位置的最大值，设为p，则基数约等于$2^p$</li>
+</ol>
+<h3 id="频率统计"><a href="#频率统计" class="headerlink" title="频率统计"></a>频率统计</h3><h4 id="HashMap"><a href="#HashMap" class="headerlink" title="HashMap"></a>HashMap</h4><h4 id="数据分片-HashMap"><a href="#数据分片-HashMap" class="headerlink" title="数据分片 + HashMap"></a>数据分片 + HashMap</h4><h4 id="Count-Min-Sketch"><a href="#Count-Min-Sketch" class="headerlink" title="Count-Min Sketch"></a>Count-Min Sketch</h4><p>Count-Min Sketch 算法流程：</p>
+<ol>
+<li>选定d个hash函数，开一个 dxm 的二维整数数组作为哈希表</li>
+<li>对于每个元素，分别使用d个hash函数计算相应的哈希值，并对m取余，然后在对应的位置上增1，二维数组中的每个整数称为sketch</li>
+<li>要查询某个元素的频率时，只需要取出d个sketch, 返回最小的那一个（其实d个sketch都是该元素的近似频率，返回任意一个都可以，该算法选择最小的那个）</li>
+</ol>
+<p><img src="/Users/mac/Documents/Blog/hexoBlog/source/images/count-min-sketch.jpg" alt=""></p>
+<h4 id="Count-Mean-Min-Sketch"><a href="#Count-Mean-Min-Sketch" class="headerlink" title="Count-Mean-Min Sketch"></a>Count-Mean-Min Sketch</h4><p>​    Count-Min Sketch算法对于<code>低频的元素</code>，<strong>结果不太准确</strong>，主要是因为hash冲突比较严重，产生了噪音，例如当m=20时，有1000个数hash到这个20桶，平均每个桶会收到50个数，这50个数的频率重叠在一块了。Count-Mean-Min Sketch 算法做了如下改进：</p>
 <ul>
-<li>尽管多个文件事件可能会并发地出现，但I/O多路复用程序总是会将所有产生事件的套接字都放到一个队列里面，然后通过这个队列，以<strong>有序（sequentially）、同步（synchronously）、每次一个套接字的</strong>方式向文件事件分派器传送套接字。当上一个套接字产生的事件被处理完毕之后（该套接字为事件所关联的事件处理器执行完毕），I/O多路复用程序才会继续向文件事件分派器传送下一个套接字</li>
+<li>来了一个查询，按照 Count-Min Sketch的正常流程，取出它的d个sketch</li>
+<li>对于每个hash函数，估算出一个噪音，噪音等于该行所有整数(除了被查询的这个元素)的平均值</li>
+<li>用该行的sketch 减去该行的噪音，作为真正的sketch</li>
+<li>返回d个sketch的中位数</li>
 </ul>
-<h4 id="I-O多路复用的实现"><a href="#I-O多路复用的实现" class="headerlink" title="I/O多路复用的实现"></a>I/O多路复用的实现</h4><p><img src="/Users/mac/Documents/Blog/hexoBlog/source/images/multi_plex.png" alt=""></p>
+<h3 id="TOPK频查询"><a href="#TOPK频查询" class="headerlink" title="TOPK频查询"></a>TOPK频查询</h3><h4 id="HashMap-Heap"><a href="#HashMap-Heap" class="headerlink" title="HashMap+Heap"></a>HashMap+Heap</h4><h4 id="多机HashMap-Heap"><a href="#多机HashMap-Heap" class="headerlink" title="多机HashMap+Heap"></a>多机HashMap+Heap</h4><h4 id="Count-Min-Sketch-Heap"><a href="#Count-Min-Sketch-Heap" class="headerlink" title="Count-Min Sketch+Heap"></a>Count-Min Sketch+Heap</h4><p>​    既然方案1中的HashMap太大，内存装不小，那么可以用<a href="https://soulmachine.gitbooks.io/system-design/content/cn/bigdata/frequency-estimation.html" target="_blank" rel="noopener">Count-Min Sketch算法</a>代替HashMap</p>
 <ul>
-<li><p>Redis的I/O多路复用程序的<strong>所有功能</strong>都是通过包装常见的select、epoll、evport和kqueue这些I/O多路复用函数库来实现的</p>
-<blockquote>
-<p>  evport &gt; epoll &gt; kqueue &gt; select</p>
-</blockquote>
-</li>
-</ul>
-<h4 id="事件类型"><a href="#事件类型" class="headerlink" title="事件类型"></a>事件类型</h4><ul>
-<li>AE_READABLE事件<ul>
-<li><strong>客户端</strong>对套接字执行write操作，或者执行close操作，会在服务端产生AE_READABLE事件</li>
-<li>新的可应答（acceptable）套接字出现</li>
-<li></li>
-</ul>
-</li>
-<li>AE_WRITABLE事件<ul>
-<li><strong>客户端</strong>对套接字执行read操作，会在服务端产生AE_WRITABLE事件</li>
+<li>在数据流不断流入的过程中，维护一个标准的Count-Min Sketch 二维数组</li>
+<li>维护一个小根堆，容量为k</li>
+<li>每次来一个新元素，<ul>
+<li>将相应的sketch增1</li>
+<li>在堆中查找该元素，如果找到，把堆里的计数器也增1，并调整堆；如果没有找到，把这个元素的sketch作为钙元素的频率的近似值，跟堆顶元素比较，如果大于堆丁元素的频率，则把堆丁元素替换为该元素，并调整堆</li>
 </ul>
 </li>
 </ul>
-<h4 id="文件事件处理器"><a href="#文件事件处理器" class="headerlink" title="文件事件处理器"></a>文件事件处理器</h4><ul>
-<li>连接应答处理器。<ul>
-<li>服务器对客户端的连接请求进行应答</li>
-</ul>
-</li>
-<li>命令请求处理器<ul>
-<li>服务器接收客户端发来的命令请求</li>
-</ul>
-</li>
-<li>命令回复处理器<ul>
-<li>服务器向客户端发送命令回复</li>
-</ul>
-</li>
-<li>复制处理器。<ul>
-<li>当主服务器和从服务器进行复制操作时</li>
-</ul>
-</li>
-</ul>
-<h3 id="时间事件"><a href="#时间事件" class="headerlink" title="时间事件"></a>时间事件</h3><ul>
-<li><p>定时事件</p>
-</li>
-<li><p>周期性事件</p>
-</li>
-</ul>
-<h4 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h4><ul>
-<li><p>一个时间事件主要由以下三个属性组成：</p>
-<ul>
-<li>id：服务器为时间事件创建的全局唯一ID（标识号）,ID号按从小到大的顺序递增，新事件的ID号比旧事件的ID号要大。</li>
-<li>when：毫秒精度的UNIX时间戳，记录了时间事件的到达（arrive）时间。</li>
-<li>timeProc：时间事件处理器，一个函数。当时间事件到达时，服务器就会调用相应的处理器来处理事件。</li>
-</ul>
-</li>
-<li><p>服务器将所有时间事件都放在一个<strong>无序链表</strong>(指不按when的大小排序)中，每当时间事件执行器运行时，它就<strong>遍历整个链表</strong>，查找所有已到达的时间事件，并调用相应的事件处理器</p>
-</li>
-<li><p>正常模式下的Redis服务器只使用serverCron一个时间事件，而在benchmark模式下，服务器也只使用两个时间事件，所以无序不会影响性能</p>
-</li>
-</ul>
-<h4 id="时间事件应用实例：serverCron函数"><a href="#时间事件应用实例：serverCron函数" class="headerlink" title="时间事件应用实例：serverCron函数"></a>时间事件应用实例：serverCron函数</h4><ul>
-<li><p>持续运行的Redis服务器需要定期对自身的资源和状态进行检查和调整</p>
-<ul>
-<li>更新服务器的各类统计信息，比如时间、内存占用、数据库占用情况等。</li>
-<li>清理数据库中的过期键值对</li>
-<li>关闭和清理连接失效的客户端。</li>
-<li>尝试进行AOF或RDB持久化操作。</li>
-<li>如果服务器是主服务器，那么对从服务器进行定期同步</li>
-<li>如果处于集群模式，对集群进行定期同步和连接测试</li>
-</ul>
-</li>
-<li><p>Redis服务器以<strong>周期性事件</strong>的方式来运行serverCron函数，在服务器运行期间，每隔一段时间，serverCron，2.6为100毫秒运行一次，2.8开始可配置</p>
-</li>
-</ul>
-<h3 id="事件调度"><a href="#事件调度" class="headerlink" title="事件调度"></a>事件调度</h3><ul>
-<li>伪代码</li>
-</ul>
-<p><img src="/Users/mac/Documents/Blog/hexoBlog/source/images/redis_schdule.png" alt=""></p>
-<ul>
-<li>processFileEvents()是虚构的，在实际中，处理已产生文件事件的代码是直接写在aeProcessEvents函数里面的</li>
-<li><p><img src="/Users/mac/Documents/Blog/hexoBlog/source/images/redis_runtime.png" alt=""></p>
-</li>
-<li><p>事件调度原则</p>
-<ul>
-<li>aeApiPoll函数的最大阻塞时间由<strong>到达时间最接近当前时间的时间事件决定</strong>，这个方法既可以避免服务器对时间事件进行频繁的轮询（忙等待），也可以确保aeApiPoll函数不会阻塞过长时间</li>
-<li>因为文件事件是随机出现的，如果等待并处理完一次文件事件之后，仍<strong>未有任何时间事件到达</strong>，那么服务器将再次<strong>等待并处理文件事件</strong>。随着文件事件的不断执行，时间会逐渐向时间事件所设置的到达时间逼近，并最终来到到达时间，这时服务器就可以开始处理到达的时间事件了</li>
-<li>对文件事件和时间事件的处理都是同步、有序、原子地执行的，服务器不会中途中断事件处理，也不会对事件进行抢占，所以为了减少程序阻塞的时间，有需要时主动让出执行权，从而降低造成事件饥饿的可能性。比如说，在命令回复处理器将一个命令回复写入到客户端套接字时，如果写入字节数超过了一个预设常量的话，命令回复处理器就会主动用break跳出写入循环，将余下的数据留到下次再写；另外，时间事件也会将非常耗时的持久化操作放到子线程或者子进程执</li>
-<li>因为时间事件在文件事件之后执行，并且事件之间不会出现抢占，所以时间事件的实际处理时间，通常会比时间事件设定的到达时间稍晚一些。</li>
-</ul>
-</li>
+<h4 id="Lossy-Counting"><a href="#Lossy-Counting" class="headerlink" title="Lossy Counting"></a>Lossy Counting</h4><p>Lossy Couting 算法流程：</p>
+<ol>
+<li>建立一个HashMap，用于存放每个元素的出现次数</li>
+<li>建立一个窗口（窗口的大小由错误率决定，后面具体讨论）</li>
+<li>等待数据流不断流进这个窗口，直到窗口满了，开始统计每个元素出现的频率，统计结束后，每个元素的频率减1，然后将出现次数为0的元素从HashMap中删除</li>
+<li>返回第2步，不断循环</li>
+</ol>
+<p>Lossy Counting 背后朴素的思想是，<strong>出现频率高的元素，不太可能减一后变成0，如果某个元素在某个窗口内降到了0，说明它不太可能是高频元素</strong>，可以不再跟踪它的计数器了。随着处理的窗口越来越多，HashMap也会不断增长，同时HashMap里的低频元素会被清理出去，这样内存占用会保持在一个很低的水平。</p>
+<p>​    它的错误率是可以在数学上证明它的边界的。假设要求错误率不大于<code>ε</code>，那么<code>窗口大小为1/ε</code>，对于长度为N的流，有N／（1/ε）＝εN 个窗口，由于每个窗口结束时减一了，那么频率最多被少计数了窗口个数εN</p>
+<h4 id="成员查询"><a href="#成员查询" class="headerlink" title="成员查询"></a>成员查询</h4><ul>
+<li>Bloom过滤器</li>
 </ul>
 
       
@@ -767,7 +747,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/redis/" rel="tag"># redis</a>
+            <a href="/tags/system-design/" rel="tag"># system_design</a>
           
         </div>
       
@@ -780,8 +760,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/03/18/algorithms/" rel="next" title="Algorithms">
-                <i class="fa fa-chevron-left"></i> Algorithms
+              <a href="/2020/02/23/golang/" rel="next" title="golang.md">
+                <i class="fa fa-chevron-left"></i> golang.md
               </a>
             
           </div>
@@ -789,10 +769,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2020/01/01/OS/" rel="prev" title="OS">
-                OS <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -1012,7 +988,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#redis事务"><span class="nav-number">1.</span> <span class="nav-text">redis事务</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#事务型流水线"><span class="nav-number">1.1.</span> <span class="nav-text">事务型流水线</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#关键指令"><span class="nav-number">1.1.1.</span> <span class="nav-text">关键指令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#非事务型流水线"><span class="nav-number">1.1.2.</span> <span class="nav-text">非事务型流水线</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#redis-性能测试"><span class="nav-number">1.1.3.</span> <span class="nav-text">redis 性能测试</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#构建应用程序组件"><span class="nav-number">2.</span> <span class="nav-text">构建应用程序组件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#自动补全"><span class="nav-number">2.1.</span> <span class="nav-text">自动补全</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#简单自动补全"><span class="nav-number">2.1.1.</span> <span class="nav-text">简单自动补全</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#利用有序集合的特性"><span class="nav-number">2.1.2.</span> <span class="nav-text">利用有序集合的特性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#构建分布式锁"><span class="nav-number">2.1.3.</span> <span class="nav-text">构建分布式锁</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#计数信号量"><span class="nav-number">2.1.4.</span> <span class="nav-text">计数信号量</span></a></li></ol></li></ol></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#Redis设计与实现"><span class="nav-number"></span> <span class="nav-text">Redis设计与实现</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#事件"><span class="nav-number">1.</span> <span class="nav-text">事件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#文件事件"><span class="nav-number">1.1.</span> <span class="nav-text">文件事件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#文件处理器的组成"><span class="nav-number">1.1.1.</span> <span class="nav-text">文件处理器的组成</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#I-O多路复用的实现"><span class="nav-number">1.1.2.</span> <span class="nav-text">I/O多路复用的实现</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#事件类型"><span class="nav-number">1.1.3.</span> <span class="nav-text">事件类型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#文件事件处理器"><span class="nav-number">1.1.4.</span> <span class="nav-text">文件事件处理器</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#时间事件"><span class="nav-number">1.2.</span> <span class="nav-text">时间事件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#实现"><span class="nav-number">1.2.1.</span> <span class="nav-text">实现</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#时间事件应用实例：serverCron函数"><span class="nav-number">1.2.2.</span> <span class="nav-text">时间事件应用实例：serverCron函数</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#事件调度"><span class="nav-number">1.3.</span> <span class="nav-text">事件调度</span></a></li></ol></li></ol></li></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#分布式ID生成器"><span class="nav-number">1.</span> <span class="nav-text">分布式ID生成器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#常见"><span class="nav-number">1.1.</span> <span class="nav-text">常见</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#要求"><span class="nav-number">1.2.</span> <span class="nav-text">要求</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#UUID"><span class="nav-number">1.3.</span> <span class="nav-text">UUID</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多台Mysql服务器"><span class="nav-number">1.4.</span> <span class="nav-text">多台Mysql服务器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Twitter-Snowflake"><span class="nav-number">1.5.</span> <span class="nav-text">Twitter Snowflake</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">1.6.</span> <span class="nav-text">总结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#短网址服务-TinyURL"><span class="nav-number">2.</span> <span class="nav-text">短网址服务(TinyURL)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#短网址的长度"><span class="nav-number">2.1.</span> <span class="nav-text">短网址的长度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一对一还是一对多映射"><span class="nav-number">2.2.</span> <span class="nav-text">一对一还是一对多映射</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#如何计算短网址"><span class="nav-number">2.3.</span> <span class="nav-text">如何计算短网址</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#如何存储"><span class="nav-number">2.4.</span> <span class="nav-text">如何存储</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#301还是302重定向"><span class="nav-number">2.5.</span> <span class="nav-text">301还是302重定向</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#预防攻击"><span class="nav-number">2.6.</span> <span class="nav-text">预防攻击</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#API限速"><span class="nav-number">3.</span> <span class="nav-text">API限速</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#设计一个API访问限速类，实现如下接口"><span class="nav-number">3.1.</span> <span class="nav-text">设计一个API访问限速类，实现如下接口</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实时输出最近一个小时内访问频率最高的10个IP"><span class="nav-number">4.</span> <span class="nav-text">实时输出最近一个小时内访问频率最高的10个IP</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#要求-1"><span class="nav-number">4.1.</span> <span class="nav-text">要求</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解法"><span class="nav-number">4.2.</span> <span class="nav-text">解法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#负载均衡"><span class="nav-number">5.</span> <span class="nav-text">负载均衡</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#大数据"><span class="nav-number">6.</span> <span class="nav-text">大数据</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#数据流采样"><span class="nav-number">6.1.</span> <span class="nav-text">数据流采样</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#K-1"><span class="nav-number">6.1.1.</span> <span class="nav-text">K=1</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#证明"><span class="nav-number">6.1.2.</span> <span class="nav-text">证明</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#K-gt-1"><span class="nav-number">6.1.3.</span> <span class="nav-text">K &gt; 1</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#证明-1"><span class="nav-number">6.1.4.</span> <span class="nav-text">证明</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基数统计"><span class="nav-number">6.2.</span> <span class="nav-text">基数统计</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#HashSet"><span class="nav-number">6.2.1.</span> <span class="nav-text">HashSet</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#BitMap"><span class="nav-number">6.2.2.</span> <span class="nav-text">BitMap</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Linear-Counting"><span class="nav-number">6.2.3.</span> <span class="nav-text">Linear Counting</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#LogLog-Counting"><span class="nav-number">6.2.4.</span> <span class="nav-text">LogLog Counting</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#频率统计"><span class="nav-number">6.3.</span> <span class="nav-text">频率统计</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#HashMap"><span class="nav-number">6.3.1.</span> <span class="nav-text">HashMap</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#数据分片-HashMap"><span class="nav-number">6.3.2.</span> <span class="nav-text">数据分片 + HashMap</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Count-Min-Sketch"><span class="nav-number">6.3.3.</span> <span class="nav-text">Count-Min Sketch</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Count-Mean-Min-Sketch"><span class="nav-number">6.3.4.</span> <span class="nav-text">Count-Mean-Min Sketch</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TOPK频查询"><span class="nav-number">6.4.</span> <span class="nav-text">TOPK频查询</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#HashMap-Heap"><span class="nav-number">6.4.1.</span> <span class="nav-text">HashMap+Heap</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#多机HashMap-Heap"><span class="nav-number">6.4.2.</span> <span class="nav-text">多机HashMap+Heap</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Count-Min-Sketch-Heap"><span class="nav-number">6.4.3.</span> <span class="nav-text">Count-Min Sketch+Heap</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Lossy-Counting"><span class="nav-number">6.4.4.</span> <span class="nav-text">Lossy Counting</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#成员查询"><span class="nav-number">6.4.5.</span> <span class="nav-text">成员查询</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
