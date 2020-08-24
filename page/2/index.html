@@ -315,7 +315,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives<span class="badge">13</span></a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives<span class="badge">14</span></a>
 
   </li>
         
@@ -437,6 +437,333 @@
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/27/network/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="BenjaminYuan">
+      <meta itemprop="description" content="记录生活点滴">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Benji'blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/02/27/network/" class="post-title-link" itemprop="http://yoursite.com/page/2/index.html">Network</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-02-27 20:02:49" itemprop="dateCreated datePublished" datetime="2019-02-27T20:02:49+08:00">2019-02-27</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2020-04-01 15:26:47" itemprop="dateModified" datetime="2020-04-01T15:26:47+08:00">2020-04-01</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/计网/" itemprop="url" rel="index"><span itemprop="name">计网</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="常见问题"><a href="#常见问题" class="headerlink" title="常见问题"></a>常见问题</h2><h3 id="ping"><a href="#ping" class="headerlink" title="ping"></a>ping</h3><ul>
+<li>ICMP(internet Control Message Protocol)<h3 id="http和https的区别"><a href="#http和https的区别" class="headerlink" title="http和https的区别"></a>http和https的区别</h3></li>
+<li>http = http+ssl</li>
+<li>http端口80，https端口443</li>
+<li>http为明文传输</li>
+<li>https过程：<pre><code>* 客户端请求公钥，同时验证公钥
+* 验证成功，客户端通过公钥加密客户端的生成的随机值，通过这个随机值进行加密解密
+</code></pre></li>
+<li>https会是页面加载时间延长50%，增加10%～20%的耗电<h3 id="TCP"><a href="#TCP" class="headerlink" title="TCP"></a>TCP</h3></li>
+<li>三次握手目的：信息对等和防止超时;</li>
+<li>四次握手目的</li>
+<li>TCP连接断开过程：<br>1、客户端TCP模块在收到应用程序的通知后，发送FIN，seq=x。<br>2、服务器收到FIN报文段，发送ACK，确认号=x+1，并且通知应用程序客户端关闭了连接。客户端收到ACK报文段。<br>3、服务器端的应用程序通知TCP关闭连接，服务器端TCP发送FIN+ACK，seq=y，确认号=x+1（这里ACK只是一般性的捎带ACK，TCP总是这样，以增强健壮性，反正也不费力气，从原理上说，对连接断开不是必须的）。<br>4、客户端收到FIN+ACK报文段后，发送ACK，确认号y+1。服务器收到ACK报文段后，连接断开。<br>  第二步是不能省略的<br>  因为，第二步中，服务器端通知应用程序并获得反馈信息可能需要可观的时间，这可能涉及人机交互操作，也可能服务器应用层暂时还不想关闭连接。第二步结束后，服务器还可以继续通过这条连接发送数据给客户端，客户端已经不能发送数据了，但是仍然可以回复ACK。第二步中服务器立即发送确认是为了防止客户端重传FIN报文。</li>
+<li>time_wait 2msl：</li>
+<li><strong>保证这次连接的重复数据段从网络中消失</strong></li>
+<li><strong>保证TCP协议的全双工连接能够可靠关闭</strong></li>
+</ul>
+<h3 id="CDN原理"><a href="#CDN原理" class="headerlink" title="CDN原理"></a>CDN原理</h3><ul>
+<li>CDN是构建在网络之上的内容分发网络，依靠部署在各地的边缘服务器，通过中心平台的负载均衡、内容分发、调度等功能模块，使用户就近获取所需内容，降低网络拥塞，提高用户访问响应速度和命中率。CDN的关键技术主要有内容存储和分发技术。</li>
+</ul>
+<h3 id="套接字"><a href="#套接字" class="headerlink" title="套接字"></a>套接字</h3><p><a href="https://www.cnblogs.com/skynet/archive/2010/12/12/1903949.html" target="_blank" rel="noopener"></a></p>
+<h4 id="一个套接字准备好读（满足任一）。"><a href="#一个套接字准备好读（满足任一）。" class="headerlink" title="一个套接字准备好读（满足任一）。"></a>一个套接字准备好读（满足任一）。</h4><ol>
+<li>该套接字接收缓冲区中的数据字节数大于等于套接字接收缓存区低水位。对于TCP和UDP套接字而言，<strong>缓冲区低水位的值默认为1</strong>。那就意味着，默认情况下，只要缓冲区中有数据，那就是可读的。我们可以通过使用SO_RCVLOWAT套接字选项(参见setsockopt函数)来设置该套接字的低水位大小。此种描述符就绪(可读)的情况下，当我们使用read/recv等对该套接字执行读操作的时候，套接字不会阻塞，而是成功返回一个大于0的值（即可读数据的大小）。</li>
+<li>该连接的读半部关闭（也就是接收了FIN的TCP连接）。对这样的套接字的读操作，将不会阻塞，而是返回0（也就是EOF）。</li>
+<li>该套接字是一个listen的监听套接字，并且目前已经完成的连接数不为0。对这样的套接字进行accept操作通常不会阻塞。</li>
+<li>有一个错误套接字待处理。对这样的套接字的读操作将不阻塞并返回-1（也就是返回了一个错误），同时把errno设置成确切的错误条件。这些待处理错误(pending error)也可以通过指定SO_ERROR套接字选项调用getsockopt获取并清除。</li>
+</ol>
+<h4 id="一个套接字准备好写的条件（满足任一）。"><a href="#一个套接字准备好写的条件（满足任一）。" class="headerlink" title="一个套接字准备好写的条件（满足任一）。"></a>一个套接字准备好写的条件（满足任一）。</h4><ol>
+<li>该套接字<strong>发送缓冲区中的可用空间字节数大于等于套接字发送缓存区低水位标记时</strong>，并且该套接字已经成功连接（UDP套接字不需要连接）。对于TCP和UDP而言，这个低水位的值默认为<strong>2048bytes</strong>，而套接字默认的发送缓冲区大小是8k，这就意味着一般一个套接字连接成功后，就是处于可写状态的。我们可以通过SO_SNDLOWAT套接字选项（参见setsockopt函数）来设置这个低水位。此种情况下，我们设置该套接字为非阻塞，对该套接字进行写操作(如write,send等)，将不阻塞，并返回一个正值（例如由传输层接受的字节数，即发送的数据大小）。</li>
+<li>该连接的写半部关闭(主动发送FIN包的TCP连接)。对这样的套接字的写操作将会产生SIGPIPE信号。所以我们的网络程序基本都要自定义处理SIGPIPE信号。因为SIGPIPE信号的默认处理方式是程序退出。</li>
+<li>使用非阻塞的connect套接字已建立连接，或者connect已经以失败告终。即connect有结果了。</li>
+<li>有一个错误的套接字待处理。对这样的套接字的写操作将不阻塞并返回-1（也就是返回了一个错误），同时把errno设置成确切的错误条件。这些待处理的错误也可以通过指定SO_ERROR套接字选项调用getsockopt获取并清除。</li>
+</ol>
+<h4 id="close和shutdown的区别"><a href="#close和shutdown的区别" class="headerlink" title="close和shutdown的区别"></a>close和shutdown的区别</h4><ul>
+<li>shutdown破坏读/写连接</li>
+<li><p>close减引用计数</p>
+<h4 id="UNIX-Domain-Socket"><a href="#UNIX-Domain-Socket" class="headerlink" title="UNIX Domain Socket"></a>UNIX Domain Socket</h4></li>
+<li><p>用于IPC,不需要经过网络协议栈，不需要打包拆包、计算校验和、维护序号和应答等，只是将应用层数据从一个进程拷贝到另一个进程。UNIX Domain Socket有<code>SOCK_DGRAM</code>或<code>SOCK_STREAM</code>两种工作模式，类似于UDP和TCP，但是<code>面向消息的UNIX Domain Socket也是可靠的</code>，消息既<code>不会丢失</code>也<code>不会顺序错乱</code></p>
+</li>
+<li><p>创建</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">socket(AF_UNIX,SOCK_DGRAM,<span class="number">0</span>);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>因为应用于IPC，所以UNIXDomain socket不需要IP和端口，用文件路径来表示“网络地址”</p>
+<ul>
+<li>UNIXDomain socket用结构体sockaddr_un表示，是一个socket类型的文件在文件系统中的路径，这个socket文件由bind()调用创建，如果调用bind()时该文件已存在，则bind()错误返回。</li>
+<li>UNIX Domain Socket客户端一般要显式调用bind函数，而不象网络socket一样依赖系统自动分配的地址</li>
+</ul>
+</li>
+</ul>
+<h3 id="IP地址类型"><a href="#IP地址类型" class="headerlink" title="IP地址类型"></a>IP地址类型</h3><ul>
+<li>IP: 网络ID+主机ID</li>
+<li>A类地址<ul>
+<li>一个字节网络ID+3字节主机地址构成</li>
+<li>网络地址最高位为 0</li>
+<li>range: 1.0.0.0–126.0.0.0</li>
+</ul>
+</li>
+<li>B类地址<ul>
+<li>2个网络IP地址+2个主机地址</li>
+<li>网络地址最高位为 10（即:128的二进制10000000)</li>
+<li>range:128.0.0.0–191.255,255,255</li>
+</ul>
+</li>
+<li>C类地址<ul>
+<li>3byte网络地址+1byte主机地址</li>
+<li>最高位 110</li>
+<li>range: 192.0.0.0–223.255.255.255</li>
+</ul>
+</li>
+<li>D类地址<ul>
+<li>广播地址<h3 id="保留地址"><a href="#保留地址" class="headerlink" title="保留地址"></a>保留地址</h3></li>
+</ul>
+</li>
+<li>A类保留地址10.0.0.0–10.255.255.255</li>
+<li>B类保留地址172.16.0.0–172.31.255.255</li>
+<li>C类保留地址192.168.0.0–192.168.255.255<h3 id="广播地址"><a href="#广播地址" class="headerlink" title="广播地址"></a>广播地址</h3></li>
+<li>主机位置1</li>
+<li>如果有子网隐码如：/17,则后17置为1;<h3 id="线材"><a href="#线材" class="headerlink" title="线材"></a>线材</h3></li>
+<li>双绞线Max:100m</li>
+<li><p>同轴电缆:1000m</p>
+<h3 id="HTTP2"><a href="#HTTP2" class="headerlink" title="HTTP2"></a>HTTP2</h3></li>
+<li><p><a href="https://developers.google.com/web/fundamentals/performance/http2?hl=zh-cn" target="_blank" rel="noopener">Google的一篇博客</a></p>
+</li>
+</ul>
+<p>HTTP3</p>
+<h2 id="epoll、poll、select"><a href="#epoll、poll、select" class="headerlink" title="epoll、poll、select"></a>epoll、poll、select</h2><h3 id="I-O模型"><a href="#I-O模型" class="headerlink" title="I/O模型"></a>I/O模型</h3><ul>
+<li><a href="https://wenchao.ren/2019/07/Select%E3%80%81Epoll%E3%80%81KQueue%E5%8C%BA%E5%88%AB/" target="_blank" rel="noopener">转发博客</a></li>
+<li><img src="../images/iomodel.png" alt=""><h3 id="IO方式"><a href="#IO方式" class="headerlink" title="IO方式"></a>IO方式</h3></li>
+<li>同步IO和异步IO的区别就在于：数据访问的时候进程是否阻塞</li>
+<li>阻塞IO和非阻塞IO的区别就在于：应用程序的调用是否立即返回<h3 id="I-O多路复用"><a href="#I-O多路复用" class="headerlink" title="I/O多路复用"></a>I/O多路复用</h3></li>
+<li>内核发现进程指定的一个或多个I/O条件满足时，就通知进程。</li>
+<li>select是POSIX定义的，epoll是Linux所特有<h3 id="select"><a href="#select" class="headerlink" title="select"></a>select</h3></li>
+<li>特点<ul>
+<li>bitmap的原因文件描述符有限</li>
+<li>数据频繁的内核和用户态之间的拷贝</li>
+<li>需要轮询fd数组</li>
+</ul>
+</li>
+</ul>
+<h3 id="poll"><a href="#poll" class="headerlink" title="poll"></a>poll</h3><ul>
+<li><p>特点</p>
+<ul>
+<li>链表存储，监听的文件描述符没有限制</li>
+<li>需要轮询<h3 id="epoll"><a href="#epoll" class="headerlink" title="epoll"></a>epoll</h3></li>
+</ul>
+</li>
+<li><p>特点</p>
+<ul>
+<li>epoll使用一个文件描述符管理多个描述符</li>
+<li>监视的描述符数量不受限制，它所支持的FD上限是最大可以打开文件的数目</li>
+<li>IO的效率不会随着监视fd的数量的增长而下降。epoll不同于select和poll轮询的方式，而是通过每个fd定义的回调函数来实现的。只有就绪的fd才会执行回调函数</li>
+<li><code>epoll_wait</code>阻塞等待内核通知。<h4 id="ET和LT模式"><a href="#ET和LT模式" class="headerlink" title="ET和LT模式"></a>ET和LT模式</h4></li>
+</ul>
+</li>
+<li><p>默认采用LT模式，LT支持阻塞和非阻塞套，ET模式只支持非阻塞套接字，其效率要高于LT模式</p>
+</li>
+<li><p>LT的读写模式</p>
+<ul>
+<li>LT对于read操作比较简单，有read事件就读，读多读少都没有问题</li>
+<li>一般来说socket在空闲状态时发送缓冲区一定是不满的，假如fd一直在监控中，那么会一直通知写事件，不胜其烦，所以必须保证没有数据要发送的时候，要把fd的写事件监控从epoll列表中删除，需要的时候再加入回去</li>
+</ul>
+</li>
+<li><p><strong>ET的读写操作</strong></p>
+<ul>
+<li>fd可读则返回可读事件，若开发者没有把所有数据读取完毕，epoll不会再次通知read事件</li>
+<li>若发送缓冲区未满，epoll通知write事件，直到开发者填满发送缓冲区，epoll才会在下次发送缓冲区由满变成未满时通知write事件</li>
+<li>ET模式下accept存在的问题，多个连接同时到达，服务器的TCP就绪队列瞬间积累多个就绪连接，由于是边缘触发模式，epoll只会通知一次，accept只处理一个连接，导致TCP就绪队列中剩下的连接都得不到处理，解决办法是用while循环抱住accept调用，处理完TCP就绪队列中的所有连接后再退出循环</li>
+</ul>
+</li>
+<li><p><strong>ET模式的线程饥饿问题</strong></p>
+<ul>
+<li>如果某个socket源源不断地收到非常多的数据，在试图读取完所有数据的过程中，有可能会造成其他的socket得不到处理，从而造成饥饿问题</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p><strong>LE和ET场景</strong></p>
+<ul>
+<li>在很容易触发EPOLLOUT，则使用ET，ET模式下，当再次epoll返回EPOLLOUT事件时，继续写出待写出的数据，当没有数据需要写出时，不处理直接略过即可。而LT模式则需要先打开EPOLLOUT，当没有数据需要写出时，再关闭EPOLLOUT（否则会一直返回EPOLLOUT事件）</li>
+</ul>
+</li>
+</ul>
+<h4 id="EPOLLSHOTONE"><a href="#EPOLLSHOTONE" class="headerlink" title="EPOLLSHOTONE"></a>EPOLLSHOTONE</h4><ul>
+<li>A线程读完某socket上数据后开始处理这些数据，此时该socket上又有新数据可读，B线程被唤醒读新的数据，造成2个线程同时操作一个socket的局面 ，EPOLLONESHOT保证一个socket连接在任一时刻只被一个线程处理</li>
+<li>如果对描述符socket注册了EPOLLONESHOT事件，那么操作系统<strong>最多触发其上注册的一个可读、可写或者异常事件，且只触发一次</strong>。想要下次再触发则必须使用epoll_ctl重置该描述符上注册的事件，包括EPOLLONESHOT 事件</li>
+</ul>
+<h4 id="epoll惊群问题"><a href="#epoll惊群问题" class="headerlink" title="epoll惊群问题"></a>epoll惊群问题</h4><ul>
+<li>但是在epoll中仍然存在惊群问题，表现起来就是当多个进程/线程调用epoll_wait时会阻塞等待，当内核触发可读写事件，所有进程/线程都会进行响应，但是<strong>实际上只有一个进程/线程真实处理这些事件</strong>。</li>
+</ul>
+<p>###关于Reactor和PProactor模式</p>
+<ul>
+<li><p><a href="https://www.zhihu.com/question/26943938" target="_blank" rel="noopener">知乎问题</a></p>
+</li>
+<li><p>两者也有相同点：demultiplexor负责提交IO操作(异步)、查询设备是否可操作(同步)，然后当条件满足时，就回调handler</p>
+</li>
+<li>不同点在于，异步情况下(Proactor)，当回调handler时，表示IO操作已经完成；同步情况下(Reactor)，回调handler时，表示IO设备可以进行某个操作(read/write)</li>
+</ul>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
     
       
 
@@ -1021,7 +1348,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">13</span>
+                    <span class="site-state-item-count">14</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>

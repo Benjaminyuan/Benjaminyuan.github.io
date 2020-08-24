@@ -118,10 +118,13 @@
 <meta property="og:site_name" content="Benji&#39;blog">
 <meta property="og:description" content="DataBase">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2020-05-06T14:37:02.099Z">
+<meta property="og:image" content="http://yoursite.com/2020/02/07/images/mysql_sql_process.png">
+<meta property="og:image" content="http://yoursite.com/Users/mac/Documents/Blog/hexoBlog/source/images/sql_updage.png">
+<meta property="og:updated_time" content="2020-06-01T08:26:17.842Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数据库相关知识笔记">
 <meta name="twitter:description" content="DataBase">
+<meta name="twitter:image" content="http://yoursite.com/2020/02/07/images/mysql_sql_process.png">
 
 
 
@@ -316,7 +319,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives<span class="badge">13</span></a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives<span class="badge">14</span></a>
 
   </li>
         
@@ -513,7 +516,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2020-05-06 22:37:02" itemprop="dateModified" datetime="2020-05-06T22:37:02+08:00">2020-05-06</time>
+                <time title="Modified: 2020-06-01 16:26:17" itemprop="dateModified" datetime="2020-06-01T16:26:17+08:00">2020-06-01</time>
               
             
           </span>
@@ -681,6 +684,34 @@
 </ul>
 </li>
 </ul>
+<h2 id="MySql"><a href="#MySql" class="headerlink" title="MySql"></a>MySql</h2><p><img src="../images/mysql_sql_process.png" alt=""></p>
+<p><img src="/Users/mac/Documents/Blog/hexoBlog/source/images/sql_updage.png" alt=""></p>
+<h2 id="InnoDB"><a href="#InnoDB" class="headerlink" title="InnoDB"></a>InnoDB</h2><h3 id="事务"><a href="#事务" class="headerlink" title="事务"></a>事务</h3><h4 id="redo"><a href="#redo" class="headerlink" title="redo"></a>redo</h4><blockquote>
+<p>  重做日志用来实现事物的持久性，D</p>
+</blockquote>
+<h5 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h5><ul>
+<li>内存中的重做日志缓冲（redo log buffer）</li>
+<li>重做日志文件（redo log file）</li>
+<li>数据流: 重做日志缓冲—&gt; 文件系统缓存 —&gt; fsync，写重做日志文件（刷盘）</li>
+</ul>
+<h5 id="优化"><a href="#优化" class="headerlink" title="优化"></a>优化</h5><ul>
+<li><p>刷盘的效率决定了事务提交的性能</p>
+</li>
+<li><p>控制参数：innodb_flush_log_at_trx_commit</p>
+<ul>
+<li>0: 事务提交时不写重做日志（联系前面innodb的内存分布，这时候数据应该缓冲池数据页），由master thread 完成整个过程</li>
+<li>1: 由事务提交即进行fsync操作，即整条数据流走完（默认）</li>
+<li>2: 事务提交仅写入文件系统缓存（写一半）</li>
+</ul>
+</li>
+<li><p>参数取值不同带来的性能影响</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> test_load(</span><br><span class="line">	a <span class="built_in">int</span>,</span><br><span class="line">  b <span class="built_in">char</span>(<span class="number">80</span>)</span><br><span class="line">)<span class="keyword">engine</span>=<span class="keyword">innodb</span>;</span><br><span class="line">delimiter //</span><br><span class="line"><span class="keyword">create</span> <span class="keyword">procedure</span> p_load(<span class="keyword">count</span> <span class="built_in">int</span> <span class="keyword">unsigned</span>)</span><br><span class="line"><span class="keyword">begin</span> </span><br><span class="line"><span class="keyword">declare</span> s <span class="built_in">int</span> <span class="keyword">unsigned</span> <span class="keyword">default</span> <span class="number">1</span>;</span><br><span class="line"><span class="keyword">declare</span> c <span class="built_in">char</span>(<span class="number">80</span>) <span class="keyword">default</span> <span class="keyword">repeat</span>(<span class="string">'a'</span>,<span class="number">80</span>);</span><br><span class="line">while s &lt;= count do </span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> test_load <span class="keyword">select</span> <span class="literal">null</span>,c;</span><br><span class="line"><span class="keyword">commit</span>;</span><br><span class="line"><span class="keyword">set</span> s = s + <span class="number">1</span>;</span><br><span class="line"><span class="keyword">end</span> <span class="keyword">while</span>;</span><br><span class="line"><span class="keyword">end</span>;</span><br><span class="line">// </span><br><span class="line">delimiter ;</span><br><span class="line"></span><br><span class="line"><span class="keyword">call</span> p_load(<span class="number">50000</span>)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h5 id="重做日志和binlog日志的区别"><a href="#重做日志和binlog日志的区别" class="headerlink" title="重做日志和binlog日志的区别"></a>重做日志和binlog日志的区别</h5><ul>
+<li>重做日志时innodb引擎层面，binlog日志Mysql数据库层面的日志</li>
+<li>binlog日志记录的是sql语句，innodb记录的是对页的修改</li>
+</ul>
 
       
     </div>
@@ -830,7 +861,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">13</span>
+                    <span class="site-state-item-count">14</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -978,7 +1009,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#DataBase"><span class="nav-number">1.</span> <span class="nav-text">DataBase</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#索引的一篇文章"><span class="nav-number">1.1.</span> <span class="nav-text">索引的一篇文章</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ACID"><span class="nav-number">1.2.</span> <span class="nav-text">ACID</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#索引的类型"><span class="nav-number">1.3.</span> <span class="nav-text">索引的类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#主键和唯一索引的区别"><span class="nav-number">1.4.</span> <span class="nav-text">主键和唯一索引的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#索引的优点"><span class="nav-number">1.5.</span> <span class="nav-text">索引的优点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#索引的缺点"><span class="nav-number">1.6.</span> <span class="nav-text">索引的缺点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#索引失效"><span class="nav-number">1.7.</span> <span class="nav-text">索引失效</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mysql"><span class="nav-number">2.</span> <span class="nav-text">mysql</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Mysqldump"><span class="nav-number">2.1.</span> <span class="nav-text">Mysqldump</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#事务级别"><span class="nav-number">2.2.</span> <span class="nav-text">事务级别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#编码问题"><span class="nav-number">2.3.</span> <span class="nav-text">编码问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mysql引擎"><span class="nav-number">2.4.</span> <span class="nav-text">mysql引擎</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BTree和B-Tree"><span class="nav-number">2.5.</span> <span class="nav-text">BTree和B+Tree</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MVCC"><span class="nav-number">2.6.</span> <span class="nav-text">MVCC</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#MVCC逻辑流程"><span class="nav-number">2.6.1.</span> <span class="nav-text">MVCC逻辑流程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#InnoDB-MVCC的实现"><span class="nav-number">2.6.2.</span> <span class="nav-text">InnoDB MVCC的实现</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#WAL实现一致性"><span class="nav-number">2.7.</span> <span class="nav-text">WAL实现一致性</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SQL常见"><span class="nav-number">3.</span> <span class="nav-text">SQL常见</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#统计"><span class="nav-number">3.1.</span> <span class="nav-text">统计</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#包含"><span class="nav-number">3.2.</span> <span class="nav-text">包含</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#join"><span class="nav-number">3.2.1.</span> <span class="nav-text">join</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#日期操作-类型为date的column"><span class="nav-number">4.</span> <span class="nav-text">日期操作(类型为date的column)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#比较"><span class="nav-number">4.1.</span> <span class="nav-text">比较</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#DataBase"><span class="nav-number">1.</span> <span class="nav-text">DataBase</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#索引的一篇文章"><span class="nav-number">1.1.</span> <span class="nav-text">索引的一篇文章</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ACID"><span class="nav-number">1.2.</span> <span class="nav-text">ACID</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#索引的类型"><span class="nav-number">1.3.</span> <span class="nav-text">索引的类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#主键和唯一索引的区别"><span class="nav-number">1.4.</span> <span class="nav-text">主键和唯一索引的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#索引的优点"><span class="nav-number">1.5.</span> <span class="nav-text">索引的优点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#索引的缺点"><span class="nav-number">1.6.</span> <span class="nav-text">索引的缺点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#索引失效"><span class="nav-number">1.7.</span> <span class="nav-text">索引失效</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mysql"><span class="nav-number">2.</span> <span class="nav-text">mysql</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Mysqldump"><span class="nav-number">2.1.</span> <span class="nav-text">Mysqldump</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#事务级别"><span class="nav-number">2.2.</span> <span class="nav-text">事务级别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#编码问题"><span class="nav-number">2.3.</span> <span class="nav-text">编码问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mysql引擎"><span class="nav-number">2.4.</span> <span class="nav-text">mysql引擎</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BTree和B-Tree"><span class="nav-number">2.5.</span> <span class="nav-text">BTree和B+Tree</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MVCC"><span class="nav-number">2.6.</span> <span class="nav-text">MVCC</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#MVCC逻辑流程"><span class="nav-number">2.6.1.</span> <span class="nav-text">MVCC逻辑流程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#InnoDB-MVCC的实现"><span class="nav-number">2.6.2.</span> <span class="nav-text">InnoDB MVCC的实现</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#WAL实现一致性"><span class="nav-number">2.7.</span> <span class="nav-text">WAL实现一致性</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SQL常见"><span class="nav-number">3.</span> <span class="nav-text">SQL常见</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#统计"><span class="nav-number">3.1.</span> <span class="nav-text">统计</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#包含"><span class="nav-number">3.2.</span> <span class="nav-text">包含</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#join"><span class="nav-number">3.2.1.</span> <span class="nav-text">join</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#日期操作-类型为date的column"><span class="nav-number">4.</span> <span class="nav-text">日期操作(类型为date的column)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#比较"><span class="nav-number">4.1.</span> <span class="nav-text">比较</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MySql"><span class="nav-number">5.</span> <span class="nav-text">MySql</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#InnoDB"><span class="nav-number">6.</span> <span class="nav-text">InnoDB</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#事务"><span class="nav-number">6.1.</span> <span class="nav-text">事务</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#redo"><span class="nav-number">6.1.1.</span> <span class="nav-text">redo</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#基本概念"><span class="nav-number">6.1.1.1.</span> <span class="nav-text">基本概念</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#优化"><span class="nav-number">6.1.1.2.</span> <span class="nav-text">优化</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#重做日志和binlog日志的区别"><span class="nav-number">6.1.1.3.</span> <span class="nav-text">重做日志和binlog日志的区别</span></a></li></ol></li></ol></li></ol></li></ol></div>
             
 
           </div>

@@ -122,7 +122,7 @@
 <meta property="og:image" content="http://yoursite.com/2020/02/23/images/memory-02-mspan.png">
 <meta property="og:image" content="http://yoursite.com/2020/02/23/images/mcache_span.png">
 <meta property="og:image" content="http://yoursite.com/2020/02/23/images/wg.png">
-<meta property="og:updated_time" content="2020-05-16T04:41:12.092Z">
+<meta property="og:updated_time" content="2020-05-16T04:41:47.977Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="golang.md">
 <meta name="twitter:description" content="读Go专家编程笔记">
@@ -321,7 +321,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives<span class="badge">13</span></a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives<span class="badge">14</span></a>
 
   </li>
         
@@ -518,7 +518,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2020-05-16 12:41:12" itemprop="dateModified" datetime="2020-05-16T12:41:12+08:00">2020-05-16</time>
+                <time title="Modified: 2020-05-16 12:41:47" itemprop="dateModified" datetime="2020-05-16T12:41:47+08:00">2020-05-16</time>
               
             
           </span>
@@ -556,7 +556,8 @@
 <h3 id="写数据"><a href="#写数据" class="headerlink" title="写数据"></a>写数据</h3><ol>
 <li>如果等待接收队列recvq不为空，说明缓冲区中没有数据或者没有缓冲区，此时直接从recvq取出G,并把数据写入，最后把该G唤醒，结束发送过程；</li>
 <li>如果缓冲区中有空余位置，将数据写入缓冲区，结束发送过程；   </li>
-<li>如果缓冲区中没有空余位置，将待发送数据写入G，将当前G加入sendq，进入睡眠，等待被读goroutine唤醒；<h3 id="读数据"><a href="#读数据" class="headerlink" title="读数据"></a>读数据</h3><ol>
+<li><p>如果缓冲区中没有空余位置，将待发送数据写入G，将当前G加入sendq，进入睡眠，等待被读goroutine唤醒；</p>
+<h3 id="读数据"><a href="#读数据" class="headerlink" title="读数据"></a>读数据</h3><ol>
 <li>如果等待发送队列sendq不为空，且<strong>没有缓冲区</strong>，直接从sendq中取出G，把G中数据读出，最后把G唤醒，结束读取过程；</li>
 <li>如果等待发送队列sendq不为空，此时说明缓冲区已满，从缓冲区中首部读出数据，把G中数据写入缓冲区尾部，把G唤醒，结束读取过程；</li>
 <li>如果缓冲区中有数据，则从缓冲区取出数据，结束读取过程； </li>
@@ -1063,7 +1064,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">13</span>
+                    <span class="site-state-item-count">14</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
